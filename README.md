@@ -16,59 +16,6 @@ When the site is hosted on GitHub Pages, the dashboard reads `data/weekly.csv` a
 
 ---
 
-## Put it on GitHub and get a public link (no coding needed)
-
-You only need a web browser.
-
-### 1. Create a GitHub account
-Go to <https://github.com> and sign up (free).
-
-### 2. Create a repository (a project folder on GitHub)
-1. Click the **+** at the top right, then **New repository**.
-2. Repository name: `kampung-health-radar`
-3. Choose **Public** (GitHub Pages is free for public repositories).
-4. Leave the other boxes unticked. Click **Create repository**.
-
-### 3. Upload the files
-1. On the new, empty repository page, click the link **uploading an existing file**.
-2. Unzip `kampung-health-radar.zip` on your computer.
-3. Drag **everything inside** the unzipped folder (`index.html`, `README.md` and the `data` folder) onto the upload area. Chrome and Edge accept a dragged folder. If yours doesn't, upload `index.html` and `README.md` first, then see the note below for `data/weekly.csv`.
-4. Scroll down, type a short message such as `First version`, and click **Commit changes**.
-
-> **If the data folder didn't upload:** click **Add file → Create new file**, type `data/weekly.csv` as the name (the slash creates the folder), paste the contents of `weekly.csv`, and commit.
-
-### 4. Turn on GitHub Pages (the free hosting)
-1. In the repository, click **Settings** (top menu), then **Pages** (left menu).
-2. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-3. Under **Branch**, choose `main` and `/ (root)`, then click **Save**.
-4. Wait 1–2 minutes and refresh. A box appears with your link:
-   `https://YOUR-USERNAME.github.io/kampung-health-radar/`
-
-That link is what you share.
-
-### 5. Update the data each week
-1. Open `data/weekly.csv` in the repository and click the **pencil** icon (Edit).
-2. Add new rows at the bottom, for example for E-week 38:
-   ```
-   2026,38,2026-09-20,dengue_cases,70,CDA bulletin EW38
-   2026,38,2026-09-20,ari_daily,2600,CDA bulletin EW38
-   2026,38,2026-09-20,hfmd_daily,17,CDA bulletin EW38
-   2026,38,2026-09-20,flu_positivity,40,CDA bulletin EW38
-   2026,38,2026-09-20,covid_positivity,2,CDA bulletin EW38
-   2026,38,2026-09-20,median5y_dengue_cases,190,CDA bulletin EW38
-   2026,38,2026-09-20,median5y_ari_daily,2400,CDA bulletin EW38
-   2026,38,2026-09-20,median5y_hfmd_daily,17,CDA bulletin EW38
-   ```
-   (These values are examples. Use the real figures from the bulletin.)
-3. Click **Commit changes**. The live site updates within a minute or two. The latest week, headlines, forecasts and map all recalculate on their own.
-
-### Make the forecast more trustworthy: add past years
-The outlook learns the seasonal pattern from past years. Right now it has only 2025. data.gov.sg publishes weekly bulletin counts going back about 10 years. Add those years as extra rows (same columns, e.g. `2019,23,,dengue_cases,…`) and the dashboard will use them. The `week_start` and `source` columns can be left empty.
-
-You can also test extra data without editing GitHub: click **Add data** in the dashboard and upload a CSV. That only lasts until you close the tab.
-
----
-
 ## Data dictionary (`data/weekly.csv`)
 
 | Column | Meaning |
