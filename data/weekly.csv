@@ -1,0 +1,487 @@
+year,week,week_start,indicator,value,source
+2025,1,2024-12-29,dengue_cases,97,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,1,2024-12-29,ari_daily,2931,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,1,2024-12-29,hfmd_daily,28,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,2,2025-01-05,dengue_cases,118,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,2,2025-01-05,ari_daily,2871,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,2,2025-01-05,hfmd_daily,23,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,3,2025-01-12,dengue_cases,99,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,3,2025-01-12,ari_daily,2866,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,3,2025-01-12,hfmd_daily,24,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,4,2025-01-19,dengue_cases,118,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,4,2025-01-19,ari_daily,3045,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,4,2025-01-19,hfmd_daily,24,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,5,2025-01-26,dengue_cases,54,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,5,2025-01-26,ari_daily,3392,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,5,2025-01-26,hfmd_daily,37,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,6,2025-02-02,dengue_cases,113,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,6,2025-02-02,ari_daily,3381,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,6,2025-02-02,hfmd_daily,32,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,7,2025-02-09,dengue_cases,114,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,7,2025-02-09,ari_daily,3046,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,7,2025-02-09,hfmd_daily,33,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,8,2025-02-16,dengue_cases,71,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,8,2025-02-16,ari_daily,2749,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,8,2025-02-16,hfmd_daily,31,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,9,2025-02-23,dengue_cases,82,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,9,2025-02-23,ari_daily,2617,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,9,2025-02-23,hfmd_daily,29,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,10,2025-03-02,dengue_cases,86,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,10,2025-03-02,ari_daily,2542,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,10,2025-03-02,hfmd_daily,35,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,11,2025-03-09,dengue_cases,72,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,11,2025-03-09,ari_daily,2431,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,11,2025-03-09,hfmd_daily,39,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,12,2025-03-16,dengue_cases,100,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,12,2025-03-16,ari_daily,2179,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,12,2025-03-16,hfmd_daily,37,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,13,2025-03-23,dengue_cases,98,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,13,2025-03-23,ari_daily,2424,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,13,2025-03-23,hfmd_daily,39,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,14,2025-03-30,dengue_cases,87,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,14,2025-03-30,ari_daily,2471,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,14,2025-03-30,hfmd_daily,43,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,15,2025-04-06,dengue_cases,92,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,15,2025-04-06,ari_daily,2632,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,15,2025-04-06,hfmd_daily,43,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,16,2025-04-13,dengue_cases,94,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,16,2025-04-13,ari_daily,2749,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,16,2025-04-13,hfmd_daily,53,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,17,2025-04-20,dengue_cases,107,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,17,2025-04-20,ari_daily,2781,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,17,2025-04-20,hfmd_daily,51,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,18,2025-04-27,dengue_cases,89,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,18,2025-04-27,ari_daily,2906,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,18,2025-04-27,hfmd_daily,61,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,19,2025-05-04,dengue_cases,105,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,19,2025-05-04,ari_daily,2711,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,19,2025-05-04,hfmd_daily,49,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,20,2025-05-11,dengue_cases,103,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,20,2025-05-11,ari_daily,2828,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,20,2025-05-11,hfmd_daily,52,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,21,2025-05-18,dengue_cases,118,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,21,2025-05-18,ari_daily,2856,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,21,2025-05-18,hfmd_daily,47,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,22,2025-05-25,dengue_cases,117,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,22,2025-05-25,ari_daily,2636,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,22,2025-05-25,hfmd_daily,37,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,23,2025-06-01,dengue_cases,118,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,23,2025-06-01,ari_daily,2338,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,23,2025-06-01,hfmd_daily,33,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,24,2025-06-08,dengue_cases,125,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,24,2025-06-08,ari_daily,2154,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,24,2025-06-08,hfmd_daily,29,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,25,2025-06-15,dengue_cases,106,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,25,2025-06-15,ari_daily,1996,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,25,2025-06-15,hfmd_daily,21,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,26,2025-06-22,dengue_cases,100,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,26,2025-06-22,ari_daily,2018,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,26,2025-06-22,hfmd_daily,20,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,27,2025-06-29,dengue_cases,119,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,27,2025-06-29,ari_daily,2147,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,27,2025-06-29,hfmd_daily,25,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,28,2025-07-06,dengue_cases,112,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,28,2025-07-06,ari_daily,2148,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,28,2025-07-06,hfmd_daily,20,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,29,2025-07-13,dengue_cases,86,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,29,2025-07-13,ari_daily,2282,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,29,2025-07-13,hfmd_daily,20,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,30,2025-07-20,dengue_cases,77,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,30,2025-07-20,ari_daily,2304,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,30,2025-07-20,hfmd_daily,20,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,31,2025-07-27,dengue_cases,71,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,31,2025-07-27,ari_daily,2298,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,31,2025-07-27,hfmd_daily,22,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,32,2025-08-03,dengue_cases,73,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,32,2025-08-03,ari_daily,2274,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,32,2025-08-03,hfmd_daily,16,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,33,2025-08-10,dengue_cases,62,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,33,2025-08-10,ari_daily,2353,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,33,2025-08-10,hfmd_daily,19,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,34,2025-08-17,dengue_cases,47,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,34,2025-08-17,ari_daily,2501,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,34,2025-08-17,hfmd_daily,16,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,35,2025-08-24,dengue_cases,51,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,35,2025-08-24,ari_daily,2553,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,35,2025-08-24,hfmd_daily,19,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,36,2025-08-31,dengue_cases,42,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,36,2025-08-31,ari_daily,2520,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,36,2025-08-31,hfmd_daily,16,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,37,2025-09-07,dengue_cases,49,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column (DF+DHF)"
+2025,37,2025-09-07,ari_daily,2498,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,37,2025-09-07,hfmd_daily,13,"CDA Weekly Infectious Disease Bulletin 2026, same-week 2025 column"
+2025,38,2025-09-14,dengue_cases,45,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,38,2025-09-14,ari_daily,2805,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,38,2025-09-14,hfmd_daily,17,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,39,2025-09-21,dengue_cases,40,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,39,2025-09-21,ari_daily,2745,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,39,2025-09-21,hfmd_daily,18,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,40,2025-09-28,dengue_cases,55,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,40,2025-09-28,ari_daily,2643,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,40,2025-09-28,hfmd_daily,17,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,41,2025-10-05,dengue_cases,33,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,41,2025-10-05,ari_daily,2714,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,41,2025-10-05,hfmd_daily,16,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,42,2025-10-12,dengue_cases,47,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,42,2025-10-12,ari_daily,2773,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,42,2025-10-12,hfmd_daily,14,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,43,2025-10-19,dengue_cases,36,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,43,2025-10-19,ari_daily,2689,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,43,2025-10-19,hfmd_daily,11,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,44,2025-10-26,dengue_cases,53,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,44,2025-10-26,ari_daily,2590,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,44,2025-10-26,hfmd_daily,11,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,45,2025-11-02,dengue_cases,55,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,45,2025-11-02,ari_daily,2485,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,45,2025-11-02,hfmd_daily,11,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,46,2025-11-09,dengue_cases,39,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,46,2025-11-09,ari_daily,2443,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,46,2025-11-09,hfmd_daily,14,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,47,2025-11-16,dengue_cases,39,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,47,2025-11-16,ari_daily,2439,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,47,2025-11-16,hfmd_daily,14,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,48,2025-11-23,dengue_cases,27,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,48,2025-11-23,ari_daily,2446,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,48,2025-11-23,hfmd_daily,11,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,49,2025-11-30,dengue_cases,38,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,49,2025-11-30,ari_daily,2450,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,49,2025-11-30,hfmd_daily,11,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,50,2025-12-07,dengue_cases,46,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,50,2025-12-07,ari_daily,2520,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,50,2025-12-07,hfmd_daily,8,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,51,2025-12-14,dengue_cases,41,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,51,2025-12-14,ari_daily,2450,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,51,2025-12-14,hfmd_daily,8,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,52,2025-12-21,dengue_cases,32,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,52,2025-12-21,ari_daily,2735,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,52,2025-12-21,hfmd_daily,16,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,53,2025-12-28,dengue_cases,38,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,53,2025-12-28,ari_daily,2829,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2025,53,2025-12-28,hfmd_daily,15,Reconstructed from 2025 bars in CDA bulletin EW37 2026 charts
+2026,1,2026-01-04,dengue_cases,53,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,1,2026-01-04,ari_daily,2857,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,1,2026-01-04,hfmd_daily,15,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,1,2026-01-04,flu_positivity,12.0,CDA bulletin text: influenza positivity among ILI samples
+2026,1,2026-01-04,covid_positivity,2.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,1,2026-01-04,median5y_dengue_cases,194,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,1,2026-01-04,median5y_ari_daily,2549,CDA table: 5-year median 2021-2025
+2026,1,2026-01-04,median5y_hfmd_daily,10,CDA table: 5-year median 2021-2025
+2026,2,2026-01-11,dengue_cases,30,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,2,2026-01-11,ari_daily,2938,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,2,2026-01-11,hfmd_daily,18,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,2,2026-01-11,flu_positivity,12.0,CDA bulletin text: influenza positivity among ILI samples
+2026,2,2026-01-11,covid_positivity,2.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,2,2026-01-11,median5y_dengue_cases,165,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,2,2026-01-11,median5y_ari_daily,2400,CDA table: 5-year median 2021-2025
+2026,2,2026-01-11,median5y_hfmd_daily,12,CDA table: 5-year median 2021-2025
+2026,3,2026-01-18,dengue_cases,35,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,3,2026-01-18,ari_daily,3093,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,3,2026-01-18,hfmd_daily,16,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,3,2026-01-18,flu_positivity,13.0,CDA bulletin text: influenza positivity among ILI samples
+2026,3,2026-01-18,covid_positivity,1.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,3,2026-01-18,median5y_dengue_cases,179,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,3,2026-01-18,median5y_ari_daily,2405,CDA table: 5-year median 2021-2025
+2026,3,2026-01-18,median5y_hfmd_daily,15,CDA table: 5-year median 2021-2025
+2026,4,2026-01-25,dengue_cases,31,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,4,2026-01-25,ari_daily,3017,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,4,2026-01-25,hfmd_daily,16,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,4,2026-01-25,flu_positivity,8.0,CDA bulletin text: influenza positivity among ILI samples
+2026,4,2026-01-25,covid_positivity,0.5,CDA bulletin text: COVID-19 positivity among ARI samples (reported as <1%)
+2026,4,2026-01-25,median5y_dengue_cases,170,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,4,2026-01-25,median5y_ari_daily,2654,CDA table: 5-year median 2021-2025
+2026,4,2026-01-25,median5y_hfmd_daily,21,CDA table: 5-year median 2021-2025
+2026,5,2026-02-01,dengue_cases,27,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,5,2026-02-01,ari_daily,2992,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,5,2026-02-01,hfmd_daily,17,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,5,2026-02-01,flu_positivity,8.0,CDA bulletin text: influenza positivity among ILI samples
+2026,5,2026-02-01,covid_positivity,0.5,CDA bulletin text: COVID-19 positivity among ARI samples (reported as <1%)
+2026,5,2026-02-01,median5y_dengue_cases,153,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,5,2026-02-01,median5y_ari_daily,2795,CDA table: 5-year median 2021-2025
+2026,5,2026-02-01,median5y_hfmd_daily,25,CDA table: 5-year median 2021-2025
+2026,6,2026-02-08,dengue_cases,34,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,6,2026-02-08,ari_daily,2835,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,6,2026-02-08,hfmd_daily,19,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,6,2026-02-08,flu_positivity,10.0,CDA bulletin text: influenza positivity among ILI samples
+2026,6,2026-02-08,covid_positivity,1.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,6,2026-02-08,dengue_hospital,5,CDA bulletin text
+2026,6,2026-02-08,median5y_dengue_cases,169,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,6,2026-02-08,median5y_ari_daily,2645,CDA table: 5-year median 2021-2025
+2026,6,2026-02-08,median5y_hfmd_daily,25,CDA table: 5-year median 2021-2025
+2026,7,2026-02-15,dengue_cases,25,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,7,2026-02-15,ari_daily,3039,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,7,2026-02-15,hfmd_daily,19,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,7,2026-02-15,flu_positivity,6.0,CDA bulletin text: influenza positivity among ILI samples
+2026,7,2026-02-15,covid_positivity,0.5,CDA bulletin text: COVID-19 positivity among ARI samples (reported as <1%)
+2026,7,2026-02-15,dengue_hospital,3,CDA bulletin text
+2026,7,2026-02-15,median5y_dengue_cases,148,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,7,2026-02-15,median5y_ari_daily,2590,CDA table: 5-year median 2021-2025
+2026,7,2026-02-15,median5y_hfmd_daily,23,CDA table: 5-year median 2021-2025
+2026,8,2026-02-22,dengue_cases,48,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,8,2026-02-22,ari_daily,2801,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,8,2026-02-22,hfmd_daily,15,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,8,2026-02-22,flu_positivity,12.0,CDA bulletin text: influenza positivity among ILI samples
+2026,8,2026-02-22,covid_positivity,2.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,8,2026-02-22,dengue_hospital,3,CDA bulletin text
+2026,8,2026-02-22,median5y_dengue_cases,146,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,8,2026-02-22,median5y_ari_daily,2694,CDA table: 5-year median 2021-2025
+2026,8,2026-02-22,median5y_hfmd_daily,22,CDA table: 5-year median 2021-2025
+2026,9,2026-03-01,dengue_cases,43,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,9,2026-03-01,ari_daily,2760,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,9,2026-03-01,hfmd_daily,19,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,9,2026-03-01,flu_positivity,9.0,CDA bulletin text: influenza positivity among ILI samples
+2026,9,2026-03-01,covid_positivity,3.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,9,2026-03-01,dengue_hospital,4,CDA bulletin text
+2026,9,2026-03-01,median5y_dengue_cases,139,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,9,2026-03-01,median5y_ari_daily,2535,CDA table: 5-year median 2021-2025
+2026,9,2026-03-01,median5y_hfmd_daily,25,CDA table: 5-year median 2021-2025
+2026,10,2026-03-08,dengue_cases,22,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,10,2026-03-08,ari_daily,2737,Revised value from EW37 chart
+2026,10,2026-03-08,hfmd_daily,19,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,10,2026-03-08,flu_positivity,6.0,CDA bulletin text: influenza positivity among ILI samples
+2026,10,2026-03-08,covid_positivity,3.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,10,2026-03-08,dengue_hospital,2,CDA bulletin text
+2026,10,2026-03-08,median5y_dengue_cases,145,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,10,2026-03-08,median5y_ari_daily,2542,CDA table: 5-year median 2021-2025
+2026,10,2026-03-08,median5y_hfmd_daily,22,CDA table: 5-year median 2021-2025
+2026,11,2026-03-15,dengue_cases,27,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,11,2026-03-15,ari_daily,2377,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,11,2026-03-15,hfmd_daily,10,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,11,2026-03-15,flu_positivity,5.0,CDA bulletin text: influenza positivity among ILI samples
+2026,11,2026-03-15,covid_positivity,3.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,11,2026-03-15,dengue_hospital,2,CDA bulletin text
+2026,11,2026-03-15,median5y_dengue_cases,149,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,11,2026-03-15,median5y_ari_daily,2134,CDA table: 5-year median 2021-2025
+2026,11,2026-03-15,median5y_hfmd_daily,24,CDA table: 5-year median 2021-2025
+2026,12,2026-03-22,dengue_cases,35,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,12,2026-03-22,ari_daily,2500,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,12,2026-03-22,hfmd_daily,10,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,12,2026-03-22,flu_positivity,7.0,CDA bulletin text: influenza positivity among ILI samples
+2026,12,2026-03-22,covid_positivity,3.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,12,2026-03-22,dengue_hospital,1,CDA bulletin text
+2026,12,2026-03-22,median5y_dengue_cases,128,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,12,2026-03-22,median5y_ari_daily,2179,CDA table: 5-year median 2021-2025
+2026,12,2026-03-22,median5y_hfmd_daily,22,CDA table: 5-year median 2021-2025
+2026,13,2026-03-29,dengue_cases,25,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,13,2026-03-29,ari_daily,2512,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,13,2026-03-29,hfmd_daily,18,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,13,2026-03-29,flu_positivity,6.0,CDA bulletin text: influenza positivity among ILI samples
+2026,13,2026-03-29,covid_positivity,3.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,13,2026-03-29,dengue_hospital,2,CDA bulletin text
+2026,13,2026-03-29,median5y_dengue_cases,113,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,13,2026-03-29,median5y_ari_daily,2238,CDA table: 5-year median 2021-2025
+2026,13,2026-03-29,median5y_hfmd_daily,22,CDA table: 5-year median 2021-2025
+2026,14,2026-04-05,dengue_cases,31,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,14,2026-04-05,ari_daily,2512,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,14,2026-04-05,hfmd_daily,15,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,14,2026-04-05,flu_positivity,3.0,CDA bulletin text: influenza positivity among ILI samples
+2026,14,2026-04-05,covid_positivity,7.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,14,2026-04-05,dengue_hospital,4,CDA bulletin text
+2026,14,2026-04-05,median5y_dengue_cases,116,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,14,2026-04-05,median5y_ari_daily,2145,CDA table: 5-year median 2021-2025
+2026,14,2026-04-05,median5y_hfmd_daily,19,CDA table: 5-year median 2021-2025
+2026,15,2026-04-12,dengue_cases,35,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,15,2026-04-12,ari_daily,2531,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,15,2026-04-12,hfmd_daily,16,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,15,2026-04-12,flu_positivity,3.0,CDA bulletin text: influenza positivity among ILI samples
+2026,15,2026-04-12,covid_positivity,8.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,15,2026-04-12,dengue_hospital,4,CDA bulletin text
+2026,15,2026-04-12,median5y_dengue_cases,132,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,15,2026-04-12,median5y_ari_daily,2293,CDA table: 5-year median 2021-2025
+2026,15,2026-04-12,median5y_hfmd_daily,26,CDA table: 5-year median 2021-2025
+2026,16,2026-04-19,dengue_cases,20,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,16,2026-04-19,ari_daily,2590,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,16,2026-04-19,hfmd_daily,24,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,16,2026-04-19,flu_positivity,3.0,CDA bulletin text: influenza positivity among ILI samples
+2026,16,2026-04-19,covid_positivity,8.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,16,2026-04-19,dengue_hospital,1,CDA bulletin text
+2026,16,2026-04-19,median5y_dengue_cases,128,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,16,2026-04-19,median5y_ari_daily,2468,CDA table: 5-year median 2021-2025
+2026,16,2026-04-19,median5y_hfmd_daily,16,CDA table: 5-year median 2021-2025
+2026,17,2026-04-26,dengue_cases,20,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,17,2026-04-26,ari_daily,2667,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,17,2026-04-26,hfmd_daily,21,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,17,2026-04-26,flu_positivity,7.0,CDA bulletin text: influenza positivity among ILI samples
+2026,17,2026-04-26,covid_positivity,14.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,17,2026-04-26,dengue_hospital,1,CDA bulletin text
+2026,17,2026-04-26,median5y_dengue_cases,128,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,17,2026-04-26,median5y_ari_daily,2590,CDA table: 5-year median 2021-2025
+2026,17,2026-04-26,median5y_hfmd_daily,21,CDA table: 5-year median 2021-2025
+2026,18,2026-05-03,dengue_cases,52,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,18,2026-05-03,ari_daily,2787,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,18,2026-05-03,hfmd_daily,17,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,18,2026-05-03,flu_positivity,10.0,CDA bulletin text: influenza positivity among ILI samples
+2026,18,2026-05-03,covid_positivity,14.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,18,2026-05-03,dengue_hospital,9,CDA bulletin text
+2026,18,2026-05-03,median5y_dengue_cases,118,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,18,2026-05-03,median5y_ari_daily,2779,CDA table: 5-year median 2021-2025
+2026,18,2026-05-03,median5y_hfmd_daily,22,CDA table: 5-year median 2021-2025
+2026,19,2026-05-10,dengue_cases,26,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,19,2026-05-10,ari_daily,2858,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,19,2026-05-10,hfmd_daily,18,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,19,2026-05-10,flu_positivity,11.0,CDA bulletin text: influenza positivity among ILI samples
+2026,19,2026-05-10,covid_positivity,13.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,19,2026-05-10,dengue_hospital,5,CDA bulletin text
+2026,19,2026-05-10,median5y_dengue_cases,105,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,19,2026-05-10,median5y_ari_daily,2548,CDA table: 5-year median 2021-2025
+2026,19,2026-05-10,median5y_hfmd_daily,29,CDA table: 5-year median 2021-2025
+2026,20,2026-05-17,dengue_cases,53,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,20,2026-05-17,ari_daily,2973,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,20,2026-05-17,hfmd_daily,29,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,20,2026-05-17,flu_positivity,15.0,CDA bulletin text: influenza positivity among ILI samples
+2026,20,2026-05-17,covid_positivity,18.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,20,2026-05-17,dengue_hospital,6,CDA bulletin text
+2026,20,2026-05-17,median5y_dengue_cases,122,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,20,2026-05-17,median5y_ari_daily,2479,CDA table: 5-year median 2021-2025
+2026,20,2026-05-17,median5y_hfmd_daily,32,CDA table: 5-year median 2021-2025
+2026,21,2026-05-24,dengue_cases,67,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,21,2026-05-24,ari_daily,3169,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,21,2026-05-24,hfmd_daily,27,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,21,2026-05-24,flu_positivity,17.0,CDA bulletin text: influenza positivity among ILI samples
+2026,21,2026-05-24,covid_positivity,13.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,21,2026-05-24,dengue_hospital,7,CDA bulletin text
+2026,21,2026-05-24,median5y_dengue_cases,134,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,21,2026-05-24,median5y_ari_daily,2300,CDA table: 5-year median 2021-2025
+2026,21,2026-05-24,median5y_hfmd_daily,29,CDA table: 5-year median 2021-2025
+2026,22,2026-05-31,dengue_cases,80,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,22,2026-05-31,ari_daily,2748,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,22,2026-05-31,hfmd_daily,22,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,22,2026-05-31,flu_positivity,20.0,CDA bulletin text: influenza positivity among ILI samples
+2026,22,2026-05-31,covid_positivity,11.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,22,2026-05-31,dengue_hospital,13,CDA bulletin text
+2026,22,2026-05-31,median5y_dengue_cases,119,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,22,2026-05-31,median5y_ari_daily,2145,CDA table: 5-year median 2021-2025
+2026,22,2026-05-31,median5y_hfmd_daily,27,CDA table: 5-year median 2021-2025
+2026,23,2026-06-07,dengue_cases,120,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,23,2026-06-07,ari_daily,2489,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,23,2026-06-07,hfmd_daily,17,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,23,2026-06-07,flu_positivity,19.0,CDA bulletin text: influenza positivity among ILI samples
+2026,23,2026-06-07,covid_positivity,9.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,23,2026-06-07,dengue_hospital,18,CDA bulletin text
+2026,23,2026-06-07,median5y_dengue_cases,163,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,23,2026-06-07,median5y_ari_daily,1913,CDA table: 5-year median 2021-2025
+2026,23,2026-06-07,median5y_hfmd_daily,24,CDA table: 5-year median 2021-2025
+2026,24,2026-06-14,dengue_cases,122,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,24,2026-06-14,ari_daily,2489,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,24,2026-06-14,hfmd_daily,24,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,24,2026-06-14,flu_positivity,32.0,CDA bulletin text: influenza positivity among ILI samples
+2026,24,2026-06-14,covid_positivity,12.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,24,2026-06-14,dengue_hospital,26,CDA bulletin text
+2026,24,2026-06-14,median5y_dengue_cases,270,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,24,2026-06-14,median5y_ari_daily,1832,CDA table: 5-year median 2021-2025
+2026,24,2026-06-14,median5y_hfmd_daily,19,CDA table: 5-year median 2021-2025
+2026,25,2026-06-21,dengue_cases,120,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,25,2026-06-21,ari_daily,2556,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,25,2026-06-21,hfmd_daily,29,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,25,2026-06-21,flu_positivity,34.0,CDA bulletin text: influenza positivity among ILI samples
+2026,25,2026-06-21,covid_positivity,14.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,25,2026-06-21,dengue_hospital,17,CDA bulletin text
+2026,25,2026-06-21,median5y_dengue_cases,215,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,25,2026-06-21,median5y_ari_daily,1996,CDA table: 5-year median 2021-2025
+2026,25,2026-06-21,median5y_hfmd_daily,19,CDA table: 5-year median 2021-2025
+2026,26,2026-06-28,dengue_cases,130,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,26,2026-06-28,ari_daily,2644,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,26,2026-06-28,hfmd_daily,30,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,26,2026-06-28,flu_positivity,22.0,CDA bulletin text: influenza positivity among ILI samples
+2026,26,2026-06-28,covid_positivity,8.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,26,2026-06-28,median5y_dengue_cases,271,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,26,2026-06-28,median5y_ari_daily,2122,CDA table: 5-year median 2021-2025
+2026,26,2026-06-28,median5y_hfmd_daily,26,CDA table: 5-year median 2021-2025
+2026,27,2026-07-05,dengue_cases,118,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,27,2026-07-05,ari_daily,2633,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,27,2026-07-05,hfmd_daily,30,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,27,2026-07-05,flu_positivity,25.0,CDA bulletin text: influenza positivity among ILI samples
+2026,27,2026-07-05,covid_positivity,9.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,27,2026-07-05,dengue_hospital,21,CDA bulletin text
+2026,27,2026-07-05,median5y_dengue_cases,235,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,27,2026-07-05,median5y_ari_daily,2211,CDA table: 5-year median 2021-2025
+2026,27,2026-07-05,median5y_hfmd_daily,23,CDA table: 5-year median 2021-2025
+2026,28,2026-07-12,dengue_cases,120,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,28,2026-07-12,ari_daily,2663,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,28,2026-07-12,hfmd_daily,33,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,28,2026-07-12,flu_positivity,21.0,CDA bulletin text: influenza positivity among ILI samples
+2026,28,2026-07-12,covid_positivity,10.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,28,2026-07-12,dengue_hospital,18,CDA bulletin text
+2026,28,2026-07-12,median5y_dengue_cases,208,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,28,2026-07-12,median5y_ari_daily,2449,CDA table: 5-year median 2021-2025
+2026,28,2026-07-12,median5y_hfmd_daily,23,CDA table: 5-year median 2021-2025
+2026,29,2026-07-19,dengue_cases,123,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,29,2026-07-19,ari_daily,2683,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,29,2026-07-19,hfmd_daily,29,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,29,2026-07-19,flu_positivity,25.0,CDA bulletin text: influenza positivity among ILI samples
+2026,29,2026-07-19,covid_positivity,8.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,29,2026-07-19,dengue_hospital,21,CDA bulletin text
+2026,29,2026-07-19,median5y_dengue_cases,200,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,29,2026-07-19,median5y_ari_daily,2645,CDA table: 5-year median 2021-2025
+2026,29,2026-07-19,median5y_hfmd_daily,20,CDA table: 5-year median 2021-2025
+2026,30,2026-07-26,dengue_cases,119,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,30,2026-07-26,ari_daily,2682,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,30,2026-07-26,hfmd_daily,30,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,30,2026-07-26,flu_positivity,20.0,CDA bulletin text: influenza positivity among ILI samples
+2026,30,2026-07-26,covid_positivity,6.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,30,2026-07-26,dengue_hospital,15,CDA bulletin text
+2026,30,2026-07-26,median5y_dengue_cases,214,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,30,2026-07-26,median5y_ari_daily,2412,CDA table: 5-year median 2021-2025
+2026,30,2026-07-26,median5y_hfmd_daily,23,CDA table: 5-year median 2021-2025
+2026,31,2026-08-02,dengue_cases,101,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,31,2026-08-02,ari_daily,2568,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,31,2026-08-02,hfmd_daily,21,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,31,2026-08-02,flu_positivity,25.0,CDA bulletin text: influenza positivity among ILI samples
+2026,31,2026-08-02,covid_positivity,7.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,31,2026-08-02,dengue_hospital,23,CDA bulletin text
+2026,31,2026-08-02,median5y_dengue_cases,162,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,31,2026-08-02,median5y_ari_daily,2298,CDA table: 5-year median 2021-2025
+2026,31,2026-08-02,median5y_hfmd_daily,22,CDA table: 5-year median 2021-2025
+2026,32,2026-08-09,dengue_cases,95,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,32,2026-08-09,ari_daily,2709,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,32,2026-08-09,hfmd_daily,22,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,32,2026-08-09,flu_positivity,24.0,CDA bulletin text: influenza positivity among ILI samples
+2026,32,2026-08-09,covid_positivity,2.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,32,2026-08-09,dengue_hospital,21,CDA bulletin text
+2026,32,2026-08-09,median5y_dengue_cases,196,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,32,2026-08-09,median5y_ari_daily,2274,CDA table: 5-year median 2021-2025
+2026,32,2026-08-09,median5y_hfmd_daily,23,CDA table: 5-year median 2021-2025
+2026,33,2026-08-16,dengue_cases,104,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,33,2026-08-16,ari_daily,2541,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,33,2026-08-16,hfmd_daily,24,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,33,2026-08-16,flu_positivity,37.0,CDA bulletin text: influenza positivity among ILI samples
+2026,33,2026-08-16,covid_positivity,4.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,33,2026-08-16,dengue_hospital,15,CDA bulletin text
+2026,33,2026-08-16,median5y_dengue_cases,192,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,33,2026-08-16,median5y_ari_daily,2326,CDA table: 5-year median 2021-2025
+2026,33,2026-08-16,median5y_hfmd_daily,19,CDA table: 5-year median 2021-2025
+2026,34,2026-08-23,dengue_cases,88,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,34,2026-08-23,ari_daily,2555,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,34,2026-08-23,hfmd_daily,21,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,34,2026-08-23,flu_positivity,32.0,CDA bulletin text: influenza positivity among ILI samples
+2026,34,2026-08-23,covid_positivity,2.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,34,2026-08-23,dengue_hospital,10,CDA bulletin text
+2026,34,2026-08-23,median5y_dengue_cases,185,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,34,2026-08-23,median5y_ari_daily,2391,CDA table: 5-year median 2021-2025
+2026,34,2026-08-23,median5y_hfmd_daily,16,CDA table: 5-year median 2021-2025
+2026,35,2026-08-30,dengue_cases,87,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,35,2026-08-30,ari_daily,2399,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,35,2026-08-30,hfmd_daily,20,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,35,2026-08-30,flu_positivity,38.0,CDA bulletin text: influenza positivity among ILI samples
+2026,35,2026-08-30,covid_positivity,3.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,35,2026-08-30,dengue_hospital,12,CDA bulletin text
+2026,35,2026-08-30,median5y_dengue_cases,179,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,35,2026-08-30,median5y_ari_daily,2285,CDA table: 5-year median 2021-2025
+2026,35,2026-08-30,median5y_hfmd_daily,21,CDA table: 5-year median 2021-2025
+2026,36,2026-09-06,dengue_cases,73,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,36,2026-09-06,ari_daily,2295,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,36,2026-09-06,hfmd_daily,21,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,36,2026-09-06,flu_positivity,35.0,CDA bulletin text: influenza positivity among ILI samples
+2026,36,2026-09-06,covid_positivity,3.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,36,2026-09-06,dengue_hospital,12,CDA bulletin text
+2026,36,2026-09-06,median5y_dengue_cases,190,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,36,2026-09-06,median5y_ari_daily,2130,CDA table: 5-year median 2021-2025
+2026,36,2026-09-06,median5y_hfmd_daily,16,CDA table: 5-year median 2021-2025
+2026,37,2026-09-13,dengue_cases,74,"CDA Weekly Infectious Disease Bulletin 2026, E-week table (dengue fever + DHF notifications)"
+2026,37,2026-09-13,ari_daily,2575,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,37,2026-09-13,hfmd_daily,18,"CDA Weekly Infectious Disease Bulletin 2026, E-week table"
+2026,37,2026-09-13,flu_positivity,42.0,CDA bulletin text: influenza positivity among ILI samples
+2026,37,2026-09-13,covid_positivity,2.0,CDA bulletin text: COVID-19 positivity among ARI samples
+2026,37,2026-09-13,dengue_hospital,14,CDA bulletin text
+2026,37,2026-09-13,median5y_dengue_cases,200,CDA table: 5-year median 2021-2025 (DF+DHF)
+2026,37,2026-09-13,median5y_ari_daily,2358,CDA table: 5-year median 2021-2025
+2026,37,2026-09-13,median5y_hfmd_daily,17,CDA table: 5-year median 2021-2025
