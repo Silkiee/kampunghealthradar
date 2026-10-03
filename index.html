@@ -263,8 +263,155 @@ pre.tpl{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-si
 .msg.ok{background:var(--good-soft);color:var(--good)}
 .msg.err{background:var(--crit-soft);color:var(--crit)}
 
+/* ---------- flu jab guide ----------
+   One readable column over the dashboard ground: a summary up top (three status tiles),
+   then the "Am I due?" tool, then the evidence (flu now, season calendar) and the practical bits. */
+[hidden]{display:none!important}
+a.btn{text-decoration:none;color:inherit}
+a.btn.primary{color:var(--accent-ink)}
+.btn .lbl-s{display:none}
+.btn.jab{border-color:var(--accent);color:var(--accent)}
+.btn.jab[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
+.btn.lg{padding:11px 16px;font-size:14.5px;border-radius:12px}
+.ext::after{content:'↗';font-weight:500;opacity:.75}
+.guide{flex:1;min-height:0;overflow-y:auto;background:var(--ground)}
+.g-wrap{max-width:900px;margin:0 auto;padding:18px 24px 56px;display:flex;flex-direction:column;gap:40px}
+a.back{text-decoration:none}
+.g-wrap>.back{margin-bottom:-28px}
+.g-hero{display:flex;flex-direction:column;gap:14px}
+.g-hero h2{font-size:clamp(27px,3.4vw,38px);font-weight:800;line-height:1.08;max-width:24ch}
+.g-hero h2:focus{outline:none}
+.g-lede{margin:0;font-size:16.5px;line-height:1.55;color:var(--ink-2);max-width:64ch}
+.g-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.g-tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px 15px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.g-tile .v{font-family:var(--display);font-size:23px;font-weight:800;line-height:1.1;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.g-tile .s{font-size:13px;color:var(--ink-3);line-height:1.4}
+.g-cta{display:flex;flex-wrap:wrap;gap:10px}
+.g-sec{display:flex;flex-direction:column;gap:14px}
+.g-sec,.g-hero{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 70px)}
+/* section navigation: a sticky row of chips on phones and tablets, a sidebar on wide screens */
+.g-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--ground);border-bottom:1px solid var(--line);padding:8px 24px}
+.g-nav>.eyebrow,.g-nav .g-nav-book{display:none}
+.g-nav ul{list-style:none;margin:0 auto;padding:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;position:relative;max-width:852px}
+.g-nav ul::-webkit-scrollbar{display:none}
+@media (max-width: 1099px){ .g-nav ul{padding-right:28px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent)} }
+.g-nav li{flex:none}
+.g-nav button{white-space:nowrap;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 12px;font-weight:600;font-size:13px;cursor:pointer;color:var(--ink-2);font-family:inherit}
+.g-nav button:hover{color:var(--ink);border-color:var(--ink-3)}
+.g-nav button.on{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+@media (min-width: 1100px){
+  .g-layout{display:grid;grid-template-columns:200px minmax(0,860px);justify-content:center;column-gap:48px;padding-inline:24px}
+  .g-wrap{max-width:none;margin:0;padding-inline:0}
+  .g-nav{top:0;align-self:start;background:none;border:0;padding:22px 0 24px;display:flex;flex-direction:column;gap:12px}
+  .g-nav>.eyebrow{display:block}
+  .g-nav .g-nav-book{display:inline-flex;align-self:flex-start;margin-top:6px}
+  .g-nav ul{flex-direction:column;gap:0;overflow:visible;border-left:2px solid var(--line);margin:0;max-width:none}
+  .g-nav button{width:100%;text-align:left;white-space:normal;border:0;border-left:2px solid transparent;margin-left:-2px;border-radius:0;background:none;padding:7px 12px;font-size:14px;font-weight:500;line-height:1.35}
+  .g-nav button:hover{background:none;border-left-color:var(--ink-3)}
+  .g-nav button.on{background:none;color:var(--ink);font-weight:700;border-left-color:var(--accent)}
+  .g-sec,.g-hero{scroll-margin-top:20px}
+}
+.g-sec>h3{font-size:24px;font-weight:800;line-height:1.15}
+.g-sec>h3:focus{outline:none}
+.g-p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink-2);max-width:68ch}
+.g-p b{color:var(--ink)}
+.g-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}
+.g-chart{position:relative}
+.g-chart svg{display:block;overflow:visible}
+.g-chart text{fill:var(--ink-3);font-size:12px;font-family:var(--body)}
+.g-chart .grid line{stroke:var(--line-2)}
+.g-chart .cell{cursor:default}
+.g-chart .cell:focus{outline:none}
+.g-chart .cell:focus rect{stroke:var(--ink);stroke-width:2}
+.sw-b{width:14px;height:10px;border-radius:2px;display:inline-block}
+.dot-k{width:8px;height:8px;border-radius:50%;background:var(--ink-2);display:inline-block}
+.today-k{width:2px;height:14px;background:var(--ink);display:inline-block}
+.win-k{width:18px;height:7px;border:2px solid var(--s-plan);border-bottom:0;display:inline-block;border-radius:2px 2px 0 0}
+details.more table.kv td:last-child{white-space:nowrap}
+
+/* checker + travel */
+.chk{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;align-items:start}
+.chk-form{display:flex;flex-direction:column;gap:18px;min-width:0}
+.q{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.q legend,.q>label{font-weight:700;font-size:15px;padding:0;margin-bottom:8px}
+.q>label{margin-bottom:0}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg label{position:relative;display:inline-flex}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:inline-flex;align-items:center;min-height:42px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font-weight:600;font-size:14px;cursor:pointer;line-height:1.25}
+.seg span:hover{border-color:var(--ink-3)}
+.seg input:checked+span{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.seg input:focus-visible+span{outline:2px solid var(--focus);outline-offset:2px}
+.q select,.q input[type=date]{height:44px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);padding:0 12px;font-size:14.5px;max-width:100%;width:100%}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;cursor:pointer}
+.check input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--accent);flex:none}
+.hint{margin:0;font-size:13px;color:var(--ink-3);line-height:1.45}
+.linkbtn{border:0;background:none;padding:0;color:var(--accent);font-weight:600;cursor:pointer;text-decoration:underline;font-size:inherit;font-family:inherit}
+.ex{font-size:12.5px;font-weight:600;color:var(--warn);background:var(--warn-soft);padding:6px 10px;border-radius:8px;align-self:flex-start}
+.res{border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;background:var(--surface-2);border:1px solid var(--line-2);min-width:0}
+.res h4{font-family:var(--display);font-size:22px;font-weight:800;line-height:1.15;margin:0;text-wrap:balance}
+.res ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:14.5px;line-height:1.5}
+.res .chip{align-self:flex-start;font-size:12.5px;padding:3px 10px}
+.res dl{margin:0;display:grid;gap:10px;font-size:13.5px;line-height:1.45;border-top:1px solid var(--line);padding-top:12px}
+.res dt{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.res dd{margin:2px 0 0;color:var(--ink-2)}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.remind{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-2)}
+.err{font-size:14px;color:var(--crit);background:var(--crit-soft);padding:10px 12px;border-radius:10px}
+
+/* vaccines, places, record, news */
+.vax{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.vax .g-card{display:flex;flex-direction:column;gap:8px;padding:16px}
+.vax h4{font-family:var(--display);font-size:18px;font-weight:700;margin:0;line-height:1.2}
+.vax p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.5}
+.rules{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.rules li{display:grid;grid-template-columns:minmax(0,15em) minmax(0,1fr);gap:4px 18px;padding:12px 0;border-top:1px solid var(--line);font-size:14.5px;line-height:1.5}
+.rules li b{color:var(--ink)}
+.rules li span{color:var(--ink-2)}
+.places{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.places li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:3px;font-size:14px}
+.places li span{color:var(--ink-2);font-size:13.5px;line-height:1.45}
+.price td:first-child{color:var(--ink-2)}
+.rec{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px;align-items:start}
+.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.5}
+.news{display:flex;flex-direction:column}
+.news article{display:flex;flex-direction:column;gap:5px;padding:14px 0;border-top:1px solid var(--line)}
+.news h4{font-family:var(--display);font-size:17px;font-weight:700;margin:0;line-height:1.25}
+.news h4 a{color:var(--ink);text-decoration:none}
+.news h4 a:hover{color:var(--accent);text-decoration:underline}
+.news p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.55;max-width:70ch}
+.g-foot{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--ink-3);line-height:1.5}
+.g-foot p{margin:0;max-width:78ch}
+
+/* flu jab card in the Flu & colds panel */
+.jabcard{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--surface-2);display:flex;flex-direction:column;gap:10px}
+.jabcard .hd{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14.5px}
+.jabcard .hd svg{color:var(--accent);flex:none}
+.jabcard p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.jabcard .btn{align-self:flex-start}
+
+@media (max-width: 900px){
+  .guide{overflow:visible;flex:none}
+  .g-wrap{padding:14px 16px 40px;gap:34px}
+  .g-nav{padding:8px 16px}
+  .stamp .btn.jab .lbl-s{display:inline}
+}
+@media (max-width: 760px){
+  .g-tiles,.chk,.vax,.rec,.places{grid-template-columns:minmax(0,1fr)}
+  .rules li{grid-template-columns:minmax(0,1fr)}
+  .g-tile .v{font-size:22px}
+  .g-sec>h3{font-size:22px}
+}
+@media (max-width: 520px){
+  .topbar{gap:10px;padding:10px 12px}
+  .stamp{flex-wrap:nowrap;gap:6px}
+  .stamp .btn{padding:7px 9px}
+  .brand h1{font-size:17px}
+}
+
 /* ---------- responsive ---------- */
-@media (max-width: 1100px){ .brand p{display:none} .stamp .pill.data{display:none} }
+@media (max-width: 1360px){ .brand p{display:none} }
+@media (max-width: 1100px){ .stamp .pill.data{display:none} }
 @media (max-width: 900px){
   body{overflow:auto;height:auto}
   .app{display:flex;flex-direction:column;padding-inline:16px;padding-block:12px;gap:12px}
@@ -309,6 +456,7 @@ pre.tpl{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-si
   <div class="stamp">
     <span class="pill data num" id="stamp"></span>
     <span class="pill proto" title="Independent prototype. Not affiliated with CDA, MOH or any government agency.">Prototype · not an official source</span>
+    <a class="btn jab" id="btn-jab" href="#flu-jab" aria-current="false"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10.6 1.6l3.8 3.8M12.5 3.5l-7.4 7.4-2.4.3.3-2.4 7.4-7.4M8.6 5.4l2 2M6.8 7.2l1.1 1.1M2.7 13.3l1.5-1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Flu jab guide</span><span class="lbl-s">Flu jab</span></a>
     <button class="btn" id="btn-about" type="button"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4.2M8 4.6v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span class="lbl">How this works</span></button>
     <button class="btn" id="btn-data" type="button"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m-3.5-3.5L8 10l3.5-3.5M2.5 12.5v1h11v-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="rotate(180 8 8)"/></svg><span class="lbl">Add data</span></button>
   </div>
@@ -349,6 +497,173 @@ pre.tpl{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-si
     <div class="maptip" id="maptip" hidden></div>
   </main>
 </div>
+<div class="guide" id="guide" hidden>
+ <div class="g-layout">
+  <nav class="g-nav" id="g-nav" aria-label="On this page">
+    <div class="eyebrow">On this page</div>
+    <ul>
+        <li><button type="button" data-jump="g-top">Summary</button></li>
+        <li><button type="button" data-jump="g-check">Am I due?</button></li>
+        <li><button type="button" data-jump="g-now">Flu right now</button></li>
+        <li><button type="button" data-jump="g-season">When flu season comes</button></li>
+        <li><button type="button" data-jump="g-which">Which vaccine, and when</button></li>
+        <li><button type="button" data-jump="g-travel">Travelling soon?</button></li>
+        <li><button type="button" data-jump="g-where">Where to get it, and cost</button></li>
+        <li><button type="button" data-jump="g-record">Your flu jab record</button></li>
+        <li><button type="button" data-jump="g-news">Latest from CDA</button></li>
+    </ul>
+    <a class="btn primary ext g-nav-book" href="https://vaccine.gov.sg/flu" target="_blank" rel="noopener">Book a flu jab </a>
+  </nav>
+  <div class="g-wrap">
+    <a class="back" href="#">← Back to the map</a>
+
+    <header class="g-hero" id="g-top">
+      <div class="eyebrow" id="g-eyebrow">Flu jab guide · Singapore</div>
+      <h2 id="g-title" tabindex="-1"></h2>
+      <p class="g-lede" id="g-lede"></p>
+      <div class="g-tiles" id="g-tiles"></div>
+      <div class="g-cta">
+        <button class="btn primary lg" type="button" data-jump="g-check">Am I due for a flu jab?</button>
+        <a class="btn lg ext" href="https://vaccine.gov.sg/flu" target="_blank" rel="noopener">Book a flu jab </a>
+        <button class="btn lg" type="button" data-jump="g-record">Check my flu jab record</button>
+      </div>
+    </header>
+
+    <section class="g-sec" id="g-check" aria-labelledby="g-check-h">
+      <h3 id="g-check-h" tabindex="-1">Am I due?</h3>
+      <p class="g-p">Four questions for you, a parent or a child. Your answers stay on this page. Nothing is saved or sent.</p>
+      <div class="g-card chk">
+        <form class="chk-form" id="chk-form" novalidate>
+          <div class="ex" id="chk-ex">Example answers: a parent aged 65 or older. Change them to match your situation.</div>
+          <fieldset class="q">
+            <legend>Who is the flu jab for?</legend>
+            <div class="seg">
+              <label><input type="radio" name="who" value="me" id="who-me"><span>Me</span></label>
+              <label><input type="radio" name="who" value="parent" id="who-parent" checked><span>My parent or grandparent</span></label>
+              <label><input type="radio" name="who" value="child" id="who-child"><span>My child</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="q">
+            <legend id="age-q">How old?</legend>
+            <div class="seg" id="age-seg"></div>
+          </fieldset>
+          <fieldset class="q" id="risk-q">
+            <legend id="risk-legend">Do any of these apply?</legend>
+            <p class="hint" id="risk-hint"></p>
+            <div class="seg">
+              <label><input type="radio" name="risk" value="yes" id="risk-yes"><span>Yes</span></label>
+              <label><input type="radio" name="risk" value="no" id="risk-no" checked><span>No</span></label>
+              <label><input type="radio" name="risk" value="unsure" id="risk-unsure"><span>Not sure</span></label>
+            </div>
+          </fieldset>
+          <div class="q" id="last-q">
+            <label for="last" id="last-label">When was the last flu jab?</label>
+            <select id="last"></select>
+            <p class="hint">Not sure? It is listed in <button type="button" class="linkbtn" data-jump="g-record">HealthHub's immunisation records</button>.</p>
+          </div>
+        </form>
+        <div id="chk-out" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="g-now" aria-labelledby="g-now-h">
+      <h3 id="g-now-h" tabindex="-1">Flu right now</h3>
+      <p class="g-p" id="g-now-p"></p>
+      <div class="g-card">
+        <div class="eyebrow" id="g-now-cap" style="margin-bottom:8px"></div>
+        <div class="g-chart chart" id="g-pos"></div>
+      </div>
+      <p class="hint" id="g-now-note"></p>
+    </section>
+
+    <section class="g-sec" id="g-season" aria-labelledby="g-season-h">
+      <h3 id="g-season-h" tabindex="-1">When flu season usually comes</h3>
+      <p class="g-p" id="g-season-p"></p>
+      <div class="g-card" style="display:flex;flex-direction:column;gap:12px">
+        <div class="eyebrow">Polyclinic visits for coughs, colds and flu, by month</div>
+        <div class="g-chart chart" id="g-strip"></div>
+        <div class="chart-legend" id="g-strip-leg"></div>
+      </div>
+      <div class="note"><b>For schools, childcare centres and eldercare homes:</b> October and November are the months to remind parents, staff and residents about flu jabs, before the year-end peak and the December holidays.</div>
+      <details class="more"><summary>See the numbers</summary><div class="body" id="g-season-table"></div></details>
+    </section>
+
+    <section class="g-sec" id="g-which" aria-labelledby="g-which-h">
+      <h3 id="g-which-h" tabindex="-1">Which vaccine, and when</h3>
+      <p class="g-p">Flu viruses change, so each vaccine is made for one season. Singapore uses both the Southern Hemisphere vaccine and the Northern Hemisphere vaccine, because flu here has two seasons a year.</p>
+      <div class="vax" id="g-vax"></div>
+      <ul class="rules" id="g-rules"></ul>
+    </section>
+
+    <section class="g-sec" id="g-travel" aria-labelledby="g-travel-h">
+      <h3 id="g-travel-h" tabindex="-1">Travelling soon?</h3>
+      <p class="g-p">Flu seasons are different around the world. Tell us where and when you are going, and we will show you when to get your jab.</p>
+      <div class="g-card chk">
+        <form class="chk-form" id="trip-form" novalidate>
+          <div class="ex" id="trip-ex">Example: a December holiday in North Asia. Change it to match your trip.</div>
+          <div class="q">
+            <label for="trip-dest">Where are you going?</label>
+            <select id="trip-dest"></select>
+          </div>
+          <div class="q">
+            <label for="trip-date">When do you leave?</label>
+            <input type="date" id="trip-date">
+          </div>
+          <label class="check"><input type="checkbox" id="trip-crowd"> <span>A cruise, tour group, pilgrimage or big event</span></label>
+        </form>
+        <div id="trip-out" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="g-where" aria-labelledby="g-where-h">
+      <h3 id="g-where-h" tabindex="-1">Where to get it, and what it costs</h3>
+      <ul class="places">
+        <li><b>Your Healthier SG clinic</b><span>If you are enrolled, book there. Free for eligible people.</span></li>
+        <li><b>CHAS GP clinics</b><span>Book online at vaccine.gov.sg/flu.</span></li>
+        <li><b>Polyclinics</b><span>Extra discounts for Pioneer and Merdeka Generation seniors.</span></li>
+        <li><b>Retail pharmacies</b><span>Adults aged 18 and over, at participating pharmacies.</span></li>
+      </ul>
+      <div class="g-card">
+        <div class="eyebrow" style="margin-bottom:6px">Subsidised price per dose</div>
+        <table class="kv price"><tbody id="g-prices"></tbody></table>
+        <p class="hint" style="margin-top:10px" id="g-price-note"></p>
+      </div>
+      <div class="acts"><a class="btn primary lg ext" href="https://vaccine.gov.sg/flu" target="_blank" rel="noopener">Book a flu jab at vaccine.gov.sg </a></div>
+    </section>
+
+    <section class="g-sec" id="g-record" aria-labelledby="g-record-h">
+      <h3 id="g-record-h" tabindex="-1">Check your flu jab record</h3>
+      <div class="rec">
+        <div class="g-card" style="display:flex;flex-direction:column;gap:12px">
+          <h4 style="font-family:var(--display);font-size:18px;margin:0">In the HealthHub app</h4>
+          <ol class="steps">
+            <li>Log in with Singpass.</li>
+            <li>Tap <b>Services</b>, then <b>Immunisation records</b>.</li>
+            <li>Look for the latest influenza entry and its date.</li>
+          </ol>
+          <div class="acts">
+            <a class="btn primary ext" href="https://www.healthhub.sg/download-app" target="_blank" rel="noopener">Get the HealthHub app </a>
+            <a class="btn ext" href="https://eservices.healthhub.sg/pre-login" target="_blank" rel="noopener">HealthHub on the web </a>
+          </div>
+          <p class="hint">Records come from the National Immunisation Registry, which clinics report to. Some records may be missing or show up later. If a jab is missing, ask the clinic that gave it.</p>
+        </div>
+        <div class="note">Using SingHealth's <b>Health Buddy</b> app? SingHealth is replacing it with HealthHub, and Health Buddy closes after February 2027. <a href="https://www.singhealth.com.sg/patient-services/health-buddy/faqs/health-buddy-faqs" target="_blank" rel="noopener">Health Buddy FAQ</a></div>
+      </div>
+    </section>
+
+    <section class="g-sec" id="g-news" aria-labelledby="g-news-h">
+      <h3 id="g-news-h" tabindex="-1">Latest from CDA</h3>
+      <div class="news" id="g-updates"></div>
+    </section>
+
+    <footer class="g-foot">
+      <p><b>General guidance, not medical advice.</b> Ask your doctor about your own situation. Based on public information from the Communicable Diseases Agency (CDA) and the Ministry of Health (MOH), the national adult and childhood immunisation schedules, and CDC advice for travellers. Prices and vaccine dates can change.</p>
+      <p>Sources: <a href="https://www.cda.gov.sg/news-and-events/update-on-seasonal-influenza-vaccination/" target="_blank" rel="noopener">CDA flu vaccination update</a> · <a href="https://www.cda.gov.sg/news-and-events/update-on-influenza-situation-in-singapore/" target="_blank" rel="noopener">CDA flu situation update</a> · <a href="https://www.cda.gov.sg/public/vaccinations/" target="_blank" rel="noopener">CDA vaccinations</a> · <a href="https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/healthier-sg-vaccinations" target="_blank" rel="noopener">MOH Healthier SG vaccinations</a> · <a href="https://www.cdc.gov/flu/school-business/travelersfacts.htm" target="_blank" rel="noopener">CDC flu and travel</a> · <a href="https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2026/" target="_blank" rel="noopener">CDA Weekly Infectious Diseases Bulletin</a></p>
+      <p>Independent prototype. Not affiliated with or endorsed by CDA, MOH or HealthHub.</p>
+    </footer>
+  </div>
+ </div>
+</div>
 
 <dialog id="dlg-about" aria-labelledby="about-h">
   <div class="dlg">
@@ -371,6 +686,8 @@ pre.tpl{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-si
     <h3>Why the map is illustrative</h3>
     <p>The bulletin reports national totals only. To show what a neighbourhood view could look like, we spread each national number across the 55 URA planning areas by <b>approximate resident population and age profile</b>. HFMD leans towards areas with many young children, and flu and COVID-19 lean towards older estates. For dengue we add a mild weighting for eastern and north-eastern estates and landed-housing areas, where dengue clusters have historically been more common. None of this is real 2026 local data. Switch the map to national figures with the toggle.</p>
     <p>Colours compare each area's estimated rate per 100,000 residents with a typical week for Singapore (the 5-year median CDA prints). <b>Moderate</b> is within 20% of typical, <b>High</b> is 20–60% above it, and <b>Very high</b> is more than 60% above. This is why a quiet year for dengue shows mostly pale colours, even at its peak.</p>
+    <h3>Flu jab guide</h3>
+    <p>The flu jab guide puts CDA's public advice on flu vaccination next to the bulletin data. <b>Flu right now</b> uses weekly flu positivity, with our own bands: Low is under 10%, Moderate is 10 to 24% and High is 25% or more. <b>When flu season usually comes</b> uses polyclinic visits for coughs, colds and flu in 2012 to 2019 and 2023 to 2025. We leave out 2020 to 2022 because COVID-19 measures changed the usual pattern. <b>Am I due?</b> and <b>Travelling soon?</b> follow CDA's September 2026 advice, the national adult and childhood immunisation schedules, and CDC advice for travellers. They run in your browser: nothing you choose is saved or sent. Vaccine dates, prices and CDA updates come from <b>data/flu-updates.csv</b>.</p>
     <h3>Limits</h3>
     <ul>
       <li>Independent prototype. Not affiliated with or endorsed by CDA, MOH or NEA.</li>
@@ -2353,6 +2670,17 @@ pre.tpl{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-si
 2026,37,2026-09-13,median5y_hfmd_daily,17,CDA table: 5-year median 2021-2025</script>
 <script id="data-areas" type="application/json">{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"id":"BD","name":"Bedok","region":"East","pop":276000,"kid":8,"sen":22,"landed":true,"lx":103.92841,"ly":1.32405,"km2":21.7},"geometry":{"type":"Polygon","coordinates":[[[103.93208,1.30555],[103.92808,1.30365],[103.92601,1.30317],[103.9252,1.30359],[103.92382,1.3028],[103.92335,1.30322],[103.91977,1.30182],[103.91826,1.30747],[103.90998,1.30555],[103.90509,1.31761],[103.90566,1.32802],[103.90482,1.32945],[103.89618,1.3378],[103.89794,1.34036],[103.9021,1.3387],[103.90233,1.3392],[103.90759,1.33916],[103.90869,1.34054],[103.90853,1.34112],[103.913,1.34446],[103.9159,1.34228],[103.91925,1.34572],[103.92497,1.34859],[103.92976,1.34525],[103.93865,1.33649],[103.94898,1.33433],[103.95417,1.3266],[103.9604,1.32137],[103.96363,1.31442],[103.96274,1.3146],[103.96117,1.31355],[103.96066,1.31381],[103.95575,1.3112],[103.95504,1.31162],[103.95338,1.31087],[103.95059,1.31081],[103.94408,1.3092],[103.94307,1.30851],[103.94122,1.30845],[103.93981,1.3073],[103.93636,1.30643],[103.93356,1.30488],[103.93354,1.30518],[103.93267,1.30526],[103.93244,1.30553],[103.93219,1.3056],[103.93208,1.30555]],[[103.93208,1.30555],[103.93208,1.30555],[103.93208,1.30555],[103.93208,1.30555]]]}},{"type":"Feature","properties":{"id":"BL","name":"Boon Lay","region":"West","pop":0,"kid":0,"sen":0,"landed":false,"lx":103.70222,"ly":1.31479,"km2":8.3},"geometry":{"type":"Polygon","coordinates":[[[103.72042,1.32824],[103.71918,1.32583],[103.72035,1.31949],[103.71948,1.31431],[103.70981,1.31409],[103.70983,1.30775],[103.70839,1.30762],[103.70847,1.30539],[103.70782,1.30486],[103.70734,1.3029],[103.70775,1.30292],[103.70778,1.30206],[103.70241,1.30184],[103.70231,1.30401],[103.69932,1.30502],[103.69693,1.30779],[103.69526,1.30795],[103.69579,1.30671],[103.69688,1.30652],[103.69938,1.30336],[103.69941,1.29953],[103.69618,1.29962],[103.69561,1.30049],[103.69529,1.30316],[103.69437,1.30491],[103.69557,1.30663],[103.69506,1.30786],[103.69355,1.30509],[103.69375,1.30094],[103.69097,1.29989],[103.68886,1.30003],[103.68374,1.29907],[103.68252,1.30891],[103.68156,1.30919],[103.6811,1.31062],[103.68464,1.3119],[103.68997,1.31482],[103.69587,1.31522],[103.69651,1.32776],[103.7067,1.32777],[103.72106,1.33165],[103.72042,1.32824]]]}},{"type":"Feature","properties":{"id":"BK","name":"Bukit Batok","region":"West","pop":168000,"kid":9,"sen":17,"landed":false,"lx":103.75473,"ly":1.35566,"km2":11.1},"geometry":{"type":"Polygon","coordinates":[[[103.76408,1.37001],[103.76754,1.36452],[103.76708,1.36096],[103.76746,1.35787],[103.76958,1.35328],[103.77038,1.34902],[103.767,1.34724],[103.76318,1.34671],[103.7642,1.34502],[103.76537,1.34462],[103.76575,1.34369],[103.76713,1.34279],[103.7669,1.34222],[103.76512,1.34211],[103.76469,1.33958],[103.76415,1.33936],[103.7645,1.33661],[103.76533,1.33545],[103.7656,1.33578],[103.76564,1.33245],[103.74401,1.3443],[103.73726,1.346],[103.73826,1.34881],[103.73652,1.35447],[103.73753,1.35745],[103.74432,1.36537],[103.75128,1.37173],[103.75297,1.37521],[103.75429,1.37663],[103.76124,1.37967],[103.76408,1.37001]]]}},{"type":"Feature","properties":{"id":"BM","name":"Bukit Merah","region":"Central","pop":150000,"kid":7,"sen":26,"landed":false,"lx":103.82314,"ly":1.27549,"km2":14.5},"geometry":{"type":"Polygon","coordinates":[[[103.82361,1.26018],[103.82347,1.25851],[103.82325,1.26307],[103.81991,1.26309],[103.81986,1.26195],[103.81806,1.26196],[103.81963,1.26217],[103.81957,1.26324],[103.81576,1.26384],[103.81505,1.26441],[103.81311,1.26353],[103.81341,1.26298],[103.81131,1.26258],[103.81059,1.26298],[103.81029,1.26372],[103.81167,1.2649],[103.81294,1.26442],[103.81302,1.26367],[103.81494,1.26451],[103.8124,1.26642],[103.81119,1.2664],[103.81019,1.26499],[103.80859,1.265],[103.80722,1.26588],[103.80538,1.26374],[103.80513,1.2623],[103.801,1.26589],[103.8013,1.26645],[103.79921,1.2682],[103.80221,1.27269],[103.80201,1.27535],[103.80312,1.27873],[103.80134,1.28353],[103.80302,1.28662],[103.80507,1.288],[103.80895,1.29243],[103.81536,1.29152],[103.81598,1.29411],[103.81705,1.29437],[103.82162,1.29357],[103.82439,1.29193],[103.8286,1.29272],[103.83104,1.29208],[103.83343,1.29237],[103.83501,1.28922],[103.83476,1.28585],[103.83534,1.28407],[103.83924,1.28079],[103.84215,1.27259],[103.84568,1.27256],[103.85156,1.26926],[103.8518,1.26357],[103.85067,1.26304],[103.85207,1.26146],[103.85126,1.26073],[103.8457,1.26684],[103.84428,1.26554],[103.84673,1.26243],[103.84594,1.26154],[103.83928,1.26764],[103.83208,1.26741],[103.82412,1.26308],[103.82441,1.26019],[103.83042,1.26363],[103.83619,1.26381],[103.84248,1.25786],[103.83637,1.25481],[103.83126,1.25642],[103.8319,1.25716],[103.83106,1.25744],[103.8305,1.25675],[103.8287,1.25713],[103.82856,1.25677],[103.82844,1.25667],[103.82783,1.25692],[103.82868,1.25715],[103.82588,1.25814],[103.82408,1.26016],[103.82401,1.25823],[103.82361,1.26018]],[[103.82359,1.26022],[103.82362,1.26026],[103.82361,1.26026],[103.82359,1.26022]],[[103.82363,1.26035],[103.82368,1.2605],[103.82364,1.2607],[103.82363,1.26035]],[[103.82364,1.2607],[103.82364,1.26075],[103.82363,1.26073],[103.82364,1.2607]],[[103.82352,1.26081],[103.82367,1.26084],[103.82353,1.26102],[103.82364,1.26301],[103.82357,1.26307],[103.82352,1.26081]]]}},{"type":"Feature","properties":{"id":"BP","name":"Bukit Panjang","region":"West","pop":139000,"kid":9,"sen":16,"landed":false,"lx":103.773,"ly":1.36682,"km2":9.0},"geometry":{"type":"Polygon","coordinates":[[[103.77445,1.39029],[103.77598,1.37983],[103.78064,1.36107],[103.78366,1.35648],[103.78939,1.35229],[103.79166,1.34927],[103.7894,1.3479],[103.78927,1.34912],[103.78777,1.34894],[103.78771,1.34937],[103.78618,1.34858],[103.78831,1.34569],[103.78715,1.34459],[103.78192,1.3425],[103.77947,1.34249],[103.77783,1.34186],[103.77584,1.3441],[103.77211,1.34634],[103.77034,1.34911],[103.76958,1.35328],[103.76746,1.35787],[103.76708,1.36096],[103.76745,1.3648],[103.76328,1.37161],[103.76189,1.37842],[103.75943,1.38304],[103.75513,1.38887],[103.7581,1.38903],[103.76496,1.39077],[103.77445,1.39029]]]}},{"type":"Feature","properties":{"id":"BT","name":"Bukit Timah","region":"Central","pop":80000,"kid":9,"sen":17,"landed":true,"lx":103.7907,"ly":1.33,"km2":17.5},"geometry":{"type":"Polygon","coordinates":[[[103.79766,1.34813],[103.80421,1.34135],[103.80737,1.34103],[103.80858,1.34181],[103.8099,1.34174],[103.80986,1.34091],[103.81169,1.34045],[103.81165,1.33957],[103.81237,1.33895],[103.81358,1.3382],[103.81461,1.33833],[103.81675,1.33635],[103.81862,1.33579],[103.81407,1.32861],[103.81294,1.32164],[103.80494,1.3149],[103.80227,1.3072],[103.79976,1.30965],[103.79842,1.30692],[103.79684,1.30797],[103.7975,1.30878],[103.7968,1.30965],[103.79553,1.30992],[103.79611,1.31208],[103.79313,1.31339],[103.79121,1.31133],[103.79118,1.31032],[103.7896,1.31328],[103.78668,1.3158],[103.78479,1.31501],[103.78581,1.31362],[103.78535,1.31109],[103.78475,1.31098],[103.77868,1.31309],[103.7712,1.31873],[103.77078,1.32052],[103.7711,1.32189],[103.77281,1.32442],[103.77462,1.32524],[103.77565,1.32643],[103.76912,1.32999],[103.76813,1.33121],[103.76571,1.33167],[103.76483,1.3324],[103.76461,1.33282],[103.76564,1.33245],[103.7656,1.33578],[103.76533,1.33545],[103.7645,1.33661],[103.76415,1.33936],[103.76469,1.33958],[103.76512,1.34211],[103.7669,1.34222],[103.76713,1.34279],[103.76575,1.34369],[103.76537,1.34462],[103.7642,1.34502],[103.76318,1.34671],[103.767,1.34724],[103.77038,1.34902],[103.77211,1.34634],[103.77584,1.3441],[103.77783,1.34186],[103.77947,1.34249],[103.78192,1.3425],[103.78737,1.34471],[103.78831,1.34569],[103.78618,1.34858],[103.78771,1.34937],[103.78777,1.34894],[103.78938,1.34907],[103.7894,1.3479],[103.7904,1.34886],[103.79342,1.34954],[103.79569,1.34917],[103.79766,1.34813]]]}},{"type":"Feature","properties":{"id":"CC","name":"Central Water Catchment","region":"North","pop":0,"kid":0,"sen":0,"landed":false,"lx":103.8012,"ly":1.37665,"km2":37.2},"geometry":{"type":"Polygon","coordinates":[[[103.80578,1.41436],[103.80875,1.40696],[103.81181,1.40273],[103.81453,1.39667],[103.81644,1.3951],[103.81882,1.39434],[103.81796,1.38993],[103.81838,1.38862],[103.81674,1.38692],[103.81736,1.38639],[103.81875,1.38677],[103.81945,1.38535],[103.81934,1.38339],[103.81777,1.38031],[103.82047,1.38054],[103.82164,1.37959],[103.82276,1.37972],[103.82394,1.37865],[103.82582,1.37975],[103.82771,1.37836],[103.82783,1.37741],[103.8263,1.37619],[103.82632,1.37345],[103.8274,1.37296],[103.8279,1.37199],[103.82796,1.37047],[103.82733,1.36927],[103.8283,1.36747],[103.8271,1.36269],[103.8254,1.36331],[103.82453,1.36168],[103.82069,1.3612],[103.81854,1.35487],[103.81904,1.35418],[103.82355,1.35232],[103.82674,1.35419],[103.82982,1.35312],[103.83207,1.35082],[103.83235,1.3498],[103.83384,1.34957],[103.83561,1.34739],[103.83456,1.34768],[103.83578,1.34629],[103.83678,1.34636],[103.83708,1.34346],[103.83592,1.34271],[103.83652,1.342],[103.83528,1.34127],[103.83297,1.34042],[103.82639,1.34125],[103.82319,1.34068],[103.82006,1.33918],[103.81862,1.33579],[103.81675,1.33635],[103.81461,1.33833],[103.81358,1.3382],[103.81237,1.33895],[103.81165,1.33957],[103.81169,1.34045],[103.80986,1.34091],[103.8099,1.34174],[103.80858,1.34181],[103.80737,1.34103],[103.80421,1.34135],[103.79766,1.34813],[103.79507,1.34934],[103.79166,1.34927],[103.78939,1.35229],[103.78315,1.35703],[103.78158,1.3591],[103.78026,1.36216],[103.77536,1.38311],[103.77362,1.40131],[103.77168,1.40999],[103.77717,1.41088],[103.78322,1.4109],[103.80244,1.41621],[103.80578,1.41436]]]}},{"type":"Feature","properties":{"id":"CH","name":"Changi","region":"East","pop":1900,"kid":3,"sen":10,"landed":false,"lx":103.99782,"ly":1.35032,"km2":41.5},"geometry":{"type":"Polygon","coordinates":[[[103.98236,1.39356],[103.98803,1.39313],[103.99464,1.39153],[103.99913,1.38893],[104.00616,1.37451],[104.00761,1.37348],[104.00886,1.37364],[104.0087,1.37259],[104.00682,1.37251],[104.00589,1.37004],[104.01006,1.36865],[104.01361,1.3701],[104.028,1.3637],[104.03344,1.36053],[104.03115,1.35736],[104.0311,1.35471],[104.01506,1.31646],[104.01487,1.3117],[104.01274,1.30966],[104.01071,1.30956],[104.00562,1.31153],[104.00313,1.3106],[104.00059,1.31045],[103.99127,1.31422],[103.98391,1.31202],[103.98519,1.31319],[103.98456,1.31604],[103.98382,1.31668],[103.98481,1.31899],[103.98068,1.32077],[103.97856,1.32243],[103.98356,1.33428],[103.98347,1.33504],[103.97968,1.33644],[103.97991,1.33696],[103.97117,1.34098],[103.96496,1.35058],[103.96429,1.3527],[103.96828,1.35409],[103.97028,1.36021],[103.97421,1.36293],[103.97584,1.36687],[103.97995,1.37068],[103.97933,1.37231],[103.97566,1.37328],[103.97486,1.37404],[103.97819,1.37747],[103.97866,1.37876],[103.97456,1.38605],[103.97287,1.38763],[103.9731,1.389],[103.97418,1.39081],[103.97467,1.39068],[103.9765,1.39239],[103.98044,1.39268],[103.98143,1.3934],[103.98105,1.39347],[103.98269,1.39378],[103.98236,1.39356]]]}},{"type":"Feature","properties":{"id":"CK","name":"Choa Chu Kang","region":"West","pop":191000,"kid":10,"sen":13,"landed":false,"lx":103.74719,"ly":1.38556,"km2":6.1},"geometry":{"type":"Polygon","coordinates":[[[103.74602,1.40549],[103.75102,1.40494],[103.75249,1.40383],[103.75285,1.40282],[103.75199,1.39837],[103.75332,1.389],[103.75513,1.38887],[103.75943,1.38304],[103.76124,1.37967],[103.75381,1.37628],[103.75168,1.37222],[103.74849,1.36905],[103.74543,1.37176],[103.73804,1.37402],[103.73267,1.37893],[103.74157,1.38661],[103.74029,1.38949],[103.74029,1.39152],[103.74266,1.39611],[103.74391,1.40273],[103.74602,1.40549]]]}},{"type":"Feature","properties":{"id":"CL","name":"Clementi","region":"West","pop":93000,"kid":8,"sen":21,"landed":false,"lx":103.76075,"ly":1.31759,"km2":9.5},"geometry":{"type":"Polygon","coordinates":[[[103.76707,1.3312],[103.76813,1.33121],[103.76912,1.32999],[103.77565,1.32643],[103.77483,1.32539],[103.77267,1.32428],[103.77085,1.32127],[103.77217,1.31136],[103.77117,1.30349],[103.76987,1.30042],[103.76949,1.29479],[103.76737,1.29165],[103.76617,1.29303],[103.76233,1.30134],[103.76102,1.30103],[103.75728,1.29837],[103.75275,1.30761],[103.75023,1.30916],[103.7478,1.30948],[103.74763,1.31375],[103.75125,1.32016],[103.75218,1.3229],[103.75006,1.32664],[103.74877,1.34014],[103.74942,1.34127],[103.76707,1.3312]]]}},{"type":"Feature","properties":{"id":"HG","name":"Hougang","region":"North-East","pop":227000,"kid":8,"sen":19,"landed":false,"lx":103.8898,"ly":1.36364,"km2":13.9},"geometry":{"type":"Polygon","coordinates":[[[103.88152,1.38774],[103.89089,1.3803],[103.8971,1.37938],[103.90506,1.38035],[103.90794,1.37869],[103.91005,1.37586],[103.90622,1.36499],[103.90197,1.35716],[103.89849,1.3562],[103.897,1.35346],[103.89573,1.35401],[103.8935,1.34876],[103.89382,1.34783],[103.89619,1.34677],[103.89836,1.34744],[103.89917,1.34385],[103.89845,1.34124],[103.89471,1.33632],[103.89193,1.33459],[103.88887,1.33356],[103.8866,1.33893],[103.88337,1.34253],[103.88059,1.34687],[103.87923,1.35103],[103.87649,1.35243],[103.87807,1.35388],[103.87417,1.35868],[103.87327,1.36218],[103.87615,1.36879],[103.87699,1.37564],[103.8767,1.38393],[103.87311,1.38734],[103.87809,1.38868],[103.88152,1.38774]]]}},{"type":"Feature","properties":{"id":"JE","name":"Jurong East","region":"West","pop":77000,"kid":8,"sen":19,"landed":false,"lx":103.7348,"ly":1.32044,"km2":17.9},"geometry":{"type":"MultiPolygon","coordinates":[[[[103.71188,1.29961],[103.71185,1.29736],[103.71134,1.29736],[103.71143,1.30697],[103.71081,1.30841],[103.70983,1.30779],[103.70981,1.31409],[103.71948,1.31431],[103.72035,1.31949],[103.7196,1.32359],[103.72601,1.32503],[103.72478,1.32868],[103.72504,1.33696],[103.72316,1.34035],[103.72161,1.34161],[103.7214,1.34278],[103.72185,1.34492],[103.72816,1.34436],[103.72814,1.35361],[103.7321,1.35111],[103.73726,1.346],[103.7435,1.34451],[103.74942,1.34127],[103.74863,1.33949],[103.74999,1.32708],[103.75218,1.3229],[103.75125,1.32016],[103.74763,1.31375],[103.74769,1.30993],[103.74795,1.30933],[103.75023,1.30916],[103.75275,1.30761],[103.75728,1.29837],[103.75536,1.29712],[103.74908,1.2965],[103.74415,1.29805],[103.74389,1.29909],[103.74483,1.30088],[103.74343,1.30132],[103.74086,1.29881],[103.72965,1.30163],[103.72761,1.30027],[103.72251,1.30276],[103.71585,1.30842],[103.7122,1.30844],[103.71228,1.30701],[103.71278,1.30641],[103.71536,1.3059],[103.72092,1.30118],[103.7204,1.29981],[103.72273,1.29957],[103.72196,1.29948],[103.71188,1.29961]],[[103.71188,1.29961],[103.71188,1.29962],[103.71188,1.29962],[103.71188,1.29961]],[[103.72039,1.29952],[103.72039,1.29952],[103.72039,1.29952],[103.72039,1.29952]],[[103.71122,1.30873],[103.71202,1.30766],[103.71202,1.30896],[103.71122,1.30873]]],[[[103.70983,1.30775],[103.70983,1.30775],[103.70983,1.30775],[103.70983,1.30775]]]]}},{"type":"Feature","properties":{"id":"JW","name":"Jurong West","region":"West","pop":257000,"kid":8,"sen":17,"landed":false,"lx":103.7049,"ly":1.34161,"km2":14.7},"geometry":{"type":"Polygon","coordinates":[[[103.72814,1.35361],[103.72816,1.34436],[103.72185,1.34492],[103.7214,1.34278],[103.72161,1.34161],[103.72316,1.34035],[103.72504,1.33696],[103.72478,1.32868],[103.72601,1.32503],[103.7196,1.32359],[103.71918,1.32583],[103.7209,1.32922],[103.72106,1.33165],[103.7067,1.32777],[103.67934,1.32777],[103.67945,1.3302],[103.67578,1.33052],[103.67493,1.33105],[103.67792,1.33841],[103.67903,1.33918],[103.68272,1.34001],[103.69067,1.34622],[103.70625,1.36435],[103.71492,1.35695],[103.71846,1.35571],[103.72404,1.35527],[103.72814,1.35361]]]}},{"type":"Feature","properties":{"id":"PR","name":"Pasir Ris","region":"East","pop":147000,"kid":9,"sen":15,"landed":false,"lx":103.94829,"ly":1.37862,"km2":15.8},"geometry":{"type":"Polygon","coordinates":[[[103.93478,1.40099],[103.93868,1.39704],[103.93654,1.39465],[103.93644,1.393],[103.93777,1.39338],[103.93996,1.39533],[103.94074,1.39524],[103.94318,1.39262],[103.94287,1.38768],[103.94924,1.38299],[103.95811,1.38134],[103.96476,1.38209],[103.96622,1.38061],[103.96751,1.38109],[103.96781,1.382],[103.96737,1.38322],[103.97287,1.38763],[103.97456,1.38605],[103.97866,1.37876],[103.97819,1.37747],[103.97486,1.37404],[103.97566,1.37328],[103.97933,1.37231],[103.97995,1.37068],[103.97584,1.36687],[103.97421,1.36293],[103.97028,1.36021],[103.96809,1.35394],[103.96429,1.3527],[103.96261,1.35764],[103.96115,1.36024],[103.95695,1.36407],[103.95413,1.36531],[103.94562,1.36749],[103.94074,1.37121],[103.93477,1.37445],[103.92902,1.37708],[103.92065,1.3797],[103.91433,1.38593],[103.91718,1.39127],[103.92342,1.39739],[103.93018,1.40059],[103.93014,1.3997],[103.93478,1.40099]]]}},{"type":"Feature","properties":{"id":"PN","name":"Pioneer","region":"West","pop":100,"kid":5,"sen":10,"landed":false,"lx":103.67299,"ly":1.31259,"km2":12.2},"geometry":{"type":"Polygon","coordinates":[[[103.67934,1.32777],[103.69651,1.32776],[103.69603,1.31618],[103.69587,1.31522],[103.68997,1.31482],[103.68464,1.3119],[103.6811,1.31062],[103.68156,1.30919],[103.6807,1.30843],[103.6819,1.298],[103.68012,1.29718],[103.67978,1.29758],[103.67844,1.29661],[103.67302,1.30263],[103.67272,1.30681],[103.66879,1.30632],[103.66946,1.30051],[103.67434,1.29544],[103.67399,1.29559],[103.67427,1.29512],[103.67283,1.29359],[103.66659,1.28868],[103.6652,1.29036],[103.66474,1.29188],[103.65864,1.29492],[103.65902,1.29574],[103.6577,1.29679],[103.6566,1.29587],[103.65587,1.29668],[103.65682,1.2975],[103.65375,1.30103],[103.65178,1.29936],[103.64981,1.30169],[103.65749,1.31006],[103.65709,1.31113],[103.6582,1.31232],[103.65587,1.31453],[103.6629,1.32201],[103.66753,1.32789],[103.67493,1.33105],[103.67578,1.33052],[103.67945,1.3302],[103.67934,1.32777]]]}},{"type":"Feature","properties":{"id":"PG","name":"Punggol","region":"North-East","pop":198000,"kid":14,"sen":9,"landed":false,"lx":103.91005,"ly":1.40536,"km2":9.4},"geometry":{"type":"Polygon","coordinates":[[[103.91082,1.42147],[103.91264,1.42105],[103.91392,1.41851],[103.91411,1.41625],[103.91503,1.41638],[103.91555,1.41729],[103.9163,1.41723],[103.91868,1.41502],[103.91911,1.41363],[103.9235,1.4112],[103.93116,1.40322],[103.93091,1.4022],[103.92981,1.4016],[103.93018,1.40059],[103.92403,1.39781],[103.9193,1.39371],[103.91649,1.39032],[103.91433,1.38593],[103.90739,1.39385],[103.90128,1.39817],[103.89596,1.39998],[103.88681,1.40121],[103.88761,1.4041],[103.8911,1.40619],[103.8938,1.40884],[103.89571,1.41121],[103.89746,1.41501],[103.89813,1.41473],[103.89994,1.41765],[103.90393,1.42018],[103.90696,1.42002],[103.90793,1.42103],[103.91082,1.42147]]]}},{"type":"Feature","properties":{"id":"QT","name":"Queenstown","region":"Central","pop":108000,"kid":8,"sen":23,"landed":false,"lx":103.78457,"ly":1.28908,"km2":21.7},"geometry":{"type":"Polygon","coordinates":[[[103.77868,1.31309],[103.78535,1.31109],[103.78581,1.31362],[103.78479,1.31501],[103.78668,1.3158],[103.7896,1.31328],[103.79118,1.31032],[103.79121,1.31133],[103.79313,1.31339],[103.79611,1.31208],[103.79553,1.30992],[103.7968,1.30965],[103.7975,1.30878],[103.79684,1.30797],[103.7977,1.30725],[103.79842,1.30692],[103.79976,1.30965],[103.80319,1.30672],[103.80386,1.30254],[103.8048,1.30048],[103.80773,1.29975],[103.8084,1.30031],[103.80894,1.29958],[103.80861,1.29836],[103.81049,1.29683],[103.8166,1.29677],[103.81536,1.29152],[103.80903,1.29247],[103.80507,1.288],[103.80302,1.28662],[103.80126,1.28321],[103.80313,1.27893],[103.80201,1.27535],[103.80221,1.27269],[103.79831,1.26663],[103.79399,1.26921],[103.78551,1.25501],[103.77857,1.25918],[103.78663,1.27279],[103.77687,1.27867],[103.77067,1.26824],[103.75023,1.28056],[103.75301,1.28527],[103.75649,1.28585],[103.76913,1.27831],[103.77229,1.28365],[103.76073,1.2906],[103.76306,1.29446],[103.75867,1.29922],[103.76102,1.30103],[103.76233,1.30134],[103.76673,1.29222],[103.76737,1.29165],[103.7691,1.29387],[103.76987,1.30042],[103.77117,1.30349],[103.77226,1.31215],[103.7712,1.31873],[103.77868,1.31309]]]}},{"type":"Feature","properties":{"id":"SL","name":"Seletar","region":"North-East","pop":300,"kid":5,"sen":10,"landed":true,"lx":103.8771,"ly":1.41434,"km2":10.8},"geometry":{"type":"MultiPolygon","coordinates":[[[[103.89715,1.41502],[103.89524,1.41048],[103.89137,1.4064],[103.88768,1.40418],[103.88681,1.40121],[103.87823,1.40137],[103.85762,1.40046],[103.85564,1.40123],[103.85487,1.40269],[103.85481,1.40412],[103.85554,1.40557],[103.86025,1.40903],[103.86128,1.41046],[103.86186,1.41286],[103.8617,1.41766],[103.86403,1.42187],[103.8692,1.42679],[103.86924,1.42787],[103.87018,1.42898],[103.87498,1.43172],[103.87713,1.43199],[103.87957,1.43138],[103.88812,1.42577],[103.88655,1.42359],[103.88727,1.42317],[103.88868,1.42544],[103.89687,1.42062],[103.89783,1.41867],[103.89648,1.4153],[103.89715,1.41502]],[[103.86976,1.42455],[103.8706,1.42544],[103.86936,1.42647],[103.86736,1.42472],[103.86976,1.42455]]],[[[103.89741,1.41491],[103.89746,1.41502],[103.89746,1.41501],[103.89741,1.41491]]]]}},{"type":"Feature","properties":{"id":"SB","name":"Sembawang","region":"North","pop":108000,"kid":12,"sen":11,"landed":false,"lx":103.81883,"ly":1.45575,"km2":12.6},"geometry":{"type":"Polygon","coordinates":[[[103.81732,1.47077],[103.82217,1.46864],[103.82027,1.46731],[103.81859,1.46496],[103.8194,1.46446],[103.82053,1.46615],[103.82285,1.46716],[103.82252,1.46596],[103.8234,1.46581],[103.82168,1.46272],[103.82219,1.46245],[103.82429,1.46573],[103.82228,1.46122],[103.82264,1.46102],[103.82404,1.46357],[103.82455,1.46332],[103.82754,1.46859],[103.8343,1.46471],[103.83195,1.46051],[103.8329,1.45996],[103.83527,1.46414],[103.83718,1.46482],[103.84781,1.46052],[103.83306,1.45139],[103.83669,1.44562],[103.83031,1.44163],[103.8292,1.43823],[103.8282,1.4369],[103.82484,1.43508],[103.82303,1.43558],[103.81955,1.43956],[103.81659,1.44191],[103.80719,1.44617],[103.80457,1.44808],[103.80291,1.45034],[103.8005,1.45667],[103.79757,1.45552],[103.79495,1.45762],[103.79179,1.46204],[103.79708,1.46586],[103.79904,1.46705],[103.79988,1.4668],[103.80158,1.46848],[103.80304,1.46903],[103.80864,1.47057],[103.8097,1.46978],[103.81732,1.47077]]]}},{"type":"Feature","properties":{"id":"SE","name":"Sengkang","region":"North-East","pop":256000,"kid":12,"sen":11,"landed":false,"lx":103.88771,"ly":1.39128,"km2":10.6},"geometry":{"type":"Polygon","coordinates":[[[103.88848,1.40105],[103.89658,1.39983],[103.90358,1.39687],[103.90739,1.39385],[103.9175,1.38236],[103.91553,1.37994],[103.91005,1.37586],[103.90794,1.37869],[103.90506,1.38035],[103.8971,1.37938],[103.89089,1.3803],[103.88368,1.38631],[103.88008,1.38844],[103.87793,1.38867],[103.87276,1.38735],[103.85811,1.39111],[103.85721,1.39654],[103.85518,1.3977],[103.85239,1.39709],[103.85522,1.39921],[103.85564,1.40123],[103.85783,1.40046],[103.87823,1.40137],[103.88848,1.40105]]]}},{"type":"Feature","properties":{"id":"SG","name":"Serangoon","region":"North-East","pop":116000,"kid":8,"sen":19,"landed":true,"lx":103.86782,"ly":1.3652,"km2":10.1},"geometry":{"type":"Polygon","coordinates":[[[103.88054,1.34696],[103.88337,1.34253],[103.88506,1.34086],[103.88321,1.34123],[103.877,1.34431],[103.8742,1.34348],[103.87172,1.34352],[103.86971,1.3427],[103.86513,1.34433],[103.86044,1.3434],[103.85686,1.35455],[103.85709,1.35716],[103.86092,1.3689],[103.85836,1.37766],[103.85811,1.39111],[103.87311,1.38734],[103.8766,1.38415],[103.87699,1.37564],[103.87665,1.37136],[103.87587,1.36795],[103.87327,1.36218],[103.87417,1.35868],[103.87807,1.35388],[103.87649,1.35243],[103.87923,1.35103],[103.88054,1.34696]]]}},{"type":"Feature","properties":{"id":"KL","name":"Kallang","region":"Central","pop":101000,"kid":8,"sen":21,"landed":false,"lx":103.86654,"ly":1.31112,"km2":8.6},"geometry":{"type":"Polygon","coordinates":[[[103.86235,1.33044],[103.86976,1.32713],[103.87592,1.32007],[103.87512,1.31886],[103.8747,1.31636],[103.876,1.30879],[103.88096,1.30686],[103.88427,1.30397],[103.88552,1.3012],[103.88533,1.29576],[103.87275,1.29536],[103.86532,1.29417],[103.86543,1.298],[103.86867,1.30186],[103.86908,1.3032],[103.86851,1.30433],[103.86696,1.30333],[103.86615,1.30436],[103.86228,1.30158],[103.85963,1.30583],[103.85447,1.31062],[103.85541,1.3118],[103.85437,1.31362],[103.85113,1.30874],[103.85065,1.30911],[103.84876,1.30662],[103.84577,1.30984],[103.84432,1.31056],[103.84555,1.31435],[103.84671,1.3159],[103.85574,1.32109],[103.86117,1.32662],[103.86218,1.32863],[103.86235,1.33044]]]}},{"type":"Feature","properties":{"id":"LK","name":"Lim Chu Kang","region":"North","pop":100,"kid":5,"sen":10,"landed":false,"lx":103.71929,"ly":1.43064,"km2":17.5},"geometry":{"type":"Polygon","coordinates":[[[103.71957,1.45109],[103.72907,1.45075],[103.73141,1.44889],[103.73157,1.44815],[103.7311,1.44898],[103.73061,1.44788],[103.73128,1.44805],[103.73263,1.4471],[103.73191,1.44684],[103.73125,1.44613],[103.73276,1.44683],[103.73207,1.44622],[103.73266,1.446],[103.73267,1.44661],[103.73349,1.44622],[103.73377,1.4452],[103.73459,1.44529],[103.73789,1.44276],[103.73804,1.44209],[103.73655,1.44042],[103.73704,1.43769],[103.73757,1.43736],[103.73848,1.43832],[103.74079,1.43829],[103.74319,1.4318],[103.7436,1.42827],[103.74326,1.42637],[103.72809,1.41125],[103.71856,1.41107],[103.71707,1.41344],[103.71559,1.41446],[103.71468,1.41433],[103.71287,1.41285],[103.70532,1.41226],[103.70097,1.41677],[103.70157,1.41805],[103.69865,1.41865],[103.70011,1.42319],[103.69701,1.42426],[103.69713,1.42611],[103.69578,1.42774],[103.69503,1.43153],[103.69432,1.43243],[103.69339,1.43263],[103.69301,1.43367],[103.6961,1.43501],[103.7001,1.43956],[103.70255,1.44096],[103.70649,1.44482],[103.70662,1.44594],[103.70699,1.44533],[103.70772,1.44565],[103.70988,1.44778],[103.71283,1.44941],[103.71957,1.45109]]]}},{"type":"Feature","properties":{"id":"NE","name":"North-Eastern Islands","region":"North-East","pop":50,"kid":5,"sen":10,"landed":false,"lx":104.03482,"ly":1.40164,"km2":67.3},"geometry":{"type":"MultiPolygon","coordinates":[[[[104.05408,1.43231],[104.05483,1.43133],[104.05578,1.43184],[104.05826,1.43159],[104.06983,1.42709],[104.08051,1.41899],[104.08509,1.41014],[104.08508,1.40897],[104.08372,1.40718],[104.08657,1.40626],[104.08823,1.40393],[104.08844,1.39982],[104.08768,1.39622],[104.07953,1.38115],[104.07618,1.37163],[104.0746,1.36308],[104.07466,1.35826],[104.07551,1.35482],[104.07914,1.34802],[104.08408,1.34052],[104.084,1.33883],[104.08262,1.33761],[104.08051,1.33804],[104.0325,1.37881],[104.02158,1.38873],[104.01782,1.39435],[104.01554,1.40123],[104.01652,1.40201],[104.02492,1.40177],[104.02852,1.40314],[104.02964,1.40471],[104.02834,1.40812],[104.03018,1.4114],[104.02865,1.41211],[104.02697,1.41195],[104.0246,1.40951],[104.02242,1.40863],[104.01437,1.409],[104.01224,1.41081],[104.00928,1.41868],[104.0091,1.42247],[104.01077,1.42593],[104.02127,1.4354],[104.02449,1.43713],[104.03643,1.44045],[104.04038,1.44056],[104.04364,1.43967],[104.04679,1.43504],[104.05359,1.43376],[104.05434,1.43316],[104.05408,1.43231]]],[[[104.06474,1.43575],[104.06426,1.4358],[104.06469,1.43596],[104.06474,1.43575]]],[[[103.92805,1.41967],[103.92748,1.42183],[103.92639,1.42238],[103.9264,1.42365],[103.92918,1.42433],[103.93048,1.42607],[103.9324,1.42665],[103.93371,1.4281],[103.94294,1.42434],[103.94576,1.42387],[103.94809,1.42263],[103.94946,1.42036],[103.9533,1.41868],[103.95355,1.4192],[103.95535,1.41908],[103.95605,1.4177],[103.9614,1.41766],[103.96403,1.41864],[103.96925,1.41908],[103.97043,1.41969],[103.97285,1.41919],[103.97416,1.41821],[103.97566,1.41844],[103.97881,1.41763],[103.98361,1.41789],[103.98571,1.41911],[103.99394,1.41934],[103.99698,1.41801],[103.99919,1.41561],[104.00133,1.41057],[104.00314,1.40384],[104.00271,1.40314],[104.00153,1.4028],[103.99644,1.40406],[103.98875,1.4041],[103.98809,1.40273],[103.98703,1.40411],[103.9782,1.40417],[103.97468,1.40247],[103.97288,1.40347],[103.97072,1.4021],[103.97038,1.40257],[103.96969,1.40236],[103.96815,1.40112],[103.96622,1.40113],[103.96228,1.39974],[103.95844,1.39946],[103.95561,1.40279],[103.95493,1.4049],[103.95348,1.40578],[103.95049,1.40556],[103.94867,1.40899],[103.94886,1.40995],[103.94111,1.41272],[103.93895,1.41428],[103.93773,1.41422],[103.93693,1.41519],[103.93442,1.41566],[103.93367,1.41723],[103.93066,1.41718],[103.92805,1.41967]],[[103.92805,1.41967],[103.92805,1.41967],[103.92815,1.41972],[103.92805,1.41967]]],[[[103.94702,1.40759],[103.94956,1.40424],[103.95357,1.40295],[103.95452,1.39946],[103.95411,1.3986],[103.95357,1.39854],[103.94832,1.40326],[103.94401,1.40814],[103.94702,1.40759]]]]}},{"type":"Feature","properties":{"id":"NV","name":"Novena","region":"Central","pop":50000,"kid":8,"sen":19,"landed":true,"lx":103.83531,"ly":1.32698,"km2":9.0},"geometry":{"type":"Polygon","coordinates":[[[103.83599,1.34168],[103.83725,1.33948],[103.83723,1.33474],[103.83909,1.3307],[103.84058,1.32885],[103.84271,1.32956],[103.84775,1.32975],[103.85657,1.32912],[103.86235,1.33044],[103.86218,1.32863],[103.86117,1.32662],[103.85574,1.32109],[103.84807,1.31694],[103.84634,1.31549],[103.84432,1.31056],[103.83953,1.31274],[103.83511,1.31755],[103.82012,1.32236],[103.81336,1.32329],[103.81407,1.32861],[103.81827,1.33493],[103.82036,1.33946],[103.8248,1.34115],[103.83297,1.34042],[103.83599,1.34168]]]}},{"type":"Feature","properties":{"id":"SM","name":"Simpang","region":"North","pop":0,"kid":0,"sen":0,"landed":false,"lx":103.85292,"ly":1.44409,"km2":8.3},"geometry":{"type":"MultiPolygon","coordinates":[[[[103.87242,1.43995],[103.87225,1.43794],[103.86951,1.43578],[103.86746,1.43534],[103.86563,1.43599],[103.86365,1.43817],[103.86172,1.44162],[103.85991,1.44298],[103.85974,1.44589],[103.85784,1.44969],[103.85763,1.45139],[103.86037,1.45271],[103.86152,1.4525],[103.87242,1.43995]]],[[[103.8635,1.43433],[103.86529,1.43432],[103.86466,1.43202],[103.85778,1.42653],[103.86197,1.42448],[103.85409,1.42808],[103.84682,1.43473],[103.84415,1.43974],[103.83689,1.44536],[103.83306,1.45139],[103.84781,1.46052],[103.85416,1.45747],[103.85832,1.4547],[103.85768,1.45356],[103.85504,1.45249],[103.85875,1.4424],[103.86337,1.43644],[103.86279,1.43597],[103.8635,1.43433]]]]}},{"type":"Feature","properties":{"id":"SI","name":"Southern Islands","region":"Central","pop":2000,"kid":6,"sen":15,"landed":false,"lx":103.83585,"ly":1.243,"km2":7.1},"geometry":{"type":"MultiPolygon","coordinates":[[[[103.8606,1.22429],[103.8614,1.22457],[103.86086,1.22498],[103.86131,1.22471],[103.86249,1.22285],[103.86276,1.2219],[103.8622,1.22102],[103.86198,1.22081],[103.86167,1.22081],[103.86142,1.22103],[103.86196,1.22085],[103.86242,1.22143],[103.86024,1.22251],[103.86059,1.22203],[103.85969,1.22322],[103.86039,1.22372],[103.85957,1.22396],[103.8591,1.22347],[103.85797,1.22495],[103.85909,1.22544],[103.8606,1.22429]]],[[[103.86087,1.22171],[103.86123,1.22134],[103.8612,1.22131],[103.86087,1.22171]]],[[[103.85956,1.22542],[103.86051,1.22517],[103.8605,1.22513],[103.85956,1.22542]]],[[[103.85632,1.22363],[103.85945,1.22014],[103.85935,1.21963],[103.85874,1.22015],[103.85789,1.21911],[103.85843,1.2182],[103.85774,1.21768],[103.85699,1.21759],[103.85732,1.21787],[103.85377,1.22083],[103.85252,1.22266],[103.85129,1.22085],[103.85163,1.22012],[103.85158,1.21905],[103.85157,1.21965],[103.85076,1.21951],[103.85113,1.21753],[103.85162,1.21777],[103.85173,1.21609],[103.85129,1.21621],[103.85115,1.21527],[103.85151,1.21475],[103.85208,1.21491],[103.85217,1.21402],[103.85142,1.21338],[103.85078,1.21433],[103.84932,1.21493],[103.84818,1.21689],[103.84317,1.22217],[103.84554,1.22347],[103.84638,1.2227],[103.84675,1.223],[103.8486,1.22212],[103.84834,1.2215],[103.85022,1.22047],[103.85057,1.22103],[103.84982,1.22163],[103.8512,1.22096],[103.85228,1.22272],[103.85242,1.22415],[103.85023,1.22577],[103.85108,1.22653],[103.85222,1.22626],[103.85214,1.2279],[103.85024,1.22782],[103.84999,1.22915],[103.84812,1.22668],[103.84679,1.22651],[103.84696,1.2273],[103.84897,1.22807],[103.84942,1.22953],[103.84822,1.23086],[103.84808,1.23017],[103.84741,1.23025],[103.84558,1.23185],[103.84563,1.23239],[103.84866,1.2316],[103.8486,1.23072],[103.84954,1.22968],[103.85172,1.23063],[103.85099,1.23087],[103.85134,1.23151],[103.85825,1.23217],[103.85838,1.23112],[103.85736,1.22942],[103.85487,1.22848],[103.855,1.22902],[103.85409,1.22913],[103.85322,1.22748],[103.85414,1.22557],[103.85522,1.22556],[103.85509,1.22618],[103.85586,1.22591],[103.85632,1.22363]],[[103.85231,1.22289],[103.85231,1.22289],[103.85231,1.22289],[103.85231,1.22289]],[[103.85218,1.2279],[103.85218,1.2279],[103.85223,1.22791],[103.85218,1.2279]],[[103.85041,1.22911],[103.85041,1.22911],[103.85041,1.22911],[103.85041,1.22911]],[[103.85041,1.22911],[103.85041,1.22911],[103.85041,1.22911],[103.85041,1.22911]],[[103.85001,1.22926],[103.84971,1.22946],[103.84983,1.22935],[103.84989,1.22931],[103.84992,1.22929],[103.85001,1.22926]],[[103.84945,1.22957],[103.84957,1.22946],[103.84944,1.22956],[103.84945,1.22957]]],[[[103.85539,1.24089],[103.85516,1.23953],[103.85407,1.23886],[103.85024,1.24052],[103.84603,1.23774],[103.84519,1.23777],[103.84473,1.23845],[103.8452,1.23979],[103.84928,1.24254],[103.85209,1.24553],[103.8542,1.24405],[103.85539,1.24089]]],[[[103.8233,1.25745],[103.82361,1.2567],[103.82364,1.25842],[103.82401,1.25823],[103.82401,1.25635],[103.82522,1.25527],[103.82706,1.25467],[103.83208,1.2547],[103.83519,1.25323],[103.83715,1.25319],[103.83835,1.25408],[103.84147,1.25372],[103.84227,1.2522],[103.84646,1.25321],[103.84842,1.25211],[103.84824,1.25122],[103.84403,1.24482],[103.83967,1.24038],[103.83718,1.23871],[103.83638,1.23862],[103.8371,1.23919],[103.83672,1.23942],[103.83258,1.23786],[103.8298,1.23962],[103.83037,1.24057],[103.82912,1.24143],[103.82859,1.24254],[103.82745,1.24282],[103.82715,1.24191],[103.8235,1.24584],[103.8233,1.24653],[103.82377,1.24613],[103.82408,1.24665],[103.82356,1.24775],[103.82251,1.24809],[103.82102,1.24973],[103.82003,1.2496],[103.82048,1.24919],[103.81987,1.2488],[103.81769,1.25001],[103.81604,1.25135],[103.81584,1.25232],[103.81485,1.25259],[103.81296,1.25478],[103.81036,1.25634],[103.81002,1.25588],[103.81093,1.25525],[103.81048,1.2548],[103.80673,1.25983],[103.80876,1.26005],[103.81474,1.25883],[103.81624,1.25978],[103.81801,1.26001],[103.81974,1.25889],[103.82012,1.25921],[103.82119,1.25775],[103.82129,1.25839],[103.82304,1.25762],[103.8232,1.25864],[103.8233,1.25745]],[[103.82306,1.25757],[103.8233,1.25745],[103.82306,1.25757],[103.82306,1.25757]],[[103.84295,1.25208],[103.84295,1.25208],[103.84295,1.25208],[103.84295,1.25208]],[[103.83108,1.23919],[103.8311,1.23916],[103.83108,1.23919],[103.83108,1.23919]],[[103.82359,1.25657],[103.82352,1.2565],[103.82363,1.25646],[103.82359,1.25657]],[[103.81083,1.25625],[103.81083,1.25625],[103.81084,1.25625],[103.81083,1.25625]]],[[[103.84061,1.22873],[103.84038,1.22773],[103.83982,1.22753],[103.83715,1.22904],[103.83532,1.23291],[103.83596,1.23479],[103.83773,1.23425],[103.83931,1.23223],[103.84061,1.22873]]],[[[103.83498,1.21558],[103.83627,1.21479],[103.83664,1.21404],[103.836,1.21427],[103.83514,1.21278],[103.8355,1.21255],[103.83433,1.21233],[103.83343,1.21348],[103.83498,1.21558]]],[[[103.83647,1.21317],[103.83591,1.21273],[103.83661,1.21348],[103.83647,1.21317]]],[[[103.83211,1.21705],[103.83316,1.21681],[103.83369,1.21626],[103.83253,1.21476],[103.83177,1.21556],[103.83211,1.21705]]],[[[103.82822,1.24128],[103.82916,1.24077],[103.82886,1.24048],[103.82822,1.24128]]],[[[103.82233,1.24729],[103.82118,1.24798],[103.82122,1.24841],[103.82146,1.24846],[103.82233,1.24729]]],[[[103.81425,1.25003],[103.81616,1.24854],[103.81476,1.24899],[103.81425,1.25003]]],[[[103.81403,1.25248],[103.81419,1.25242],[103.81503,1.25203],[103.81417,1.2522],[103.81403,1.25248]]],[[[103.81445,1.2602],[103.81472,1.25951],[103.81314,1.2596],[103.81351,1.26008],[103.81445,1.2602]]],[[[103.81271,1.25374],[103.81293,1.253],[103.81256,1.2537],[103.81271,1.25374]]],[[[103.8112,1.25449],[103.81182,1.25418],[103.81196,1.25413],[103.8117,1.25408],[103.8112,1.25449]]]]}},{"type":"Feature","properties":{"id":"SK","name":"Sungei Kadut","region":"North","pop":500,"kid":5,"sen":10,"landed":false,"lx":103.75746,"ly":1.41813,"km2":17.6},"geometry":{"type":"Polygon","coordinates":[[[103.75819,1.44338],[103.76208,1.44433],[103.76519,1.44299],[103.76676,1.44068],[103.76842,1.44051],[103.76879,1.43195],[103.77115,1.42402],[103.77149,1.41145],[103.77362,1.40131],[103.77445,1.39029],[103.76496,1.39077],[103.7581,1.38903],[103.75332,1.389],[103.75199,1.39837],[103.75285,1.40282],[103.75249,1.40383],[103.75102,1.40494],[103.74414,1.40608],[103.74179,1.4085],[103.74209,1.41398],[103.73933,1.42228],[103.74326,1.42637],[103.74344,1.43028],[103.74079,1.43829],[103.73848,1.43832],[103.73721,1.43741],[103.73747,1.44017],[103.73824,1.44105],[103.73871,1.4389],[103.74269,1.43928],[103.74297,1.43871],[103.74295,1.44546],[103.74396,1.44631],[103.75819,1.44338]]]}},{"type":"Feature","properties":{"id":"TP","name":"Toa Payoh","region":"Central","pop":126000,"kid":7,"sen":24,"landed":false,"lx":103.86103,"ly":1.33668,"km2":8.2},"geometry":{"type":"Polygon","coordinates":[[[103.84477,1.34394],[103.8543,1.34321],[103.86145,1.3435],[103.86513,1.34433],[103.86954,1.3427],[103.87172,1.34352],[103.87409,1.34347],[103.87725,1.34425],[103.88321,1.34123],[103.88506,1.34086],[103.8866,1.33893],[103.88887,1.33356],[103.8798,1.33153],[103.86874,1.32782],[103.86167,1.33053],[103.85657,1.32912],[103.84775,1.32975],[103.84271,1.32956],[103.84058,1.32885],[103.83909,1.3307],[103.83723,1.33474],[103.83725,1.33948],[103.83599,1.34168],[103.84099,1.34503],[103.84477,1.34394]]]}},{"type":"Feature","properties":{"id":"TS","name":"Tuas","region":"West","pop":0,"kid":0,"sen":0,"landed":false,"lx":103.6331,"ly":1.28023,"km2":47.7},"geometry":{"type":"MultiPolygon","coordinates":[[[[103.63879,1.3531],[103.6449,1.34787],[103.64696,1.34545],[103.64988,1.34488],[103.65171,1.34347],[103.65208,1.34235],[103.65142,1.33979],[103.65196,1.33876],[103.65673,1.33454],[103.65714,1.33357],[103.66545,1.33014],[103.66772,1.32799],[103.65587,1.31453],[103.6582,1.31232],[103.65679,1.31091],[103.65621,1.31147],[103.65088,1.30589],[103.64922,1.30543],[103.64473,1.30097],[103.64649,1.29178],[103.6498,1.28566],[103.65019,1.28352],[103.64946,1.2812],[103.64745,1.27947],[103.64568,1.27897],[103.64044,1.27908],[103.63974,1.2699],[103.64333,1.26979],[103.64336,1.26085],[103.61734,1.26085],[103.61734,1.25398],[103.64435,1.25398],[103.64435,1.24796],[103.63779,1.24503],[103.61734,1.24503],[103.61734,1.23815],[103.64984,1.23815],[103.64984,1.2292],[103.61735,1.2292],[103.61735,1.2216],[103.65692,1.22161],[103.65858,1.21717],[103.64806,1.21328],[103.64242,1.21024],[103.60876,1.21887],[103.60664,1.22045],[103.60571,1.22304],[103.6057,1.24368],[103.61243,1.24368],[103.61244,1.24639],[103.60885,1.24639],[103.60885,1.25295],[103.61199,1.25295],[103.61199,1.25566],[103.60975,1.25566],[103.60975,1.26023],[103.60571,1.26023],[103.60571,1.26113],[103.60987,1.26113],[103.60987,1.26467],[103.60676,1.26467],[103.61105,1.27633],[103.61261,1.27824],[103.61765,1.28069],[103.61986,1.28396],[103.62024,1.28777],[103.61822,1.29335],[103.61751,1.29343],[103.61782,1.29673],[103.61799,1.29627],[103.61815,1.29716],[103.6187,1.29707],[103.62654,1.3183],[103.6246,1.31903],[103.62265,1.31405],[103.62076,1.31476],[103.62136,1.31968],[103.63234,1.33715],[103.6337,1.33782],[103.63476,1.34076],[103.63453,1.34227],[103.63571,1.34348],[103.63646,1.34585],[103.6355,1.34543],[103.63464,1.34632],[103.63413,1.34785],[103.63439,1.34957],[103.6333,1.3508],[103.63458,1.34995],[103.63706,1.35168],[103.63821,1.35046],[103.63879,1.3531]]],[[[103.64772,1.23933],[103.64801,1.23957],[103.64877,1.23946],[103.64772,1.23933]]],[[[103.64759,1.23965],[103.6475,1.23961],[103.64767,1.23973],[103.64759,1.23965]]]]}},{"type":"Feature","properties":{"id":"WI","name":"Western Islands","region":"West","pop":0,"kid":0,"sen":0,"landed":false,"lx":103.67022,"ly":1.25999,"km2":45.8},"geometry":{"type":"MultiPolygon","coordinates":[[[[103.79303,1.21055],[103.79533,1.20839],[103.79661,1.20791],[103.7984,1.20477],[103.80133,1.2018],[103.80138,1.20067],[103.79843,1.20143],[103.79353,1.20452],[103.7919,1.20791],[103.79183,1.21056],[103.79303,1.21055]]],[[[103.78648,1.21569],[103.78715,1.21543],[103.78708,1.21501],[103.78625,1.21526],[103.78648,1.21569]]],[[[103.76003,1.21299],[103.76152,1.21287],[103.76102,1.21182],[103.76151,1.21006],[103.76084,1.20986],[103.7621,1.20988],[103.76252,1.21042],[103.76291,1.20993],[103.7624,1.20859],[103.76301,1.20819],[103.76222,1.20786],[103.76164,1.20738],[103.76085,1.20794],[103.76062,1.20775],[103.76158,1.20729],[103.76323,1.20794],[103.76251,1.20728],[103.76344,1.20741],[103.76322,1.20612],[103.76358,1.20711],[103.76596,1.20815],[103.77002,1.20758],[103.77529,1.20988],[103.77529,1.21029],[103.78042,1.21037],[103.78153,1.20579],[103.78135,1.2002],[103.78001,1.19856],[103.7762,1.19648],[103.77532,1.19229],[103.771,1.18873],[103.76874,1.1883],[103.76651,1.18903],[103.7606,1.19499],[103.76052,1.19626],[103.76313,1.19949],[103.76376,1.20154],[103.76329,1.20385],[103.76281,1.20308],[103.76287,1.20347],[103.76259,1.20386],[103.76157,1.20415],[103.7626,1.2037],[103.76265,1.20286],[103.76164,1.20193],[103.76091,1.20295],[103.75965,1.20102],[103.75841,1.2031],[103.75765,1.2061],[103.75921,1.21209],[103.7589,1.21741],[103.76003,1.21299]],[[103.76367,1.20418],[103.76353,1.20399],[103.76355,1.2038],[103.76367,1.20418]]],[[[103.7618,1.24043],[103.76519,1.23958],[103.76942,1.23598],[103.77049,1.23417],[103.77132,1.23372],[103.7717,1.23431],[103.77407,1.2316],[103.77436,1.23187],[103.77711,1.2287],[103.7768,1.22756],[103.77766,1.22719],[103.77899,1.22405],[103.77327,1.22491],[103.77254,1.2277],[103.77078,1.22933],[103.76712,1.23073],[103.76298,1.23114],[103.76071,1.23245],[103.75962,1.23882],[103.76007,1.23985],[103.7618,1.24043]]],[[[103.7507,1.23572],[103.75448,1.23428],[103.75496,1.23536],[103.7574,1.23666],[103.75991,1.23116],[103.76361,1.22977],[103.76728,1.23003],[103.77078,1.22743],[103.7689,1.225],[103.7604,1.22591],[103.75213,1.22985],[103.74526,1.23135],[103.74267,1.23133],[103.74057,1.2324],[103.73967,1.23411],[103.74001,1.2349],[103.74309,1.23662],[103.74629,1.2373],[103.74932,1.23697],[103.7507,1.23572]]],[[[103.75535,1.19724],[103.75887,1.19724],[103.75887,1.19631],[103.75535,1.19631],[103.75535,1.19724]]],[[[103.75277,1.22584],[103.75381,1.22485],[103.75396,1.22463],[103.75328,1.22529],[103.75292,1.22378],[103.7539,1.22403],[103.75191,1.22338],[103.75127,1.22339],[103.75225,1.22389],[103.75155,1.22609],[103.74924,1.22771],[103.75277,1.22584]]],[[[103.74707,1.22829],[103.74842,1.22798],[103.74707,1.22821],[103.74727,1.22658],[103.75019,1.22579],[103.74936,1.22418],[103.7504,1.22348],[103.74865,1.22298],[103.74692,1.22426],[103.74774,1.22395],[103.74804,1.22448],[103.74735,1.22555],[103.74673,1.225],[103.74722,1.22657],[103.74682,1.22803],[103.74707,1.22829]]],[[[103.74258,1.16432],[103.7422,1.16395],[103.742,1.16521],[103.74258,1.16432]]],[[[103.73314,1.17633],[103.73453,1.17566],[103.73492,1.17479],[103.73674,1.17558],[103.73648,1.17442],[103.7366,1.17399],[103.73685,1.1756],[103.73766,1.1758],[103.73951,1.17518],[103.73996,1.17431],[103.74146,1.17438],[103.7414,1.17334],[103.74045,1.17205],[103.73916,1.17271],[103.73857,1.17222],[103.73935,1.17241],[103.73979,1.17187],[103.7392,1.16988],[103.73963,1.16725],[103.73805,1.16643],[103.73524,1.16761],[103.73397,1.16711],[103.73205,1.16938],[103.73111,1.17219],[103.7283,1.17301],[103.72821,1.17377],[103.72953,1.17532],[103.73012,1.17505],[103.73139,1.1763],[103.7317,1.1758],[103.73314,1.17633]]],[[[103.7413,1.16095],[103.74084,1.1596],[103.74118,1.15938],[103.74068,1.1587],[103.74038,1.15967],[103.7413,1.16095]]],[[[103.7413,1.15998],[103.7413,1.15978],[103.74126,1.15979],[103.7413,1.15998]]],[[[103.71253,1.29163],[103.71742,1.29067],[103.71816,1.29199],[103.71979,1.29147],[103.71887,1.28999],[103.721,1.29134],[103.72452,1.2896],[103.7259,1.28723],[103.72646,1.28417],[103.72919,1.28095],[103.73036,1.28094],[103.73088,1.27934],[103.73159,1.27973],[103.73195,1.27866],[103.73586,1.27804],[103.74004,1.2738],[103.74007,1.273],[103.73715,1.27062],[103.73285,1.26923],[103.73161,1.2704],[103.72617,1.27167],[103.72609,1.27129],[103.73197,1.26925],[103.73371,1.26626],[103.72917,1.26258],[103.72328,1.25988],[103.71964,1.26136],[103.71775,1.26297],[103.7108,1.26674],[103.71019,1.26928],[103.70874,1.26695],[103.70612,1.26835],[103.70481,1.26559],[103.71383,1.26022],[103.71408,1.25902],[103.70613,1.25453],[103.69412,1.25026],[103.69041,1.26339],[103.68497,1.2684],[103.68013,1.26306],[103.68591,1.25773],[103.69038,1.242],[103.69039,1.24003],[103.68807,1.23694],[103.687,1.2376],[103.68254,1.23309],[103.68287,1.23171],[103.67441,1.22315],[103.6734,1.22262],[103.67212,1.22285],[103.6698,1.22696],[103.66966,1.22838],[103.67216,1.22358],[103.67594,1.22728],[103.67667,1.22875],[103.67494,1.23226],[103.67385,1.23274],[103.67291,1.23449],[103.6688,1.23486],[103.66505,1.24264],[103.66302,1.24498],[103.65373,1.26801],[103.65373,1.27291],[103.65876,1.27685],[103.6608,1.274],[103.67635,1.28494],[103.68424,1.28957],[103.68865,1.29082],[103.6966,1.29117],[103.69682,1.29038],[103.69164,1.2848],[103.69102,1.28256],[103.68423,1.27653],[103.68806,1.27275],[103.69209,1.27707],[103.69337,1.276],[103.69572,1.27694],[103.69538,1.27763],[103.6966,1.27749],[103.69558,1.27915],[103.69633,1.28091],[103.69572,1.2814],[103.70403,1.29089],[103.70641,1.29246],[103.7085,1.29272],[103.71185,1.2916],[103.7113,1.29294],[103.71134,1.29736],[103.71185,1.29736],[103.71181,1.29307],[103.71253,1.29163]],[[103.69381,1.29059],[103.69382,1.2906],[103.69381,1.29059],[103.69381,1.29059]]],[[[103.73681,1.18881],[103.73553,1.18902],[103.73633,1.19022],[103.73786,1.1911],[103.73681,1.18881]]],[[[103.72345,1.21313],[103.72492,1.21262],[103.72356,1.21305],[103.72326,1.21211],[103.72422,1.21061],[103.72531,1.20997],[103.72704,1.21015],[103.72847,1.21113],[103.7281,1.21169],[103.72944,1.21093],[103.73063,1.2079],[103.73,1.2094],[103.7292,1.20964],[103.72806,1.20915],[103.72738,1.20792],[103.72842,1.20683],[103.72965,1.2067],[103.73164,1.20523],[103.7324,1.20539],[103.73198,1.20596],[103.7336,1.20404],[103.73365,1.20354],[103.73176,1.20331],[103.73211,1.20386],[103.73174,1.20444],[103.72982,1.2049],[103.72968,1.20312],[103.73086,1.20326],[103.72662,1.20247],[103.72319,1.20326],[103.71687,1.20255],[103.70778,1.20407],[103.70711,1.20472],[103.70746,1.2057],[103.71067,1.20771],[103.71386,1.21121],[103.72191,1.21349],[103.72345,1.21313]]],[[[103.72519,1.19193],[103.72924,1.19201],[103.72958,1.19141],[103.72797,1.19092],[103.72771,1.1905],[103.7278,1.19041],[103.72901,1.19121],[103.73032,1.19089],[103.73167,1.18858],[103.73091,1.18792],[103.73173,1.18789],[103.73154,1.18666],[103.73048,1.1869],[103.72931,1.18598],[103.72932,1.18651],[103.72833,1.18829],[103.7292,1.1865],[103.72889,1.18586],[103.72831,1.18702],[103.72745,1.18728],[103.72667,1.18692],[103.72829,1.18695],[103.7287,1.18615],[103.72839,1.18335],[103.72698,1.18345],[103.72544,1.18258],[103.72437,1.18323],[103.72206,1.18146],[103.72119,1.18122],[103.72075,1.18172],[103.71909,1.18008],[103.71943,1.18083],[103.71895,1.18297],[103.71727,1.187],[103.72129,1.18759],[103.72234,1.18677],[103.72208,1.18823],[103.72377,1.19112],[103.72519,1.19193]]],[[[103.72328,1.19054],[103.72269,1.19077],[103.72295,1.19149],[103.72356,1.19101],[103.72328,1.19054]]],[[[103.70736,1.21664],[103.7068,1.21632],[103.70628,1.21722],[103.70736,1.21664]]]]}},{"type":"Feature","properties":{"id":"WC","name":"Western Water Catchment","region":"West","pop":700,"kid":5,"sen":10,"landed":false,"lx":103.68973,"ly":1.38213,"km2":69.7},"geometry":{"type":"MultiPolygon","coordinates":[[[[103.69302,1.43367],[103.69339,1.43263],[103.69432,1.43243],[103.69503,1.43153],[103.69578,1.42774],[103.69713,1.42611],[103.69701,1.42426],[103.70011,1.42319],[103.69865,1.41865],[103.70157,1.41805],[103.70097,1.41677],[103.7056,1.41218],[103.71287,1.41285],[103.71468,1.41433],[103.71559,1.41446],[103.71707,1.41344],[103.71856,1.41107],[103.72789,1.41117],[103.73933,1.42228],[103.74209,1.41398],[103.74156,1.41019],[103.74188,1.40826],[103.74331,1.40651],[103.74602,1.40549],[103.74365,1.4021],[103.74266,1.39611],[103.74029,1.39152],[103.74029,1.38949],[103.74157,1.38661],[103.72401,1.37143],[103.72134,1.37014],[103.71028,1.36693],[103.70719,1.36511],[103.7022,1.36014],[103.69067,1.34622],[103.68272,1.34001],[103.67903,1.33918],[103.67792,1.33841],[103.67493,1.33105],[103.66772,1.32799],[103.66545,1.33014],[103.65714,1.33357],[103.65673,1.33454],[103.65196,1.33876],[103.65142,1.33979],[103.65208,1.34235],[103.65171,1.34347],[103.64988,1.34488],[103.64696,1.34545],[103.6449,1.34787],[103.63879,1.3531],[103.64039,1.3581],[103.64067,1.35767],[103.64376,1.36074],[103.6468,1.36761],[103.64908,1.37096],[103.64935,1.37264],[103.65106,1.37317],[103.65091,1.37432],[103.6514,1.37471],[103.65271,1.37301],[103.65272,1.37465],[103.65358,1.37482],[103.65722,1.38226],[103.65695,1.3835],[103.65799,1.38335],[103.65746,1.38423],[103.65908,1.38573],[103.65976,1.38596],[103.65991,1.38502],[103.66023,1.38526],[103.66044,1.38599],[103.65983,1.38699],[103.6616,1.38886],[103.66161,1.39054],[103.66274,1.39252],[103.66237,1.39486],[103.66285,1.39731],[103.66205,1.39873],[103.66269,1.40026],[103.66325,1.40032],[103.66273,1.40069],[103.66297,1.40146],[103.66388,1.40196],[103.66249,1.40553],[103.66431,1.40631],[103.66514,1.40892],[103.66687,1.40935],[103.66805,1.40874],[103.6706,1.4117],[103.67058,1.41328],[103.67271,1.41379],[103.6718,1.41462],[103.67153,1.41593],[103.67216,1.41801],[103.67302,1.41777],[103.67309,1.41853],[103.67227,1.41924],[103.67393,1.42014],[103.67483,1.41925],[103.67437,1.41999],[103.67493,1.42071],[103.67414,1.42052],[103.67351,1.42201],[103.6743,1.42518],[103.67593,1.42623],[103.67691,1.42609],[103.6764,1.42631],[103.67656,1.4269],[103.67806,1.42912],[103.679,1.42853],[103.6814,1.42914],[103.68331,1.43117],[103.68583,1.42997],[103.68577,1.43139],[103.68631,1.4319],[103.68778,1.43171],[103.6886,1.43304],[103.68965,1.43335],[103.69055,1.43306],[103.69302,1.43367]]],[[[103.68527,1.43353],[103.68425,1.43422],[103.6854,1.43506],[103.68571,1.4347],[103.68527,1.43353]]],[[[103.66113,1.39681],[103.66029,1.39708],[103.66125,1.39924],[103.66191,1.39793],[103.66113,1.39681]]]]}},{"type":"Feature","properties":{"id":"WD","name":"Woodlands","region":"North","pop":256000,"kid":10,"sen":13,"landed":false,"lx":103.7877,"ly":1.44068,"km2":13.6},"geometry":{"type":"Polygon","coordinates":[[[103.79281,1.46048],[103.79331,1.46048],[103.79495,1.45762],[103.79757,1.45552],[103.8005,1.45667],[103.80123,1.45403],[103.80399,1.44863],[103.80719,1.44617],[103.8117,1.44428],[103.81094,1.44105],[103.79497,1.42257],[103.78835,1.4258],[103.78205,1.42654],[103.77622,1.425],[103.77127,1.42151],[103.77089,1.42539],[103.76879,1.43195],[103.76842,1.44051],[103.76676,1.44068],[103.7644,1.44345],[103.76706,1.44418],[103.76737,1.44641],[103.7696,1.44869],[103.76986,1.44983],[103.76905,1.45249],[103.76941,1.45269],[103.77086,1.44849],[103.78347,1.45558],[103.78568,1.45788],[103.79176,1.46203],[103.79281,1.46048]]]}},{"type":"Feature","properties":{"id":"RV","name":"River Valley","region":"Central","pop":11000,"kid":7,"sen":14,"landed":false,"lx":103.83398,"ly":1.29805,"km2":1.5},"geometry":{"type":"Polygon","coordinates":[[[103.83059,1.304],[103.83483,1.30044],[103.83737,1.2997],[103.83775,1.29846],[103.83883,1.29824],[103.83966,1.29924],[103.84224,1.29866],[103.8433,1.29668],[103.84071,1.29207],[103.83877,1.29097],[103.83632,1.29271],[103.83585,1.29181],[103.83552,1.29249],[103.83411,1.29247],[103.83259,1.2952],[103.83292,1.29629],[103.83034,1.29561],[103.82995,1.2992],[103.82624,1.29927],[103.82327,1.30117],[103.82341,1.30268],[103.8255,1.30301],[103.82761,1.30445],[103.8291,1.30463],[103.83059,1.304]]]}},{"type":"Feature","properties":{"id":"RC","name":"Rochor","region":"Central","pop":13000,"kid":5,"sen":25,"landed":false,"lx":103.85328,"ly":1.30414,"km2":1.6},"geometry":{"type":"Polygon","coordinates":[[[103.85447,1.31062],[103.85963,1.30583],[103.86228,1.30158],[103.85942,1.29978],[103.85619,1.30248],[103.85421,1.30305],[103.85585,1.30063],[103.85231,1.29638],[103.84952,1.29865],[103.84891,1.3],[103.84641,1.30009],[103.84543,1.30136],[103.84587,1.30201],[103.84537,1.30224],[103.84582,1.30331],[103.84542,1.304],[103.84599,1.30478],[103.84816,1.30345],[103.84867,1.30541],[103.84656,1.30691],[103.84704,1.30814],[103.84876,1.30662],[103.85065,1.30911],[103.85113,1.30874],[103.85437,1.31362],[103.85541,1.3118],[103.85447,1.31062]]]}},{"type":"Feature","properties":{"id":"SR","name":"Singapore River","region":"Central","pop":3000,"kid":6,"sen":15,"landed":false,"lx":103.84121,"ly":1.29011,"km2":1.0},"geometry":{"type":"Polygon","coordinates":[[[103.8341,1.29248],[103.83552,1.29249],[103.83585,1.29181],[103.83632,1.29271],[103.83877,1.29097],[103.84071,1.29207],[103.84214,1.29413],[103.84827,1.29008],[103.85082,1.2863],[103.84954,1.28557],[103.84777,1.28641],[103.84718,1.28543],[103.84009,1.28919],[103.83866,1.28882],[103.83797,1.28798],[103.83685,1.28793],[103.83637,1.28686],[103.83583,1.28742],[103.83518,1.28696],[103.83492,1.28958],[103.83343,1.29237],[103.83181,1.29215],[103.83034,1.29561],[103.83292,1.29629],[103.83259,1.2952],[103.8341,1.29248]]]}},{"type":"Feature","properties":{"id":"SV","name":"Straits View","region":"Central","pop":0,"kid":0,"sen":0,"landed":false,"lx":103.85877,"ly":1.27125,"km2":1.1},"geometry":{"type":"Polygon","coordinates":[[[103.86643,1.27284],[103.85997,1.26779],[103.86173,1.26534],[103.86085,1.2647],[103.8591,1.26715],[103.85719,1.26584],[103.85586,1.26564],[103.85261,1.26811],[103.85157,1.26811],[103.85156,1.26926],[103.85249,1.26872],[103.85843,1.27804],[103.86643,1.27284]]]}},{"type":"Feature","properties":{"id":"CB","name":"Changi Bay","region":"East","pop":0,"kid":0,"sen":0,"landed":false,"lx":104.07118,"ly":1.29147,"km2":2.0},"geometry":{"type":"MultiPolygon","coordinates":[[[[104.08413,1.32245],[104.08346,1.32229],[104.08321,1.32263],[104.08409,1.32327],[104.08413,1.32245]]],[[[104.07166,1.29195],[104.07159,1.29106],[104.07056,1.29105],[104.07086,1.29192],[104.07166,1.29195]]],[[[104.03344,1.36053],[104.04222,1.3538],[104.04353,1.35055],[104.04316,1.34872],[104.04182,1.34909],[104.04264,1.35175],[104.04096,1.35451],[104.03786,1.35693],[104.03668,1.35705],[104.03473,1.35835],[104.03303,1.35879],[104.03187,1.35839],[104.03344,1.36053]]],[[[104.03143,1.35741],[104.03228,1.35688],[104.03257,1.35587],[104.02276,1.33308],[104.02069,1.3273],[104.02076,1.32566],[104.02139,1.32432],[104.03255,1.3246],[104.03274,1.31799],[104.03355,1.31743],[104.03269,1.31618],[104.02906,1.31608],[104.02895,1.32038],[104.02266,1.32021],[104.02278,1.31592],[104.0148,1.31568],[104.0311,1.35471],[104.03143,1.35741]]]]}},{"type":"Feature","properties":{"id":"MP","name":"Marine Parade","region":"Central","pop":46000,"kid":7,"sen":24,"landed":true,"lx":103.89627,"ly":1.30023,"km2":6.1},"geometry":{"type":"Polygon","coordinates":[[[103.90671,1.31332],[103.90998,1.30555],[103.91826,1.30747],[103.91951,1.30199],[103.91749,1.3018],[103.91189,1.29917],[103.90544,1.29772],[103.89879,1.29544],[103.89485,1.29322],[103.89333,1.29354],[103.89009,1.29039],[103.88869,1.29081],[103.8854,1.28776],[103.88393,1.28791],[103.88108,1.28484],[103.87548,1.29128],[103.87588,1.29366],[103.87767,1.29552],[103.88533,1.29576],[103.88552,1.3012],[103.8838,1.30454],[103.88505,1.30546],[103.88968,1.30632],[103.89012,1.30695],[103.88972,1.30859],[103.89462,1.30958],[103.9015,1.30954],[103.90671,1.31332]]]}},{"type":"Feature","properties":{"id":"DT","name":"Downtown Core","region":"Central","pop":3000,"kid":6,"sen":15,"landed":false,"lx":103.8555,"ly":1.28679,"km2":5.1},"geometry":{"type":"Polygon","coordinates":[[[103.86615,1.30436],[103.86696,1.30333],[103.86851,1.30433],[103.86908,1.30297],[103.8682,1.3011],[103.86543,1.298],[103.86532,1.29417],[103.86445,1.29401],[103.86498,1.28931],[103.86429,1.28854],[103.86161,1.28856],[103.86147,1.28441],[103.86068,1.2817],[103.85249,1.26872],[103.84568,1.27256],[103.84215,1.27259],[103.84153,1.27439],[103.84189,1.27482],[103.84306,1.27456],[103.8433,1.27569],[103.84452,1.27551],[103.84519,1.27916],[103.84405,1.28061],[103.84477,1.28134],[103.84539,1.28017],[103.84593,1.28075],[103.84758,1.27953],[103.84919,1.28181],[103.84852,1.28221],[103.84966,1.2838],[103.84718,1.28543],[103.84777,1.28641],[103.84954,1.28557],[103.85082,1.2863],[103.84942,1.28898],[103.84806,1.28982],[103.85067,1.29463],[103.85585,1.30063],[103.85409,1.30295],[103.85619,1.30248],[103.85942,1.29978],[103.86615,1.30436]]]}},{"type":"Feature","properties":{"id":"ME","name":"Marina East","region":"Central","pop":0,"kid":0,"sen":0,"landed":false,"lx":103.87235,"ly":1.28852,"km2":1.8},"geometry":{"type":"Polygon","coordinates":[[[103.88108,1.28484],[103.87594,1.28079],[103.87744,1.28101],[103.87731,1.28051],[103.87612,1.28056],[103.87531,1.28094],[103.87375,1.28219],[103.87252,1.28128],[103.86473,1.28885],[103.86445,1.29401],[103.87162,1.29525],[103.87767,1.29552],[103.87588,1.29366],[103.87543,1.29147],[103.88108,1.28484]]]}},{"type":"Feature","properties":{"id":"MS","name":"Marina South","region":"Central","pop":0,"kid":0,"sen":0,"landed":false,"lx":103.86563,"ly":1.28053,"km2":1.6},"geometry":{"type":"Polygon","coordinates":[[[103.86473,1.28885],[103.87252,1.28128],[103.87144,1.28049],[103.87211,1.2785],[103.87169,1.2769],[103.86643,1.27284],[103.85843,1.27804],[103.86131,1.28347],[103.86161,1.28856],[103.86473,1.28885]]]}},{"type":"Feature","properties":{"id":"MU","name":"Museum","region":"Central","pop":400,"kid":6,"sen":15,"landed":false,"lx":103.84672,"ly":1.29592,"km2":0.8},"geometry":{"type":"Polygon","coordinates":[[[103.84514,1.30174],[103.84641,1.30009],[103.84891,1.3],[103.84952,1.29865],[103.85231,1.29638],[103.8505,1.29439],[103.84827,1.29008],[103.84194,1.2944],[103.8433,1.29668],[103.84224,1.29866],[103.84136,1.29907],[103.84163,1.29975],[103.84427,1.29959],[103.84514,1.30174]]]}},{"type":"Feature","properties":{"id":"NT","name":"Newton","region":"Central","pop":8000,"kid":8,"sen":16,"landed":false,"lx":103.83808,"ly":1.30866,"km2":2.1},"geometry":{"type":"Polygon","coordinates":[[[103.84577,1.30984],[103.84704,1.30814],[103.84656,1.30691],[103.84867,1.30541],[103.84816,1.30345],[103.84585,1.30471],[103.84537,1.30224],[103.84587,1.30201],[103.84543,1.30136],[103.84514,1.30174],[103.84427,1.29959],[103.84298,1.30001],[103.84322,1.301],[103.84125,1.30279],[103.83982,1.30325],[103.83921,1.30164],[103.83772,1.30234],[103.8377,1.30384],[103.83681,1.30474],[103.83661,1.30437],[103.83582,1.30477],[103.83531,1.30418],[103.83396,1.3051],[103.83368,1.30602],[103.83587,1.3068],[103.83512,1.30838],[103.83548,1.30906],[103.83485,1.30949],[103.83416,1.30979],[103.83324,1.30799],[103.83169,1.30799],[103.8313,1.30712],[103.82816,1.30824],[103.82776,1.30745],[103.82673,1.30907],[103.828,1.31209],[103.82943,1.3126],[103.83534,1.31737],[103.83953,1.31274],[103.84577,1.30984]]]}},{"type":"Feature","properties":{"id":"OR","name":"Orchard","region":"Central","pop":900,"kid":6,"sen":15,"landed":false,"lx":103.83358,"ly":1.30381,"km2":1.0},"geometry":{"type":"Polygon","coordinates":[[[103.83546,1.3091],[103.83587,1.3068],[103.83368,1.30602],[103.83391,1.30516],[103.83531,1.30418],[103.83582,1.30477],[103.83661,1.30437],[103.83681,1.30474],[103.8377,1.30384],[103.83772,1.30234],[103.83921,1.30164],[103.83982,1.30325],[103.84125,1.30279],[103.84322,1.301],[103.84283,1.29938],[103.84163,1.29975],[103.84136,1.29907],[103.83966,1.29924],[103.83883,1.29824],[103.83775,1.29846],[103.83737,1.2997],[103.83483,1.30044],[103.83159,1.30338],[103.8293,1.3046],[103.82781,1.30453],[103.8255,1.30301],[103.82341,1.30268],[103.82338,1.30417],[103.82266,1.30505],[103.8251,1.30562],[103.82746,1.30712],[103.82816,1.30824],[103.8313,1.30712],[103.83169,1.30799],[103.83324,1.30799],[103.83416,1.30979],[103.83546,1.3091]]]}},{"type":"Feature","properties":{"id":"OT","name":"Outram","region":"Central","pop":17000,"kid":5,"sen":30,"landed":false,"lx":103.84206,"ly":1.28286,"km2":1.4},"geometry":{"type":"Polygon","coordinates":[[[103.84313,1.28778],[103.84966,1.2838],[103.84852,1.28221],[103.84919,1.28181],[103.84758,1.27953],[103.84593,1.28075],[103.84539,1.28017],[103.84477,1.28134],[103.84405,1.28061],[103.84519,1.27916],[103.84452,1.27551],[103.8433,1.27569],[103.84306,1.27456],[103.84189,1.27482],[103.84137,1.27415],[103.83924,1.28079],[103.83549,1.28382],[103.83477,1.28618],[103.835,1.28727],[103.83583,1.28742],[103.83637,1.28686],[103.83685,1.28793],[103.83797,1.28798],[103.83976,1.28917],[103.84313,1.28778]]]}},{"type":"Feature","properties":{"id":"TM","name":"Tampines","region":"East","pop":276000,"kid":9,"sen":16,"landed":false,"lx":103.95403,"ly":1.34379,"km2":20.8},"geometry":{"type":"Polygon","coordinates":[[[103.97066,1.34146],[103.97242,1.34016],[103.97991,1.33696],[103.97968,1.33644],[103.98347,1.33504],[103.98356,1.33428],[103.97856,1.32243],[103.98068,1.32077],[103.98481,1.31899],[103.98382,1.31668],[103.98294,1.31633],[103.9793,1.31659],[103.9767,1.31543],[103.9767,1.31617],[103.97598,1.31623],[103.97113,1.31553],[103.97049,1.31589],[103.96416,1.31413],[103.9604,1.32137],[103.95417,1.3266],[103.94898,1.33433],[103.93865,1.33649],[103.92976,1.34525],[103.92497,1.34859],[103.93083,1.35942],[103.9304,1.37186],[103.93189,1.37578],[103.94074,1.37121],[103.94464,1.36796],[103.95491,1.36504],[103.95906,1.36256],[103.96201,1.35888],[103.9653,1.34974],[103.97066,1.34146]]]}},{"type":"Feature","properties":{"id":"TN","name":"Tanglin","region":"Central","pop":21000,"kid":9,"sen":18,"landed":true,"lx":103.8176,"ly":1.30837,"km2":7.6},"geometry":{"type":"Polygon","coordinates":[[[103.82761,1.30727],[103.82504,1.30558],[103.82266,1.30505],[103.82347,1.30382],[103.82327,1.30117],[103.82624,1.29927],[103.82995,1.2992],[103.83024,1.29595],[103.83181,1.29215],[103.8286,1.29272],[103.82439,1.29193],[103.82162,1.29357],[103.8174,1.29433],[103.81598,1.29411],[103.8166,1.29677],[103.81031,1.2969],[103.80861,1.29836],[103.80894,1.29958],[103.8084,1.30031],[103.80773,1.29975],[103.8048,1.30048],[103.80386,1.30254],[103.80328,1.30652],[103.80228,1.30724],[103.80494,1.3149],[103.80899,1.3187],[103.81159,1.32014],[103.81294,1.32164],[103.81336,1.32329],[103.82012,1.32236],[103.83534,1.31737],[103.82943,1.3126],[103.82792,1.312],[103.82673,1.30907],[103.82777,1.30794],[103.82761,1.30727]]]}},{"type":"Feature","properties":{"id":"TH","name":"Tengah","region":"West","pop":35000,"kid":17,"sen":5,"landed":false,"lx":103.72875,"ly":1.36385,"km2":7.4},"geometry":{"type":"Polygon","coordinates":[[[103.73826,1.34881],[103.73726,1.346],[103.73662,1.34642],[103.73132,1.35173],[103.72673,1.35431],[103.72332,1.35543],[103.71789,1.35582],[103.71448,1.35718],[103.70625,1.36435],[103.71028,1.36693],[103.723,1.37084],[103.7268,1.37343],[103.73267,1.37893],[103.73837,1.37383],[103.74543,1.37176],[103.74849,1.36905],[103.74432,1.36537],[103.73695,1.35662],[103.73658,1.35407],[103.73826,1.34881]]]}},{"type":"Feature","properties":{"id":"MD","name":"Mandai","region":"North","pop":2000,"kid":8,"sen":12,"landed":false,"lx":103.80246,"ly":1.42362,"km2":11.8},"geometry":{"type":"Polygon","coordinates":[[[103.82439,1.43505],[103.82588,1.43536],[103.82661,1.43271],[103.82685,1.42825],[103.82557,1.42487],[103.82308,1.41341],[103.82077,1.41425],[103.81525,1.41358],[103.81044,1.41542],[103.80613,1.41427],[103.80244,1.41621],[103.78322,1.4109],[103.77717,1.41088],[103.77168,1.40999],[103.77127,1.42151],[103.77622,1.425],[103.78205,1.42654],[103.78835,1.4258],[103.79497,1.42257],[103.81053,1.44043],[103.8117,1.44428],[103.81748,1.4413],[103.8229,1.4357],[103.82439,1.43505]]]}},{"type":"Feature","properties":{"id":"BS","name":"Bishan","region":"Central","pop":87000,"kid":8,"sen":20,"landed":false,"lx":103.84044,"ly":1.35496,"km2":7.6},"geometry":{"type":"Polygon","coordinates":[[[103.84297,1.36429],[103.84655,1.36393],[103.84936,1.36268],[103.85324,1.35947],[103.85522,1.35633],[103.85686,1.35551],[103.85717,1.35266],[103.86044,1.3434],[103.8543,1.34321],[103.8445,1.34395],[103.84137,1.34508],[103.83652,1.342],[103.83592,1.34271],[103.83708,1.34346],[103.83678,1.34636],[103.83578,1.34629],[103.83456,1.34768],[103.83561,1.34739],[103.83384,1.34957],[103.83235,1.3498],[103.83207,1.35082],[103.82982,1.35312],[103.82674,1.35419],[103.82355,1.35232],[103.81904,1.35418],[103.81854,1.35487],[103.82069,1.3612],[103.82453,1.36168],[103.8254,1.36331],[103.8271,1.36269],[103.82833,1.36799],[103.83307,1.36742],[103.84297,1.36429]]]}},{"type":"Feature","properties":{"id":"AM","name":"Ang Mo Kio","region":"North-East","pop":161000,"kid":7,"sen":25,"landed":false,"lx":103.8421,"ly":1.38009,"km2":13.9},"geometry":{"type":"Polygon","coordinates":[[[103.85721,1.39654],[103.85805,1.39317],[103.85836,1.37766],[103.86093,1.36916],[103.85686,1.35551],[103.85489,1.35665],[103.85339,1.3593],[103.85194,1.36065],[103.84762,1.36359],[103.84101,1.36461],[103.83194,1.36767],[103.82833,1.36799],[103.8283,1.36747],[103.82734,1.36924],[103.82798,1.3706],[103.82783,1.37225],[103.8263,1.37351],[103.82633,1.37633],[103.82783,1.37741],[103.82728,1.37909],[103.82571,1.37976],[103.82394,1.37865],[103.82276,1.37972],[103.82164,1.37959],[103.82047,1.38054],[103.81777,1.38031],[103.81934,1.38339],[103.81945,1.38535],[103.81875,1.38677],[103.81736,1.38639],[103.81674,1.38692],[103.81838,1.38862],[103.81796,1.38993],[103.81882,1.39434],[103.8234,1.39314],[103.82715,1.39293],[103.84268,1.39644],[103.85007,1.39647],[103.85448,1.39774],[103.85721,1.39654]]]}},{"type":"Feature","properties":{"id":"GL","name":"Geylang","region":"Central","pop":110000,"kid":7,"sen":21,"landed":false,"lx":103.88952,"ly":1.3209,"km2":9.6},"geometry":{"type":"Polygon","coordinates":[[[103.90179,1.30975],[103.89462,1.30958],[103.88972,1.30859],[103.89012,1.30695],[103.88968,1.30632],[103.88505,1.30546],[103.8838,1.30454],[103.88096,1.30686],[103.876,1.30879],[103.8747,1.31636],[103.87512,1.31886],[103.87592,1.32007],[103.87066,1.32632],[103.86874,1.32782],[103.8798,1.33153],[103.89061,1.33405],[103.89374,1.3356],[103.89618,1.3378],[103.90482,1.32945],[103.90575,1.32764],[103.90494,1.3193],[103.90523,1.31687],[103.90671,1.31332],[103.90179,1.30975]]]}},{"type":"Feature","properties":{"id":"PL","name":"Paya Lebar","region":"East","pop":0,"kid":0,"sen":0,"landed":false,"lx":103.91478,"ly":1.3594,"km2":11.7},"geometry":{"type":"Polygon","coordinates":[[[103.9175,1.38236],[103.92222,1.37896],[103.93189,1.37578],[103.9304,1.37186],[103.93093,1.36611],[103.93044,1.35827],[103.92529,1.34892],[103.91925,1.34572],[103.9159,1.34228],[103.913,1.34446],[103.90853,1.34112],[103.90869,1.34054],[103.90759,1.33916],[103.90233,1.3392],[103.9021,1.3387],[103.89933,1.33957],[103.89794,1.34036],[103.89916,1.34347],[103.89836,1.34744],[103.89619,1.34677],[103.89382,1.34783],[103.8935,1.34876],[103.89573,1.35401],[103.897,1.35346],[103.89849,1.3562],[103.90197,1.35716],[103.90622,1.36499],[103.90945,1.37465],[103.91077,1.37678],[103.9154,1.37983],[103.9175,1.38236]]]}},{"type":"Feature","properties":{"id":"YS","name":"Yishun","region":"North","pop":232000,"kid":10,"sen":13,"landed":false,"lx":103.83712,"ly":1.41504,"km2":21.0},"geometry":{"type":"Polygon","coordinates":[[[103.85218,1.4295],[103.86197,1.42448],[103.86427,1.42665],[103.86742,1.42498],[103.86422,1.4221],[103.86206,1.41859],[103.86143,1.41606],[103.86178,1.4121],[103.86089,1.40978],[103.85506,1.40487],[103.85487,1.40269],[103.85571,1.40076],[103.85536,1.39941],[103.85104,1.3966],[103.84268,1.39644],[103.82688,1.39292],[103.8234,1.39314],[103.81644,1.3951],[103.81453,1.39667],[103.81181,1.40273],[103.80875,1.40696],[103.80578,1.41436],[103.81044,1.41542],[103.81525,1.41358],[103.82077,1.41425],[103.82308,1.41341],[103.82557,1.42487],[103.82685,1.42825],[103.82661,1.43271],[103.8258,1.43567],[103.82776,1.4365],[103.82905,1.43797],[103.83031,1.44163],[103.83669,1.44562],[103.84415,1.43974],[103.84682,1.43473],[103.85218,1.4295]]]}}]}</script>
 <script id="data-context" type="application/json">{"latest_week":37,"latest_dates":"13 - 19 Sep 2026","pathogens_adult":"Influenza (24%), human rhinovirus/enterovirus (22%), and parainfluenza viruses (4%)","pathogens_child":"Influenza (34%), human rhinovirus/enterovirus (29%), and respiratory syncytial virus (8%)","serotype":"DEN-1, DEN-2, DEN-3 and DEN-4 at 16.4%, 36.1%, 44.3% and 3.3%","flu_subtypes":"Of the 200 specimens tested positive for influenza in August 2026, 127 were positive for influenza A(pH1N1) (63.5%), 41 were positive for influenza A(H3N2) (20.5%), and 32 were positive for influenza B (16.0%).","thresholds":{"dengue_cases":{"Mean + 1 SD":167,"Mean + 2 SD":219},"ari_daily":{"70th percentile":2668,"90th percentile":2861}},"cumulative_dengue_2026":2411,"cumulative_dengue_2025":3372}</script>
+<script id="data-flu" type="text/csv">kind,date,label,value,note,link
+vaccine_nh,2026-10-15,2026–2027 Northern Hemisphere vaccine,expected,"Made for the northern hemisphere winter, which lines up with Singapore's year-end flu season. It is about 2 weeks later than usual this year because of delays across the industry.",https://www.cda.gov.sg/news-and-events/update-on-seasonal-influenza-vaccination/
+vaccine_sh,,2026 Southern Hemisphere vaccine,available,"The vaccine in clinics now. Made for the southern hemisphere winter, which lines up with Singapore's mid-year flu season.",https://www.cda.gov.sg/news-and-events/update-on-seasonal-influenza-vaccination/
+past_peak,2025-01,January 2025,43.9,,https://www.cda.gov.sg/news-and-events/update-on-influenza-situation-in-singapore/
+price_adult,,Healthier SG member at their enrolled clinic,0,,https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/healthier-sg-vaccinations
+price_adult,,Pioneer Generation at a CHAS GP clinic,9,,https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/healthier-sg-vaccinations
+price_adult,,Merdeka Generation or CHAS Blue/Orange at a CHAS GP clinic,18,,https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/healthier-sg-vaccinations
+price_adult,,Other eligible Singapore Citizens at a CHAS GP clinic,35,,https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/healthier-sg-vaccinations
+price_child,,Singapore Citizen children at a CHAS GP clinic,0,,https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/childhood-developmental-screening-and-childhood-vaccinations
+update,2026-09-04,Update on seasonal influenza vaccination,,"The 2026–2027 Northern Hemisphere vaccine is expected in early to mid October, about two weeks later than usual because of delays across the industry. People in recommended groups who have not had a flu jab can get the Southern Hemisphere vaccine now and the new one at least 8 weeks later. People who already had the Southern Hemisphere vaccine should wait for the new one.",https://www.cda.gov.sg/news-and-events/update-on-seasonal-influenza-vaccination/
+update,2026-09-01,Update on influenza situation in Singapore,,"Flu cases are rising, but there is no sign that infections are more severe than usual. Flu positivity reached 36.6% in the week of 16–22 August, up from 24.0% the week before and below the January 2025 peak of 43.9%. If you are unwell, stay home. If you must go out, wear a mask and avoid crowded places.",https://www.cda.gov.sg/news-and-events/update-on-influenza-situation-in-singapore/</script>
 <script>
 /* ===== Kampung Health Radar · data + forecast model =====
    Pure functions, no DOM. Everything re-runs when new data is added,
@@ -2486,6 +2814,231 @@ function planFactor(h, x, lever){
 
 if(typeof module!=='undefined') module.exports={parseCSV,buildStore,seasonalProfile,forecastSeries,planFactor,epiWeekStart,weeksInYear,median};
 
+</script>
+<script>
+/* ===== Kampung Health Radar · flu jab guide logic =====
+   Pure functions, no DOM. Rules follow CDA's September 2026 flu vaccination advice,
+   the National Adult and Childhood Immunisation Schedules, and CDC advice for travellers. */
+
+const G_MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const G_DAY=864e5;
+function gAddDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+function gDay(d){ return new Date(d.getFullYear(),d.getMonth(),d.getDate()); }
+function gFmt(d,ref){ return `${d.getDate()} ${G_MONTHS[d.getMonth()].slice(0,3)}${ref&&d.getFullYear()!==ref.getFullYear()?' '+d.getFullYear():''}`; }
+function gBy(d){ const x=d.getDate(), M=G_MONTHS[d.getMonth()]; return x<=10?`by early ${M}`:x<=20?`by mid-${M}`:`by late ${M}`; }
+
+/* data/flu-updates.csv (kind,date,label,value,note,link) -> {nh, sh, peak, prices, updates}
+   vaccine_nh / vaccine_sh: value = expected | available; note = text for the vaccine card
+   past_peak: value = %;  price_adult / price_child: value = $ per dose;  update: note = summary in plain words */
+function parseFluUpdates(text){
+  const rows=parseCSV(text);
+  const pd=s=>{ const m=/^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(s||''); return m? new Date(+m[1],+m[2]-1,+(m[3]||1)) : null; };
+  const vax=r=>r&&{label:r.label,date:pd(r.date),available:/^avail/i.test(r.value),note:r.note||'',link:r.link};
+  const pk=rows.find(r=>r.kind==='past_peak');
+  return {
+    nh:vax(rows.find(r=>r.kind==='vaccine_nh')),
+    sh:vax(rows.find(r=>r.kind==='vaccine_sh')),
+    peak:pk&&{label:pk.label,value:+pk.value,link:pk.link},
+    prices:rows.filter(r=>/^price_/.test(r.kind)).map(r=>({group:r.kind.slice(6),label:r.label,value:+r.value,link:r.link})),
+    updates:rows.filter(r=>r.kind==='update').map(r=>({date:pd(r.date),title:r.label,text:r.note||r.value,link:r.link})).sort((a,b)=>b.date-a.date)
+  };
+}
+
+/* Flu right now, from weekly flu positivity {week: %}. Bands are our own: Low <10%, Moderate 10–24%, High 25%+. */
+function fluLevel(fp){
+  const ws=Object.keys(fp||{}).map(Number).sort((a,b)=>a-b); if(!ws.length) return null;
+  const t=ws[ws.length-1], p=fp[t];
+  const avg=ks=>{ const v=ks.map(k=>fp[k]).filter(x=>x!=null); return v.length? v.reduce((a,b)=>a+b,0)/v.length : null; };
+  const now=avg([t,t-1]), before=avg([t-3,t-4]), d=(now!=null&&before!=null)? now-before : 0;
+  const level=p>=25?'High':p>=10?'Moderate':'Low';
+  return {t,p,level,cls:p>=25?'crit':p>=10?'warn':'good',dir:d>=3?'rising':d<=-3?'easing':'steady',
+    max:Math.max(...ws.map(w=>fp[w])),share:p>=15?`about ${Math.round(p/10)} in 10`:`about 1 in ${Math.max(2,Math.round(100/Math.max(p,1)))}`};
+}
+
+/* When flu season usually comes: respiratory polyclinic visits by month, as a share of each year's average.
+   Leaves out the current year and 2020–2022, when COVID-19 measures changed the usual pattern. */
+function seasonCalendar(byYear,curYear,epiStart){
+  const EXCL=new Set([2020,2021,2022]);
+  const years=Object.keys(byYear||{}).map(Number).filter(y=>y<curYear&&!EXCL.has(y)&&Object.keys(byYear[y]).length>=40).sort((a,b)=>a-b);
+  const per=Array.from({length:12},()=>[]), peakYears=Array.from({length:12},()=>[]);
+  for(const y of years){
+    const s=byYear[y], ws=Object.keys(s).map(Number), mean=ws.reduce((a,w)=>a+s[w],0)/ws.length;
+    const mon=w=>{ const d=epiStart(y,w); d.setUTCDate(d.getUTCDate()+3); return d.getUTCMonth(); };
+    const acc=Array.from({length:12},()=>[]);
+    for(const w of ws) acc[mon(w)].push(s[w]/mean);
+    acc.forEach((a,m)=>{ if(a.length) per[m].push(a.reduce((x,z)=>x+z,0)/a.length); });
+    const pw=ws.reduce((a,w)=>s[w]>s[a]?w:a,ws[0]); peakYears[mon(pw)].push(y);
+  }
+  const idx=per.map(a=>a.length? a.reduce((x,z)=>x+z,0)/a.length : 1);
+  return {years,idx,peakYears,peaks:peakYears.map(a=>a.length)};
+}
+function yearsText(ys){
+  const out=[]; let a=ys[0], b=ys[0];
+  for(let i=1;i<=ys.length;i++){ if(ys[i]===b+1){ b=ys[i]; continue; } out.push(a===b?`${a}`:`${a}–${b}`); a=b=ys[i]; }
+  return out.length>1? out.slice(0,-1).join(', ')+' and '+out[out.length-1] : out[0]||'';
+}
+
+/* Where we are in the flu jab year */
+function jabPhase(today,nh){
+  const T=gDay(today), m=T.getMonth();
+  if(nh&&nh.date){
+    const end=new Date(nh.date.getFullYear(),10,30);
+    if(!nh.available&&T<=end) return {k:'before',start:nh.date,end};
+    if(nh.available&&T<=end&&T>=gAddDays(nh.date,-45)) return {k:'window',start:nh.date,end};
+  }
+  if(m===11||m<=2) return {k:'peak'};
+  return {k:'mid'};
+}
+
+const G_WHO={
+  me:{s:'you',S:'You',be:'are',pos:'your',Pos:'Your',obj:'you',live:'live',care:'care',need:'need',want:'want'},
+  parent:{s:'your parent',S:'Your parent',be:'is',pos:'their',Pos:'Their',obj:'them',live:'lives',care:'cares',need:'needs',want:'wants'},
+  child:{s:'your child',S:'Your child',be:'is',pos:'their',Pos:'Their',obj:'them',live:'lives',care:'cares',need:'needs',want:'wants'}
+};
+const G_AGES={u6m:'under 6 months','6m4':'6 months to 4 years','5to17':'5 to 17','18to64':'18 to 64','65plus':'65 and over'};
+
+/* "Am I due?"
+   inp: {who:'me'|'parent'|'child', age:'u6m'|'6m4'|'5to17'|'18to64'|'65plus', risk:'yes'|'no'|'unsure',
+         last:'YYYY-MM'|'over'|'never'|'unsure'}
+   ctx: {today:Date, nh:{label,date,available}, sh:{label,available}} */
+function fluAdvice(inp,ctx){
+  const P=G_WHO[inp.who]||G_WHO.me, T=gDay(ctx.today), nh=ctx.nh, sh=ctx.sh;
+  const kid=['u6m','6m4','5to17'].includes(inp.age);
+  if(inp.age==='u6m') return {tone:'calm',chip:'Too young',title:'Babies under 6 months are too young for a flu jab',
+    steps:['Protect your baby by making sure everyone at home has had a flu jab.','A flu jab during pregnancy also helps protect a baby in the first months of life.','See a doctor early if your baby has a fever or is breathing fast.'],
+    where:'From 6 months old, at a polyclinic or CHAS GP clinic.',cost:'child',remind:null};
+
+  const rec=inp.age==='65plus'||inp.age==='6m4'||(inp.risk==='yes'&&(inp.age==='18to64'||inp.age==='5to17'));
+  const maybe=!rec&&inp.risk==='unsure';
+  let lastStart=null,lastEnd=null,lastLabel='';
+  const lm=/^(\d{4})-(\d{2})$/.exec(inp.last||'');
+  if(lm){ lastStart=new Date(+lm[1],+lm[2]-1,1); lastEnd=new Date(+lm[1],+lm[2],0); if(lastEnd>T) lastEnd=T; lastLabel=`${G_MONTHS[lastStart.getMonth()]} ${lastStart.getFullYear()}`; }
+  const eight=lastEnd? gAddDays(lastEnd,56) : null;
+  const shName=sh&&sh.available? `the ${sh.label}` : 'the vaccine in clinics now';
+
+  /* timing for someone in a recommended group */
+  function plan(){
+    if(nh&&nh.date&&nh.available){
+      const nhMonth=new Date(nh.date.getFullYear(),nh.date.getMonth(),1);
+      if(lastStart&&lastStart>=nhMonth){
+        const next=new Date(lastStart.getFullYear()+1,lastStart.getMonth(),1);
+        const same=lastStart.getTime()===nhMonth.getTime();
+        return {state:'covered',tone:'good',chip:'Covered',title:`${P.S} ${P.be} covered for this flu season`,
+          steps:[`${P.S} had a flu jab in ${lastLabel}, when the new ${nh.label} was in clinics.${same?` If it was before ${gFmt(nh.date,T)}, it was the older vaccine, so get the new one 8 weeks after it.`:''}`,
+                 `The next flu jab is usually due about a year later, around ${G_MONTHS[next.getMonth()]} ${next.getFullYear()}.`],
+          remind:{date:next,title:'Check if you are due for a flu jab'}};
+      }
+      if(!eight||eight<=T) return {state:'due',tone:'crit',chip:'Due now',title:`${P.S} ${P.be} due for a flu jab`,
+        steps:[lastStart&&`${P.Pos} last flu jab, in ${lastLabel}, was before the new vaccine arrived.`,`Get the new ${nh.label}. It is in clinics now.`].filter(Boolean),remind:null};
+      return {state:'soon',tone:'warn',chip:`Due from ${gFmt(eight,T)}`,title:`Get the new vaccine from ${gFmt(eight,T)}`,
+        steps:[`${P.Pos} last flu jab, in ${lastLabel}, was the older vaccine.`,`Get the new ${nh.label} from ${gFmt(eight,T)}, once 8 weeks have passed.`],
+        remind:{date:eight,title:'Get the new flu jab'}};
+    }
+    if(nh&&nh.date){
+      if(lastStart&&lastEnd>=gAddDays(T,-183)){
+        const late=eight>nh.date, when=late? eight : nh.date;
+        return {state:'wait',tone:'calm',chip:'Wait for the new vaccine',title:`Wait for the new vaccine, ${late?'from '+gFmt(eight,T):gBy(nh.date)}`,
+          steps:[`${P.S} had a flu jab in ${lastLabel}. CDA advises people who already had ${shName} to wait for the new ${nh.label}.`,
+                 late? `It is expected ${gBy(nh.date)}. Get it from ${gFmt(eight,T)}, 8 weeks after the last jab.` : `Get it once it is in clinics, ${gBy(nh.date)}. By then it will be more than 8 weeks since the last jab.`],
+          remind:{date:when,title:'Get the new flu jab'}};
+      }
+      return {state:'due',tone:'crit',chip:'Due now',title:`${P.S} ${P.be} due for a flu jab`,
+        steps:[lastStart&&`${P.Pos} last flu jab was in ${lastLabel}, more than 6 months ago.`,
+          `Don't wait for the new vaccine. CDA says people in recommended groups who have not had a flu jab can get ${shName} now, and the new ${nh.label} at least 8 weeks later.`,
+          `To have just one jab, wait for the new vaccine, expected ${gBy(nh.date)}. With flu high, don't wait longer than that.`].filter(Boolean),
+        remind:{date:nh.date,title:'New flu vaccine arrives: book a flu jab'}};
+    }
+    /* no vaccine news in the data: fall back to the yearly rule */
+    if(lastStart&&lastStart>gAddDays(T,-335)) return {state:'covered',tone:'good',chip:'Covered',title:`${P.S} ${P.be} covered for now`,
+      steps:[`${P.S} had a flu jab in ${lastLabel}. Most people need one a year.`],remind:{date:new Date(lastStart.getFullYear()+1,lastStart.getMonth(),1),title:'Check if you are due for a flu jab'}};
+    return {state:'due',tone:'crit',chip:'Due now',title:`${P.S} ${P.be} due for a flu jab`,steps:['Get the vaccine in clinics now.'],remind:null};
+  }
+
+  const p=plan();
+  const firstEver=inp.last==='never';
+  if(firstEver&&p.state==='due'){
+    if(inp.age==='6m4') p.steps.push(`As this is ${P.pos} first flu jab, ${P.s} ${P.need} 2 doses, 4 weeks apart. The clinic will plan the doses.`);
+    else if(inp.age==='5to17') p.steps.push('Children under 9 having their first flu jab need 2 doses, 4 weeks apart.');
+  }
+  if(inp.last==='unsure'){
+    p.chip='Check record first'; p.tone='warn'; p.title=`Check ${P.pos} last flu jab first`;
+    p.steps=[`Look up ${P.pos} immunisation records in HealthHub. If there is a flu jab in the past year, choose its month above for an exact answer.`,
+             `If there is none, ${P.s} ${P.be} due now.`, ...p.steps.filter(s=>!/^(Your|Their) last flu jab/.test(s))];
+  }
+  const where=kid? 'A polyclinic or CHAS GP clinic. Pharmacies only vaccinate adults.'
+    : 'Your Healthier SG clinic if you are enrolled. Otherwise a CHAS GP clinic, polyclinic or participating pharmacy.';
+
+  if(rec) return {...p,where,cost:kid?'child':'adult'};
+  if(maybe) return {...p,tone:'warn',chip:'Ask a doctor',title:`${P.S} may be in a recommended group`,
+    steps:[`A yearly flu jab is recommended for people with a long-term illness or a weak immune system, pregnant women and people in long-term care. Many of them also get a subsidy.`,
+           `Ask a doctor whether this applies to ${P.obj}. If it does:`,...p.steps],where,cost:kid?'child':'adult'};
+
+  /* healthy 5 to 64: optional */
+  const timing={covered:`${P.S} ${P.be} already covered for this flu season.`,
+    wait:p.steps[1]&&`If ${P.s} ${P.want} a jab, wait for the new vaccine. ${p.steps[1]}`,
+    soon:p.steps[1],
+    due: nh&&nh.date&&!nh.available? `The best time is when the new vaccine arrives, ${gBy(nh.date)}, and before the end of November.`
+       : nh&&nh.available? `The new ${nh.label} is in clinics now.` : 'Any time is fine. Most people who choose to have one get it once a year.'}[p.state];
+  return {tone:'calm',chip:'Optional',title:`Optional for ${P.s}, but worth considering`,
+    steps:[`The flu jab is not on the national list for healthy people aged ${G_AGES[inp.age]}, but anyone aged 6 months and older can have one.`,
+           `It is most worth it if ${P.s} ${P.live} with or ${P.care} for someone at higher risk, such as a baby, an older person or someone with a long-term illness, or before travel.`,
+           timing].filter(Boolean),
+    where:kid? 'A GP clinic or polyclinic.' : 'A GP clinic, polyclinic or participating pharmacy.',cost:'none',
+    remind:p.state==='due'&&nh&&nh.date&&!nh.available? {date:nh.date,title:'New flu vaccine arrives'} : (p.state==='covered'?null:p.remind)};
+}
+
+/* "Travelling soon?" */
+const G_DEST={
+  nasia:{label:'Japan, Korea, China, HK or Taiwan',place:'North Asia',hemi:'N'},
+  europe:{label:'Europe or the UK',place:'Europe',hemi:'N'},
+  namer:{label:'USA or Canada',place:'North America',hemi:'N'},
+  south:{label:'Australia, New Zealand or South Africa',place:'the southern hemisphere',hemi:'S'},
+  tropics:{label:'Southeast Asia, India or other tropical places',place:'the tropics',hemi:'T'}
+};
+function travelAdvice(inp,ctx){
+  const T=gDay(ctx.today), nh=ctx.nh, dest=G_DEST[inp.dest]||G_DEST.nasia;
+  if(!(inp.date instanceof Date)||isNaN(inp.date)) return {error:'Choose the date you leave.'};
+  const D=gDay(inp.date);
+  if(D<T) return {error:'That date has passed. Choose the date you leave.'};
+  const mo=D.getMonth(), Mn=G_MONTHS[mo];
+  let inSeason=false, season;
+  if(dest.hemi==='N'){ inSeason=mo>=9||mo<=3; const peak=mo===11||mo<=1;
+    season=inSeason? `${Mn} is flu season in ${dest.place}. It runs from about October to April${peak?' and is usually worst from December to February':''}.`
+                   : `${Mn} is outside the main flu season in ${dest.place}, which runs from about October to April. Flu still spreads there, but less.`; }
+  else if(dest.hemi==='S'){ inSeason=mo>=3&&mo<=8;
+    season=inSeason? `${Mn} is flu season in ${dest.place}, which runs from about April to September.`
+                   : `${Mn} is outside the main flu season in ${dest.place}, which runs from about April to September. Flu still spreads there, but less.`; }
+  else season=`Flu spreads all year round in ${dest.place}, as it does in Singapore.`;
+  const days=Math.round((D-T)/G_DAY), bookBy=gAddDays(D,-14), early=days>=14;
+  const steps=[season, early? `A flu jab takes about 2 weeks to work. Getting it by ${gFmt(bookBy,T)} means you are protected when you fly on ${gFmt(D,T)}.`
+                             : 'A flu jab takes about 2 weeks to work, so it may not fully protect you at the start of this trip, but it will for the rest of the season.'];
+  if(dest.hemi==='N'&&inSeason&&nh&&nh.date){
+    const ready=nh.available||(early?bookBy:T)>=nh.date;
+    steps.push(ready? `By then, clinics should have the new ${nh.label}, made for this northern winter.`
+                    : `The new ${nh.label} is expected ${gBy(nh.date)}. If you need your jab before then, the vaccine in clinics now still helps.`);
+  }
+  if(inp.crowd) steps.push('Cruises, tour groups, pilgrimages and big events mix people from many countries, so flu spreads more easily.');
+  steps.push('A jab before travel matters most for people aged 65 and over, young children, pregnant women and people with a long-term illness.');
+  return {tone:dest.hemi==='T'?'calm':inSeason?'warn':'calm',chip:dest.hemi==='T'?'Flu all year there':inSeason?'Flu season there':'Off-season there',
+    title:early? `Aim to get your flu jab by ${gFmt(bookBy,T)}` : 'Get your flu jab as soon as you can',steps,
+    remind:days>=21? {date:gAddDays(bookBy,-7),title:'Book your flu jab before your trip'} : null};
+}
+
+/* Calendar reminder links: Google Calendar URL and an .ics file (Apple, Outlook) */
+function gYmd(d){ return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`; }
+function calLinks(r,now){
+  const d=gDay(r.date), e=gAddDays(d,1);
+  const details='Book at vaccine.gov.sg/flu or your Healthier SG clinic. Check your last flu jab in HealthHub (Immunisation records). From Kampung Health Radar.';
+  const gcal=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(r.title)}&dates=${gYmd(d)}/${gYmd(e)}&details=${encodeURIComponent(details)}`;
+  const esc=s=>s.replace(/[\\;,]/g,m=>'\\'+m);
+  const n=now||new Date(), st=n.toISOString().replace(/[-:]/g,'').replace(/\.\d+Z$/,'Z');
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Kampung Health Radar//Flu jab guide//EN','BEGIN:VEVENT',
+    `UID:flu-${gYmd(d)}-${st}@kampung-health-radar`,`DTSTAMP:${st}`,`DTSTART;VALUE=DATE:${gYmd(d)}`,`DTEND;VALUE=DATE:${gYmd(e)}`,
+    `SUMMARY:${esc(r.title)}`,`DESCRIPTION:${esc(details)}`,'BEGIN:VALARM','TRIGGER:PT9H','ACTION:DISPLAY',`DESCRIPTION:${esc(r.title)}`,'END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  return {gcal,ics:'data:text/calendar;charset=utf-8,'+encodeURIComponent(ics)};
+}
+
+if(typeof module!=='undefined') module.exports={parseFluUpdates,fluLevel,seasonCalendar,yearsText,jabPhase,fluAdvice,travelAdvice,calLinks,gBy,gFmt};
 </script>
 <script>
 (function(){
@@ -2791,6 +3344,7 @@ function renderNational(){
   $('#panel-body').innerHTML=`<div style="display:flex;flex-direction:column;gap:18px">
     ${cardsHTML()}
     ${storyHTML()}
+    ${state.disease==='flu'?jabCardHTML():''}
     ${chartBlockHTML('Next 3 months')}
     <section class="section"><div class="section-head"><h3>What if we act now?</h3></div>${planHTML()}</section>
     ${actionsHTML()}
@@ -2831,6 +3385,7 @@ function renderArea(){
     <section class="section"><div class="section-head"><h3>All four in ${a.name}</h3><span class="muted">${fc?'outlook':'this week'}</span></div>
       <div class="alld">${DIS.map(o=>{const rr=on?areaRate(o.id,a,w):nationalRate(o.id,w), l=levelOf(o.id,rr);
         return `<button type="button" data-dis="${o.id}" aria-current="${o.id===d.id}"><span><b>${o.name}</b><br><span class="muted">${(()=>{const vv=on?areaCount(o.id,a,w):value(o.id,w);return (vv<1?'':'~')+cnt(vv);})()} ${on?o.areaUnit:o.cardUnit}</span></span><span class="lvl"><i style="background:${HEAT[l]}"></i>${LEVELS[l]}</span>${trendText(trendOf(o.id,w))}</button>`;}).join('')}</div></section>
+    ${state.disease==='flu'?jabCardHTML():''}
     ${actionsHTML()}
   </div>`;
   drawChart($('#chart'),d.id,sc);
@@ -3129,6 +3684,7 @@ $('#reset-data').onclick=()=>{ extraRecords=[]; recompute(); update(); renderCov
 function update(){
   $('#stamp').textContent=`Latest bulletin: week ${M.dengue.t} · ${weekRange(M.dengue.t)} ${CUR}`;
   renderPanel(); renderMap(); renderTimeline();
+  if(GUIDE_ON) renderGuide();
 }
 function updateLight(){ // slider drag: keep focus on the slider, refresh numbers, chart and map only
   const d=DI[state.disease], x=state.plan[d.id];
@@ -3145,11 +3701,315 @@ function updateLight(){ // slider drag: keep focus on the slider, refresh number
 }
 let rz; window.addEventListener('resize',()=>{ clearTimeout(rz); rz=setTimeout(()=>{ fitProj(); areaSel.attr('d',path); drawRegions(); svg.call(zoom.transform,d3.zoomIdentity); renderMap(); renderTimeline(); },150); });
 
+/* ---------------- flu jab guide ---------------- */
+let FLU=parseFluUpdates(document.getElementById('data-flu').textContent.trim());
+let GUIDE_ON=false, guideInit=false, mapStale=false, grz;
+const BASE_TITLE=document.title;
+const MONFULL=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const SYRINGE='<svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M10.6 1.6l3.8 3.8M12.5 3.5l-7.4 7.4-2.4.3.3-2.4 7.4-7.4M8.6 5.4l2 2M6.8 7.2l1.1 1.1M2.7 13.3l1.5-1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const gToday=()=>new Date();
+const gCtx=()=>({today:gToday(),nh:FLU.nh,sh:FLU.sh});
+const gLevel=()=>fluLevel(S.flu_positivity?.[CUR]||{});
+const NBH='\u2011'; // non-breaking hyphen
+const short=d=>{ const x=d.getDate(); return `${x<=10?'Early ':x<=20?'Mid'+NBH:'Late '}${MON[d.getMonth()]}`; };
+const lvlColor=L=>L.level==='High'?'var(--crit)':L.level==='Moderate'?'var(--warn)':'var(--good)';
+const dirChip=L=>L.dir==='rising'?'<span class="chip crit">▲ Rising</span>':L.dir==='easing'?'<span class="chip good">▼ Easing</span>':'<span class="chip calm">▶ Steady</span>';
+
+function heroCopy(){
+  const L=gLevel(), nh=FLU.nh, ph=jabPhase(gToday(),nh);
+  const lv=L? `Flu is ${L.level.toLowerCase()}${L.dir==='steady'?'':` and ${L.dir}`}` : 'Flu season';
+  if(ph.k==='before') return {L,ph,
+    title:`${lv}. The new flu vaccine arrives ${gBy(nh.date)}.`,
+    lede:'For most people, the best time for a flu jab is when the new vaccine arrives, until the end of November. If you are 65 or older, have a child aged 6 months to 4 years, or have a long-term illness, and have not had a flu jab recently, you do not need to wait. CDA says you can get the vaccine in clinics now and the new one at least 8 weeks later.',
+    best:`${short(nh.date)} to end${NBH}Nov`,bestSub:'When the new vaccine arrives, and at least 2 weeks before the usual December to February peak.',
+    card:`${lv}. The new flu vaccine is expected ${gBy(nh.date)}. For most people, the best time for a flu jab is from then until the end of November.`};
+  if(ph.k==='window') return {L,ph,
+    title:'Now is the best time for your flu jab.',
+    lede:`The new ${nh.label} is in clinics. Getting it by the end of November gives it 2 weeks to work before flu usually peaks, between December and February.`,
+    best:`Now to end${NBH}Nov`,bestSub:'At least 2 weeks before the usual December to February peak.',
+    card:'The new flu vaccine is in clinics. Get it by the end of November, before flu usually peaks.'};
+  if(ph.k==='peak') return {L,ph,
+    title:`${lv}. If you have not had this season's flu jab, get it now.`,
+    lede:'Flu in Singapore usually peaks between December and February. A flu jab takes about 2 weeks to work, so the sooner the better.',
+    best:'Now, if you are due',bestSub:'Flu usually peaks between December and February.',
+    card:"Flu usually peaks between December and February. If you have not had this season's flu jab, get it now."};
+  return {L,ph,title:`${lv}.`,
+    lede:'Most people need a flu jab once a year. Check below whether you or your family are due.',
+    best:'When you are due',bestSub:'Most people need one flu jab a year.',
+    card:'Most people need a flu jab once a year. Check whether you are due.'};
+}
+function jabCardHTML(){
+  const h=heroCopy();
+  return `<section class="jabcard" aria-label="Flu jab"><div class="hd">${SYRINGE}<span>Flu jab season</span></div><p>${esc(h.card)}</p><a class="btn primary" href="#flu-jab">Am I due? Open the flu jab guide</a></section>`;
+}
+
+function renderGuide(){
+  if(!GUIDE_ON) return;
+  const h=heroCopy(), L=h.L, nh=FLU.nh;
+  $('#g-eyebrow').textContent=L? `Flu jab guide · Singapore · bulletin week ${L.t}, ${weekRange(L.t)} ${CUR}` : 'Flu jab guide · Singapore';
+  $('#g-title').textContent=h.title;
+  $('#g-lede').textContent=h.lede;
+  $('#g-tiles').innerHTML=
+    (L?`<div class="g-tile"><div class="eyebrow">Flu right now</div><div class="v"><span style="color:${lvlColor(L)}">${L.level}</span>${dirChip(L)}</div><div class="s">${L.share.charAt(0).toUpperCase()+L.share.slice(1)} people tested for flu-like illness had flu (${L.p}%), week of ${weekRange(L.t)}</div></div>`:'')+
+    (nh?`<div class="g-tile"><div class="eyebrow">New vaccine</div><div class="v">${nh.available?'In clinics now':`Expected ${gBy(nh.date).replace(/^by (early|mid-|late) ?(\w{3})\w*/,(m,a,b)=>`by ${a.replace('-',NBH)}${a==='mid-'?'':' '}${b}`)}`}</div><div class="s">${esc(nh.label)}${nh.available&&nh.date?`, since ${gFmt(nh.date)}`:''}</div></div>`:'')+
+    `<div class="g-tile"><div class="eyebrow">Best time for your jab</div><div class="v">${h.best}</div><div class="s">${h.bestSub}</div></div>`;
+  renderNow(L); renderSeason(L); renderVax(); renderWhere(); renderNews();
+  if(!guideInit){ initChecker(); initTrip(); guideInit=true; }
+  updateChk(); updateTrip();
+}
+
+/* Flu right now */
+function renderNow(L){
+  const fp=S.flu_positivity?.[CUR]||{}, pk=FLU.peak;
+  if(!L){ $('#g-now-p').textContent='There is no flu test data for this year yet.'; $('#g-pos').innerHTML=''; return; }
+  const p4=fp[L.t-4];
+  const adv=L.level==='High'?'Flu is spreading widely. If you are unwell, stay home. If you must go out, wear a mask and avoid crowded places.'
+    :L.level==='Moderate'?'Flu is going around. Stay home if you are unwell.':'Flu is quiet for now.';
+  $('#g-now-p').innerHTML=`In the week of ${weekRange(L.t)}, ${L.share} people tested for flu-like illness had flu (${L.p}%)${L.p>=L.max?', the highest so far this year.':`. This year's high was ${L.max}%.`}${p4!=null?` Four weeks earlier it was ${p4}%.`:''}${pk?` The last big peak was ${pk.value}% in ${esc(pk.label)}.`:''} <b>${adv}</b>`;
+  $('#g-now-cap').textContent=`Share of flu-like illness samples that tested positive for flu, ${CUR}`;
+  $('#g-now-note').textContent=CTX.flu_subtypes? `Which flu is going around: ${CTX.flu_subtypes}`:'';
+  drawGuidePos($('#g-pos'),fp,pk);
+}
+function guideTip(el){ let t=el.querySelector('.tip'); if(!t){ t=document.createElement('div'); t.className='tip'; t.hidden=true; el.appendChild(t); } return t; }
+function placeTip(el,tip,x,y){ const w=el.clientWidth, tw=tip.offsetWidth||180; tip.style.left=Math.max(0,Math.min(w-tw,x+12))+'px'; tip.style.top=Math.max(0,y-10)+'px'; }
+function drawGuidePos(el,fp,pk){
+  el.innerHTML='';
+  const pts=Object.entries(fp).map(([k,v])=>[+k,v]).sort((a,b)=>a[0]-b[0]); if(pts.length<2) return;
+  const W=Math.max(280,Math.round(el.clientWidth)), narrow=W<520, H=narrow?210:240, mg={l:36,r:44,t:14,b:26};
+  const t=pts[pts.length-1][0], lv=pts[pts.length-1][1];
+  const yMax=Math.ceil((Math.max(50,d3.max(pts,p=>p[1]),pk?pk.value:0)+2)/10)*10;
+  const x=d3.scaleLinear([1,t],[mg.l,W-mg.r]), y=d3.scaleLinear([0,yMax],[H-mg.b,mg.t]);
+  const svg=d3.select(el).append('svg').attr('width',W).attr('height',H).attr('viewBox',`0 0 ${W} ${H}`).attr('role','img')
+    .attr('aria-label',`Weekly flu positivity in ${CUR}, latest ${lv}% in week ${t}`);
+  svg.append('g').attr('class','grid').selectAll('line').data(y.ticks(5)).join('line').attr('x1',mg.l).attr('x2',W-mg.r).attr('y1',y).attr('y2',y);
+  svg.append('g').selectAll('text').data(y.ticks(5)).join('text').attr('x',mg.l-6).attr('y',v=>y(v)+4).attr('text-anchor','end').text(v=>v+'%');
+  const mt=[]; for(let w=1;w<=t;w++){ const a=wkStart(w); if(a.getUTCDate()<=7) mt.push([w,MON[a.getUTCMonth()]]); }
+  svg.append('g').selectAll('text').data(mt.filter((_,i)=>!narrow||i%2===0)).join('text').attr('x',p=>x(p[0])).attr('y',H-6).attr('text-anchor','middle').text(p=>p[1]);
+  const area=d3.area().x(p=>x(p[0])).y0(y(0)).y1(p=>y(p[1])).curve(d3.curveMonotoneX);
+  const line=d3.line().x(p=>x(p[0])).y(p=>y(p[1])).curve(d3.curveMonotoneX);
+  svg.append('path').datum(pts).attr('d',area).attr('fill','var(--s-fc)').attr('fill-opacity',.12);
+  if(pk){
+    svg.append('line').attr('x1',mg.l).attr('x2',W-mg.r).attr('y1',y(pk.value)).attr('y2',y(pk.value)).attr('stroke','var(--ink-3)').attr('stroke-dasharray','4 4').attr('stroke-width',1.2);
+    svg.append('text').attr('x',mg.l+6).attr('y',y(pk.value)-6).style('fill','var(--ink-2)').style('font-weight',600).text(`${pk.label} peak: ${pk.value}%`);
+  }
+  svg.append('path').datum(pts).attr('d',line).attr('fill','none').attr('stroke','var(--s-fc)').attr('stroke-width',2.2).attr('stroke-linejoin','round');
+  svg.append('circle').attr('cx',x(t)).attr('cy',y(lv)).attr('r',4.5).attr('fill','var(--s-fc)').attr('stroke','var(--surface)').attr('stroke-width',2);
+  svg.append('text').attr('x',x(t)+8).attr('y',y(lv)+(pk&&pk.value>=lv&&pk.value-lv<3?12:4)).attr('text-anchor','start').style('fill','var(--ink)').style('font-weight',700).style('font-size','13px').text(`${lv}%`);
+  // hover: crosshair and tooltip
+  const tip=guideTip(el), cross=svg.append('line').attr('y1',mg.t).attr('y2',H-mg.b).attr('stroke','var(--ink-3)').attr('stroke-width',1).style('display','none');
+  const dot=svg.append('circle').attr('r',4).attr('fill','var(--s-fc)').attr('stroke','var(--surface)').attr('stroke-width',2).style('display','none');
+  svg.append('rect').attr('x',mg.l).attr('y',mg.t).attr('width',W-mg.l-mg.r).attr('height',H-mg.t-mg.b).attr('fill','transparent')
+    .on('pointermove',ev=>{ const [mx]=d3.pointer(ev); const w=Math.max(1,Math.min(t,Math.round(x.invert(mx)))); const p=pts.find(q=>q[0]===w); if(!p) return;
+      cross.style('display',null).attr('x1',x(w)).attr('x2',x(w)); dot.style('display',null).attr('cx',x(w)).attr('cy',y(p[1]));
+      tip.innerHTML=`<div class="t">Week ${w} · ${weekRange(w)}</div><div class="r"><span>Tested positive for flu</span><b>${p[1]}%</b></div>`; tip.hidden=false; placeTip(el,tip,x(w),y(p[1])); })
+    .on('pointerleave',()=>{ cross.style('display','none'); dot.style('display','none'); tip.hidden=true; });
+}
+
+/* When flu season usually comes */
+function renderSeason(L){
+  const cal=seasonCalendar(S.ari_daily,CUR,epiWeekStart), n=cal.years.length;
+  if(!n){ $('#g-season-p').textContent='Add past years of bulletin data to see the usual flu season pattern.'; $('#g-strip').innerHTML=''; return; }
+  const winter=cal.peaks[11]+cal.peaks[0]+cal.peaks[1];
+  const others=[...new Set(cal.peakYears.map((ys,m)=>ys.length&&![11,0,1].includes(m)?MONFULL[m]:null).filter(Boolean))];
+  const late=L&&L.p>=L.max&&L.t>=31? ` This year the mid-year season has run late: flu is still at its highest in ${monthOf(L.t)}.`:'';
+  $('#g-season-p').innerHTML=`CDA says flu in Singapore usually peaks twice a year, from May to August and from December to March. Polyclinic visits show the year-end peak is usually the bigger one: in <b>${winter} of the ${n} years</b> we looked at (${yearsText(cal.years)}), the busiest week for coughs, colds and flu fell between December and February.${others.length&&n>winter?` In the other ${n-winter}, it came in ${others.join(' or ')}.`:''}${late} A flu jab takes about 2 weeks to work, so getting it by the end of November means you are protected before the usual peak.`;
+  const ph=jabPhase(gToday(),FLU.nh), win=(ph.k==='before'||ph.k==='window')? ph : null;
+  drawSeason($('#g-strip'),cal,win);
+  $('#g-strip-leg').innerHTML=`${['Quieter (3% or more below average)','About average','Busier (3 to 8% above)','Busiest (8% or more above)'].map((l,i)=>`<span><i class="sw-b" style="background:var(--heat-${i+1})"></i>${l}</span>`).join('')}<span><i class="dot-k"></i> Busiest week of one year</span><span><i class="today-k"></i> Today</span>${win?'<span><i class="win-k"></i> Best time for your jab</span>':''}`;
+  const pct=v=>gPct(v);
+  $('#g-season-table').innerHTML=`<div style="overflow-x:auto"><table class="kv"><tbody><tr><td><b>Month</b></td><td><b>Visits vs yearly average</b></td><td><b>Busiest week in</b></td></tr>${cal.idx.map((v,m)=>`<tr><td>${MONFULL[m]}</td><td>${pct(v)}</td><td>${cal.peakYears[m].join(', ')||'–'}</td></tr>`).join('')}</tbody></table></div><div class="muted">Average daily polyclinic visits for acute respiratory infections each month, compared with that year's average, for ${yearsText(cal.years)}. 2020 to 2022 are left out because COVID-19 measures changed the usual pattern.</div>`;
+}
+const gPct=v=>{ const r=Math.round((v-1)*100); return r===0?'0%':`${r>0?'+':'−'}${Math.abs(r)}%`; };
+/* month colour bands, compared with the yearly average */
+const seasonBand=v=>v<0.97?0:v<1.03?1:v<1.08?2:3;
+function drawSeason(el,cal,win){
+  el.innerHTML='';
+  const W=Math.max(280,Math.round(el.clientWidth)), narrow=W<560, top=narrow?14:30, ch=narrow?40:50, cw=W/12;
+  const lvl=seasonBand, BAND=['var(--heat-1)','var(--heat-2)','var(--heat-3)','var(--heat-4)'];
+  const sp=narrow?6:8, r=narrow?2.3:3, perRow=Math.max(1,Math.floor((cw-6)/sp));
+  const rows=Math.max(1,...cal.peaks.map(k=>Math.ceil(k/perRow))), dotsY=top+ch+28, H=dotsY+(rows-1)*sp+r+4;
+  const N=cal.years.length, pct=v=>gPct(v);
+  const svg=d3.select(el).append('svg').attr('width',W).attr('height',H).attr('viewBox',`0 0 ${W} ${H}`).attr('role','img')
+    .attr('aria-label',`Busiest months for coughs, colds and flu: ${cal.idx.map((v,m)=>`${MON[m]} ${pct(v)}`).join(', ')}`);
+  const xd=d=>{ const dim=new Date(d.getFullYear(),d.getMonth()+1,0).getDate(); return (d.getMonth()+(d.getDate()-1)/dim)*cw; };
+  const tip=guideTip(el);
+  const show=(m,cx)=>{ tip.innerHTML=`<div class="t">${MONFULL[m]}</div><div class="r"><span>Visits vs yearly average</span><b>${pct(cal.idx[m])}</b></div><div class="r"><span>Busiest week of the year</span><b>${cal.peaks[m]} of ${N} years</b></div>${cal.peakYears[m].length?`<div class="r"><span>${cal.peakYears[m].join(', ')}</span></div>`:''}`; tip.hidden=false; placeTip(el,tip,cx,top+ch+6); };
+  const g=svg.selectAll('g.cell').data(d3.range(12)).join('g').attr('class','cell').attr('tabindex',0).attr('role','img')
+    .attr('aria-label',m=>`${MONFULL[m]}: visits ${pct(cal.idx[m])} against the yearly average; busiest week in ${cal.peaks[m]} of ${N} years`)
+    .on('pointerenter focus',(ev,m)=>show(m,m*cw+cw/2)).on('pointerleave blur',()=>{ tip.hidden=true; });
+  g.append('rect').attr('x',m=>m*cw+1).attr('y',top).attr('width',cw-2).attr('height',ch).attr('rx',4).attr('fill',m=>BAND[lvl(cal.idx[m])]);
+  if(!narrow) g.append('text').attr('x',m=>m*cw+cw/2).attr('y',top+ch/2+4).attr('text-anchor','middle').style('font-weight',700).style('font-size','12px')
+    .style('fill',m=>lvl(cal.idx[m])>=3?'var(--surface)':'var(--ink)').text(m=>pct(cal.idx[m]));
+  svg.append('g').selectAll('text').data(MON).join('text').attr('x',(s,m)=>m*cw+cw/2).attr('y',top+ch+16).attr('text-anchor','middle')
+    .style('font-size',narrow?'11px':'12px').style('font-weight',600).style('fill','var(--ink-2)').text(s=>narrow?s.slice(0,1):s);
+  const dots=[]; cal.peaks.forEach((k,m)=>{ for(let i=0;i<k;i++){ const inRow=Math.min(k-Math.floor(i/perRow)*perRow,perRow), col=i%perRow; dots.push([m*cw+cw/2+(col-(inRow-1)/2)*sp, dotsY+Math.floor(i/perRow)*sp]); } });
+  svg.append('g').selectAll('circle').data(dots).join('circle').attr('cx',d=>d[0]).attr('cy',d=>d[1]).attr('r',r).attr('fill','var(--ink-2)');
+  let lab=null;
+  if(win){
+    const x1=xd(win.start), x2=xd(win.end)+cw/30;
+    svg.append('path').attr('d',`M${x1},${top-3}V${top-9}H${x2}V${top-3}`).attr('fill','none').attr('stroke','var(--s-plan)').attr('stroke-width',2).attr('stroke-linejoin','round');
+    if(!narrow){ const cx=Math.max(78,Math.min(W-78,(x1+x2)/2)); lab=[cx-76,cx+76];
+      svg.append('text').attr('x',cx).attr('y',top-14).attr('text-anchor','middle').style('fill','var(--ink)').style('font-weight',700).text('Best time for your jab'); }
+  }
+  const tx=xd(gToday());
+  svg.append('line').attr('x1',tx).attr('x2',tx).attr('y1',top-4).attr('y2',top+ch+4).attr('stroke','var(--ink)').attr('stroke-width',2).attr('stroke-linecap','round');
+  if(!narrow&&(!lab||tx-6<lab[0]||tx-48>lab[1])) svg.append('text').attr('x',tx-6).attr('y',top-14).attr('text-anchor','end').style('fill','var(--ink)').style('font-weight',700).text('Today');
+}
+
+/* Which vaccine, and when */
+function renderVax(){
+  const nh=FLU.nh, sh=FLU.sh, T=gToday();
+  const card=(v,cls,chip,txt)=>`<div class="g-card"><span class="chip ${cls}" style="align-self:flex-start">${chip}</span><h4>${esc(v.label)}</h4><p>${esc(txt)}</p></div>`;
+  let h='';
+  if(sh) h+=card(sh,sh.available?'good':'calm',sh.available?'In clinics now':'Not in clinics',sh.note||'Made for the southern hemisphere winter, which lines up with Singapore\'s mid-year flu season.');
+  if(nh) h+=card(nh,nh.available?'good':'fc',nh.available?`In clinics${nh.date?' since '+gFmt(nh.date,T):''}`:`Expected ${gBy(nh.date)}`,nh.note||'Made for the northern hemisphere winter, which lines up with Singapore\'s year-end flu season.');
+  $('#g-vax').innerHTML=h;
+  const before=nh&&!nh.available;
+  const rules=[
+    before? ['In a recommended group, and no flu jab recently?','Don\'t wait. Get the vaccine in clinics now, and the new one at least 8 weeks later.'] : ['In a recommended group?','Get the newest vaccine if you have not had it yet.'],
+    ['Already had the Southern Hemisphere vaccine this year?', before? 'Wait for the new vaccine, and leave at least 8 weeks between the two jabs.' : 'Get the new vaccine once 8 weeks have passed since that jab.'],
+    ['Child under 9 having a first flu jab?','2 doses, 4 weeks apart. After that, one dose a year.'],
+    ['Who is it recommended for?','People aged 65 and over, children aged 6 months to 4 years, people with a long-term illness or a weak immune system, pregnant women, and people in long-term care. Anyone aged 6 months and older can have one.']];
+  $('#g-rules').innerHTML=rules.map(r=>`<li><b>${r[0]}</b><span>${r[1]}</span></li>`).join('');
+}
+
+/* Where to get it, and what it costs */
+const price=p=>p.value===0?'Free':'$'+p.value;
+function renderWhere(){
+  $('#g-prices').innerHTML=FLU.prices.map(p=>`<tr><td>${esc(p.label)}</td><td>${price(p)}</td></tr>`).join('');
+  $('#g-price-note').innerHTML='Adult subsidies are for Singapore Citizens aged 65 and over, or aged 18 to 64 with certain medical conditions. At polyclinics, Pioneer Generation seniors get an extra 50% off and Merdeka Generation seniors an extra 25% off. Healthy adults pay the clinic\'s or pharmacy\'s own price. <a href="https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/healthier-sg-vaccinations" target="_blank" rel="noopener">MOH subsidy details</a>';
+}
+
+/* Latest from CDA */
+function renderNews(){
+  const fd=d=>d? `${d.getDate()} ${MONFULL[d.getMonth()]} ${d.getFullYear()}`:'';
+  $('#g-updates').innerHTML=FLU.updates.length? FLU.updates.map(u=>`<article><div class="eyebrow">${fd(u.date)} · CDA</div><h4><a href="${esc(u.link)}" target="_blank" rel="noopener">${esc(u.title)}</a></h4><p>${esc(u.text)}</p></article>`).join('') : '<p class="g-p">No updates yet.</p>';
+}
+
+/* "Am I due?" form */
+const AGE_OPTS={me:[['18to64','18 to 64'],['65plus','65 and over'],['5to17','Under 18']],
+  parent:[['18to64','Under 65'],['65plus','65 and over']],
+  child:[['u6m','Under 6 months'],['6m4','6 months to 4 years'],['5to17','5 to 17 years']]};
+const AGE_DEF={me:'18to64',parent:'65plus',child:'6m4'};
+function renderAgeSeg(who,keep){
+  const opts=AGE_OPTS[who], val=opts.some(o=>o[0]===keep)? keep : AGE_DEF[who];
+  $('#age-seg').innerHTML=opts.map(([v,l])=>`<label><input type="radio" name="age" value="${v}" id="age-${v}"${v===val?' checked':''}><span>${l}</span></label>`).join('');
+  $('#age-q').textContent={me:'How old are you?',parent:'How old are they?',child:'How old is your child?'}[who];
+}
+function initChecker(){
+  renderAgeSeg('parent','65plus');
+  const T=gToday(), o=[];
+  for(let i=0;i<=12;i++){ const d=new Date(T.getFullYear(),T.getMonth()-i,1), v=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+    o.push(`<option value="${v}">${i===0?`This month (${MONFULL[d.getMonth()]} ${d.getFullYear()})`:`${MONFULL[d.getMonth()]} ${d.getFullYear()}`}</option>`); }
+  o.push('<option value="over" selected>More than a year ago</option>','<option value="never">Never had one</option>','<option value="unsure">Not sure</option>');
+  $('#last').innerHTML=o.join('');
+  $('#chk-form').addEventListener('change',ev=>{ if(ev.target.name==='who') renderAgeSeg(ev.target.value,$('#chk-form').elements.age.value); $('#chk-ex').hidden=true; updateChk(); });
+  $('#chk-form').addEventListener('submit',ev=>ev.preventDefault());
+}
+function remindHTML(rem){
+  const T=gToday(); if(!rem||!rem.date||rem.date<=T) return '';
+  const c=calLinks(rem);
+  return `<div class="remind"><b>Remind me on ${gFmt(rem.date,T)}</b><div class="acts"><a class="btn ext" href="${c.gcal}" target="_blank" rel="noopener">Google Calendar </a><a class="btn" href="${c.ics}" download="flu-jab-reminder.ics">Apple or Outlook calendar</a></div></div>`;
+}
+function costHTML(kind){
+  if(kind==='none') return 'Not subsidised. Clinics and pharmacies set their own price.';
+  const ps=FLU.prices.filter(p=>p.group===kind); if(!ps.length) return '';
+  const free=ps.filter(p=>p.value===0), paid=ps.filter(p=>p.value>0).map(p=>p.value);
+  const parts=[...free.map(p=>`Free for ${esc(p.label.charAt(0).toLowerCase()+p.label.slice(1)).replace(/^(healthier|pioneer|merdeka|singapore|chas)/i,m=>m.charAt(0).toUpperCase()+m.slice(1))}.`)];
+  if(paid.length) parts.push(`Otherwise $${Math.min(...paid)}${paid.length>1?` to $${Math.max(...paid)}`:''} a dose at CHAS GP clinics, depending on your card.`);
+  return parts.join(' ')+` <button type="button" class="linkbtn" data-jump="g-where">See prices</button>`;
+}
+function updateChk(){
+  const f=$('#chk-form').elements, who=f.who.value, age=f.age.value, risk=f.risk.value, last=$('#last').value;
+  $('#risk-q').hidden=['u6m','6m4','65plus'].includes(age);
+  $('#last-q').hidden=age==='u6m';
+  $('#risk-legend').textContent={me:'Do any of these apply to you?',parent:'Do any of these apply to them?',child:'Does your child have any of these?'}[who];
+  $('#risk-hint').textContent=who==='child'? 'A long-term illness such as asthma, diabetes, or heart, lung or kidney disease. A weak immune system. Long-term aspirin treatment.'
+    : 'A long-term illness such as diabetes, asthma, or heart, lung, kidney or liver disease. A weak immune system. Pregnancy. Long-term care at home or in a nursing home.';
+  $('#last-label').textContent=who==='me'?'When was your last flu jab?':'When was their last flu jab?';
+  const a=fluAdvice({who,age,risk,last},gCtx());
+  const book=!['Too young','Covered'].includes(a.chip);
+  const cost=costHTML(a.cost);
+  $('#chk-out').innerHTML=`<div class="res"><span class="chip ${a.tone}">${esc(a.chip)}</span><h4>${esc(a.title)}</h4>
+    <ul>${a.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ul>
+    <dl><div><dt>Where</dt><dd>${esc(a.where)}</dd></div>${cost?`<div><dt>Cost</dt><dd>${cost}</dd></div>`:''}</dl>
+    ${book?'<div class="acts"><a class="btn primary ext" href="https://vaccine.gov.sg/flu" target="_blank" rel="noopener">Book a flu jab </a><button class="btn" type="button" data-jump="g-record">Check the record in HealthHub</button></div>':''}
+    ${remindHTML(a.remind)}</div>`;
+}
+
+/* "Travelling soon?" form */
+function initTrip(){
+  const T=gToday(), iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  $('#trip-dest').innerHTML=Object.entries(G_DEST).map(([k,d])=>`<option value="${k}">${d.label}</option>`).join('');
+  const dec=new Date(T.getFullYear(),11,12), ex=T<new Date(T.getFullYear(),10,20)? dec : new Date(T.getFullYear(),T.getMonth(),T.getDate()+60);
+  $('#trip-date').value=iso(ex); $('#trip-date').min=iso(T);
+  const f=$('#trip-form'); ['change','input'].forEach(e=>f.addEventListener(e,()=>{ $('#trip-ex').hidden=true; updateTrip(); }));
+  f.addEventListener('submit',ev=>ev.preventDefault());
+}
+function updateTrip(){
+  const v=$('#trip-date').value, m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+  const a=travelAdvice({dest:$('#trip-dest').value,date:m?new Date(+m[1],+m[2]-1,+m[3]):null,crowd:$('#trip-crowd').checked},gCtx());
+  if(a.error){ $('#trip-out').innerHTML=`<div class="err">${esc(a.error)}</div>`; return; }
+  $('#trip-out').innerHTML=`<div class="res"><span class="chip ${a.tone}">${esc(a.chip)}</span><h4>${esc(a.title)}</h4>
+    <ul>${a.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ul>
+    <div class="acts"><a class="btn primary ext" href="https://vaccine.gov.sg/flu" target="_blank" rel="noopener">Book a flu jab </a><button class="btn" type="button" data-jump="g-check">Check if my last jab still counts</button></div>
+    ${remindHTML(a.remind)}</div>`;
+}
+
+/* switching between the map and the guide (#flu-jab) */
+function route(){
+  const on=location.hash==='#flu-jab';
+  if(on===GUIDE_ON) return;
+  GUIDE_ON=on; $('.app').hidden=on; $('#guide').hidden=!on;
+  $('#btn-jab').setAttribute('aria-current',on?'page':'false');
+  if(on){ stopPlay(); renderGuide(); $('#guide').scrollTop=0; window.scrollTo(0,0); $('#g-title').focus({preventScroll:true}); document.title='Flu jab guide · '+BASE_TITLE; spyLock=0; navOn=null; spy(); }
+  else { document.title=BASE_TITLE; if(mapStale){ mapStale=false; window.dispatchEvent(new Event('resize')); } renderPanel(); }
+}
+window.addEventListener('hashchange',route);
+$('#btn-jab').addEventListener('click',()=>{ if(GUIDE_ON){ $('#guide').scrollTo({top:0}); window.scrollTo(0,0); } });
+document.addEventListener('click',ev=>{
+  const j=ev.target.closest('[data-jump]'); if(!j) return;
+  const id=j.dataset.jump, el=document.getElementById(id); if(!el) return;
+  ev.preventDefault();
+  const behavior=matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+  spyLock=Date.now()+1000; setNav(id);
+  if(id==='g-top'){ $('#guide').scrollTo({top:0,behavior}); window.scrollTo({top:0,behavior}); }
+  else el.scrollIntoView({behavior,block:'start'});
+  const h=el.querySelector('h2[tabindex],h3[tabindex]'); if(h) h.focus({preventScroll:true});
+});
+/* section navigation: highlight the section being read */
+const NAV_IDS=[...document.querySelectorAll('#g-nav [data-jump]')].map(b=>b.dataset.jump);
+let navOn=null, spyRaf=0, spyLock=0;
+function setNav(id){
+  if(id===navOn) return; navOn=id;
+  document.querySelectorAll('#g-nav [data-jump]').forEach(b=>{ const on=b.dataset.jump===id; b.classList.toggle('on',on); on? b.setAttribute('aria-current','location') : b.removeAttribute('aria-current'); });
+  const ul=$('#g-nav ul'), b=ul.querySelector(`[data-jump="${id}"]`);
+  if(b&&ul.scrollWidth>ul.clientWidth) ul.scrollTo({left:Math.max(0,b.parentElement.offsetLeft-24),behavior:'smooth'});
+}
+function spy(){
+  spyRaf=0; if(!GUIDE_ON||Date.now()<spyLock) return;
+  const g=$('#guide'), wide=innerWidth>=1100, line=Math.max(wide?120:$('#g-nav').offsetHeight+60,innerHeight*0.3);
+  let cur=NAV_IDS[0];
+  for(const id of NAV_IDS){ const el=document.getElementById(id); if(el&&el.getBoundingClientRect().top<=line) cur=id; }
+  const bottom=g.scrollHeight>g.clientHeight+4? g.scrollTop+g.clientHeight>=g.scrollHeight-4 : innerHeight+scrollY>=document.documentElement.scrollHeight-4;
+  if(bottom&&(g.scrollTop>0||scrollY>0)) cur=NAV_IDS[NAV_IDS.length-1];
+  setNav(cur);
+}
+const onGuideScroll=()=>{ if(!spyRaf) spyRaf=requestAnimationFrame(spy); };
+$('#guide').addEventListener('scroll',onGuideScroll,{passive:true});
+window.addEventListener('scroll',onGuideScroll,{passive:true});
+window.addEventListener('resize',()=>{ if(!GUIDE_ON) return; mapStale=true; clearTimeout(grz); grz=setTimeout(()=>{ const L=gLevel(); renderNow(L); renderSeason(L); spy(); },150); });
+
 recompute(); update();
 // On GitHub Pages, prefer the editable data/weekly.csv next to this page if it exists
 fetch('data/weekly.csv',{cache:'no-store'}).then(r=>r.ok?r.text():null).then(t=>{
   if(!t) return; const rows=parseCSV(t); if(rows.length&&'indicator' in rows[0]){ baseRecords=rows; recompute(); update(); }
 }).catch(()=>{});
+// ...and the editable data/flu-updates.csv for the flu jab guide
+fetch('data/flu-updates.csv',{cache:'no-store'}).then(r=>r.ok?r.text():null).then(t=>{
+  if(!t) return; const f=parseFluUpdates(t); if(f.nh||f.updates.length){ FLU=f; if(GUIDE_ON) renderGuide(); else renderPanel(); }
+}).catch(()=>{});
+route();
 })();
 
 </script>
