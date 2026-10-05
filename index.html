@@ -409,6 +409,42 @@ details.more table.kv td:last-child{white-space:nowrap}
   .brand h1{font-size:17px}
 }
 
+/* legal & data sources view (#legal) */
+a.pill.proto{text-decoration:none;cursor:pointer;border:1px solid transparent}
+a.pill.proto:hover{border-color:var(--warn)}
+a.pill.proto[aria-current="page"]{border-color:var(--warn)}
+a.pill.proto svg{flex:none}
+.proto-bar{display:none;align-items:center;justify-content:center;gap:6px;padding:6px 12px;background:var(--warn-soft);color:var(--warn);font-size:12.5px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--line);flex:none}
+.proto-bar:hover{text-decoration:underline}
+.panel-legal{margin:18px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3);line-height:1.45}
+.l-callout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;background:var(--warn-soft);border-radius:16px;padding:16px 18px}
+.l-co{display:flex;flex-direction:column;gap:4px;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+.l-co>b{color:var(--ink);font-size:15px}
+.l-list{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:72ch}
+.l-list b{color:var(--ink)}
+.l-why{display:flex;flex-direction:column;gap:6px}
+.l-why p{margin:0;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:70ch}
+.l-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.l-two .g-card{display:flex;flex-direction:column;gap:10px;padding:16px}
+.l-two ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+.l-two b{color:var(--ink)}
+.l-tag{align-self:flex-start;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px}
+.l-tag.rep{background:var(--good-soft);color:var(--good)}
+.l-tag.est{background:var(--warn-soft);color:var(--warn)}
+.srcs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.srcs li{display:grid;grid-template-columns:minmax(0,16em) minmax(0,1fr);gap:6px 22px;padding:16px 0;border-top:1px solid var(--line)}
+.s-name{display:flex;flex-direction:column;gap:3px;font-size:15px;line-height:1.35}
+.s-name span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);line-height:1.4}
+.s-body{display:flex;flex-direction:column;gap:8px;align-items:flex-start;min-width:0}
+.s-body p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:68ch}
+.s-body .acts{gap:6px 16px}
+.s-body a.ext,.l-wrap a.ext{font-weight:600;font-size:14px}
+.s-body p.l-attr{font-size:13px;color:var(--ink-3);border-left:2px solid var(--line);padding-left:10px}
+@media (max-width: 760px){
+  .l-callout,.l-two{grid-template-columns:minmax(0,1fr)}
+  .srcs li{grid-template-columns:minmax(0,1fr)}
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 1360px){ .brand p{display:none} }
 @media (max-width: 1100px){ .stamp .pill.data{display:none} }
@@ -432,6 +468,7 @@ details.more table.kv td:last-child{white-space:nowrap}
   .timeline{grid-template-columns:auto 1fr;padding:8px 10px}
   .play{width:38px;height:38px}
   .stamp .pill.proto{display:none}
+  .proto-bar{display:flex}
   #tl-hint{display:none}
   .map-title .toggle{font-size:12px}
 }
@@ -455,12 +492,13 @@ details.more table.kv td:last-child{white-space:nowrap}
   </div>
   <div class="stamp">
     <span class="pill data num" id="stamp"></span>
-    <span class="pill proto" title="Independent prototype. Not affiliated with CDA, MOH or any government agency.">Prototype · not an official source</span>
+    <a class="pill proto" id="btn-legal" href="#legal" aria-current="false" title="Independent prototype. Not affiliated with CDA, MOH or any government agency. Read the legal and data sources page."><svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 7v4.2M8 4.6v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Prototype · not an official source</a>
     <a class="btn jab" id="btn-jab" href="#flu-jab" aria-current="false"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10.6 1.6l3.8 3.8M12.5 3.5l-7.4 7.4-2.4.3.3-2.4 7.4-7.4M8.6 5.4l2 2M6.8 7.2l1.1 1.1M2.7 13.3l1.5-1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Flu jab guide</span><span class="lbl-s">Flu jab</span></a>
     <button class="btn" id="btn-about" type="button"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4.2M8 4.6v.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span class="lbl">How this works</span></button>
     <button class="btn" id="btn-data" type="button"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m-3.5-3.5L8 10l3.5-3.5M2.5 12.5v1h11v-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="rotate(180 8 8)"/></svg><span class="lbl">Add data</span></button>
   </div>
 </header>
+<a class="proto-bar" href="#legal">Prototype · not an official source · Legal &amp; data sources ›</a>
 
 <div class="app">
   <aside class="panel" aria-label="Details">
@@ -473,6 +511,7 @@ details.more table.kv td:last-child{white-space:nowrap}
         <div class="suggest" id="suggest" role="listbox" hidden></div>
       </div>
       <div id="panel-body"></div>
+      <p class="panel-legal">Independent prototype, not an official source. Not affiliated with CDA or MOH. <a href="#legal">Legal &amp; data sources</a></p>
     </div>
   </aside>
 
@@ -659,7 +698,189 @@ details.more table.kv td:last-child{white-space:nowrap}
     <footer class="g-foot">
       <p><b>General guidance, not medical advice.</b> Ask your doctor about your own situation. Based on public information from the Communicable Diseases Agency (CDA) and the Ministry of Health (MOH), the national adult and childhood immunisation schedules, and CDC advice for travellers. Prices and vaccine dates can change.</p>
       <p>Sources: <a href="https://www.cda.gov.sg/news-and-events/update-on-seasonal-influenza-vaccination/" target="_blank" rel="noopener">CDA flu vaccination update</a> · <a href="https://www.cda.gov.sg/news-and-events/update-on-influenza-situation-in-singapore/" target="_blank" rel="noopener">CDA flu situation update</a> · <a href="https://www.cda.gov.sg/public/vaccinations/" target="_blank" rel="noopener">CDA vaccinations</a> · <a href="https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/healthier-sg-vaccinations" target="_blank" rel="noopener">MOH Healthier SG vaccinations</a> · <a href="https://www.cdc.gov/flu/school-business/travelersfacts.htm" target="_blank" rel="noopener">CDC flu and travel</a> · <a href="https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2026/" target="_blank" rel="noopener">CDA Weekly Infectious Diseases Bulletin</a></p>
-      <p>Independent prototype. Not affiliated with or endorsed by CDA, MOH or HealthHub.</p>
+      <p>Independent prototype. Not affiliated with or endorsed by CDA, MOH or HealthHub. <a href="#legal">Legal &amp; data sources</a></p>
+    </footer>
+  </div>
+ </div>
+</div>
+
+<div class="guide legal" id="legal" hidden>
+ <div class="g-layout">
+  <nav class="g-nav" id="l-nav" aria-label="On this page">
+    <div class="eyebrow">On this page</div>
+    <ul>
+        <li><button type="button" data-jump="l-top">Summary</button></li>
+        <li><button type="button" data-jump="l-who">1. Who runs this</button></li>
+        <li><button type="button" data-jump="l-advice">2. Not official, not medical advice</button></li>
+        <li><button type="button" data-jump="l-est">3. Reported vs estimated</button></li>
+        <li><button type="button" data-jump="l-sources">4. Data sources</button></li>
+        <li><button type="button" data-jump="l-names">5. Names and copyright</button></li>
+        <li><button type="button" data-jump="l-privacy">6. Privacy</button></li>
+        <li><button type="button" data-jump="l-fix">7. Corrections</button></li>
+        <li><button type="button" data-jump="l-liab">8. Liability</button></li>
+        <li><button type="button" data-jump="l-changes">9. Changes and law</button></li>
+    </ul>
+  </nav>
+  <div class="g-wrap">
+    <a class="back" href="#">← Back to the map</a>
+
+    <header class="g-hero" id="l-top">
+      <div class="eyebrow">Legal &amp; data sources</div>
+      <h2 id="l-title" tabindex="-1">An independent project, not an official source</h2>
+      <p class="g-lede">Kampung Health Radar is an experimental personal project that turns Singapore's public infectious disease bulletin into a map, charts and plain-language advice. It is not run by, linked to or endorsed by the Communicable Diseases Agency (CDA), the Ministry of Health (MOH), the National Environment Agency (NEA) or any other government agency.</p>
+      <p class="hint">Last reviewed 5 October 2026 · <span id="l-latest">Latest bulletin used on this site: see the top of the map</span></p>
+      <div class="l-callout" role="note">
+        <div class="l-co">
+          <b>For official figures and advice</b>
+          <span>Go to the Communicable Diseases Agency at <a href="https://www.cda.gov.sg/" target="_blank" rel="noopener">cda.gov.sg</a>. If CDA's figures differ from ours, CDA is right.</span>
+        </div>
+        <div class="l-co">
+          <b>If you feel unwell</b>
+          <span>See a doctor or visit a polyclinic. In an emergency, call <b>995</b>. Nothing on this site can tell you whether you are sick.</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="g-sec" id="l-who" aria-labelledby="l-who-h">
+      <h3 id="l-who-h" tabindex="-1">1. Who runs this</h3>
+      <p class="g-p">Kampung Health Radar is an independent, non-commercial, experimental project run by <b>Andy</b>, a member of the public in Singapore, in a personal capacity.</p>
+      <ul class="l-list">
+        <li>I do not work for, and am not connected with, CDA, MOH, NEA, HealthHub or any other government agency or healthcare provider.</li>
+        <li>This site does not sell anything, show ads, collect payments or accept sponsorship.</li>
+        <li>I am not a doctor or a public health official.</li>
+      </ul>
+      <div class="g-card l-why">
+        <div class="eyebrow">Why this exists</div>
+        <p>CDA publishes a Weekly Infectious Disease Bulletin full of tables and charts written for specialists. As a member of the public, I found those documents hard to read. This site is an attempt to make the same public numbers easier to understand: what is going around, whether it is getting better or worse, and what you can do.</p>
+      </div>
+    </section>
+
+    <section class="g-sec" id="l-advice" aria-labelledby="l-advice-h">
+      <h3 id="l-advice-h" tabindex="-1">2. Not official, not medical advice</h3>
+      <ul class="l-list">
+        <li><b>Not an official source.</b> The official figures are the ones CDA publishes. We copy them by hand from CDA's documents, so this site can contain typing mistakes, and it can be days or weeks behind.</li>
+        <li><b>Figures can change.</b> CDA's bulletin figures are provisional and are sometimes revised later.</li>
+        <li><b>Not medical advice.</b> The advice on this site, including the flu jab guide, is general public health guidance in plain language. It is not advice for you as an individual. Ask a doctor about your own health.</li>
+        <li><b>No official announcements.</b> Nothing on this site is an outbreak alert, a government announcement or an instruction. For those, follow CDA, MOH and NEA directly.</li>
+        <li><b>Please read it calmly.</b> Many numbers here are estimates (see section 3). A dark colour on the map or a rising line in the outlook is not a warning that you, or your area, are at special risk.</li>
+      </ul>
+    </section>
+
+    <section class="g-sec" id="l-est" aria-labelledby="l-est-h">
+      <h3 id="l-est-h" tabindex="-1">3. What is reported, and what we estimate</h3>
+      <p class="g-p">Some numbers on this site come straight from CDA's bulletin. Others are calculated by this site to make the trends easier to see. They should not be read as official figures.</p>
+      <div class="l-two">
+        <div class="g-card">
+          <div class="l-tag rep">From the bulletin</div>
+          <ul>
+            <li>Weekly dengue cases for Singapore as a whole</li>
+            <li>Average daily polyclinic visits for HFMD and for coughs, colds and flu</li>
+            <li>The share of samples testing positive for flu and for COVID-19</li>
+            <li>The "usual" week (CDA's 5-year median) and the dengue alert and epidemic lines</li>
+          </ul>
+        </div>
+        <div class="g-card">
+          <div class="l-tag est">Estimated by this site</div>
+          <ul>
+            <li><b>The map by area.</b> CDA reports national totals only. We spread them across planning areas by rough population and age. It is an illustration, not local data.</li>
+            <li><b>COVID-19 numbers.</b> Polyclinic visits multiplied by the COVID-19 positive rate.</li>
+            <li><b>The 3-month outlook.</b> A simple statistical projection with a range. It can be wrong.</li>
+            <li><b>"What if we act now?"</b> An illustration of how cutting spread could change cases, not a prediction for any real programme.</li>
+            <li><b>Levels and colours</b> such as Low, Moderate, High, and the flu level bands. These are our own labels.</li>
+            <li><b>2025 weeks 38 to 53,</b> read off the bars of CDA's charts.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="hint">How each estimate is made is explained under <button type="button" class="linkbtn" data-about>How this works</button>.</p>
+    </section>
+
+    <section class="g-sec" id="l-sources" aria-labelledby="l-sources-h">
+      <h3 id="l-sources-h" tabindex="-1">4. Data sources</h3>
+      <p class="g-p">Every number on this site comes from a public source. We credit each one here and link to the original so you can check it.</p>
+      <ul class="srcs">
+        <li>
+          <div class="s-name"><b>Weekly Infectious Diseases Bulletin 2026</b><span>Communicable Diseases Agency (CDA)</span></div>
+          <div class="s-body"><p>The main source. Weekly dengue cases, polyclinic visits for HFMD and for coughs, colds and flu, flu and COVID-19 positive rates, dengue hospital admissions and CDA's 5-year medians, from epidemiological week 1 of 2026. Also the 2025 comparison figures printed in each bulletin.</p><a class="ext" href="https://www.cda.gov.sg/resources/weekly-infectious-diseases-bulletin-2026/" target="_blank" rel="noopener">CDA bulletin page </a></div>
+        </li>
+        <li>
+          <div class="s-name"><b>Yearly Weekly Infectious Disease Bulletin spreadsheets, 2012 to 2025</b><span>CDA, previously MOH</span></div>
+          <div class="s-body"><p>Past weekly dengue cases and polyclinic visits for coughs, colds and flu (2012 to 2024), and HFMD polyclinic visits (2023 and 2024). Used to learn the usual seasonal pattern for the outlook and the "when flu season usually comes" chart. Downloaded from CDA's website, where each year's bulletins are listed.</p><a class="ext" href="https://www.cda.gov.sg/resources/" target="_blank" rel="noopener">CDA resources page </a></div>
+        </li>
+        <li>
+          <div class="s-name"><b>Weekly Infectious Disease Bulletin Cases, and Average Daily Polyclinic Attendances for Selected Diseases</b><span>MOH, on data.gov.sg</span></div>
+          <div class="s-body"><p>MOH also publishes weekly bulletin figures for 2012 to 2022 as open data. Listed here so anyone can check the history against an openly licensed copy.</p><div class="acts"><a class="ext" href="https://data.gov.sg/datasets/d_ca168b2cb763640d72c4600a68f9909e/view" target="_blank" rel="noopener">Bulletin cases dataset </a><a class="ext" href="https://data.gov.sg/datasets/d_5d5508f1c954f5630d7b3aa7875d01f9/view" target="_blank" rel="noopener">Polyclinic attendances dataset </a></div></div>
+        </li>
+        <li>
+          <div class="s-name"><b>Master Plan 2019 Planning Area Boundary (No Sea)</b><span>Urban Redevelopment Authority (URA), on data.gov.sg</span></div>
+          <div class="s-body"><p>The shapes of the 55 planning areas on the map, simplified for the web.</p><p class="l-attr">Contains information from Master Plan 2019 Planning Area Boundary (No Sea) accessed in 2026 from data.gov.sg, which is made available under the terms of the <a href="https://data.gov.sg/open-data-licence" target="_blank" rel="noopener">Singapore Open Data Licence version 1.0</a>.</p><a class="ext" href="https://data.gov.sg/datasets/d_4765db0e87b9c86336792efe8a1f7a66/view" target="_blank" rel="noopener">Dataset on data.gov.sg </a></div>
+        </li>
+        <li>
+          <div class="s-name"><b>Population and age profile by planning area</b><span>Rounded approximations</span></div>
+          <div class="s-body"><p>Approximate resident numbers and shares of young children and older residents, used only to spread national totals across the map. They are rounded estimates, not official statistics. For official population figures, see the Department of Statistics.</p><a class="ext" href="https://www.singstat.gov.sg/" target="_blank" rel="noopener">SingStat </a></div>
+        </li>
+        <li>
+          <div class="s-name"><b>Flu jab guide</b><span>CDA, MOH, HealthHub, US CDC</span></div>
+          <div class="s-body"><p>CDA's flu situation and seasonal flu vaccination updates, CDA's vaccination pages and the national immunisation schedules (who should get a flu jab, timing, doses), MOH's Healthier SG vaccination subsidies (prices), HealthHub (vaccination records) and the US Centers for Disease Control and Prevention (flu advice for travellers). We summarise them in our own words and link to the originals. Vaccine dates and prices can change.</p><div class="acts"><a class="ext" href="https://www.cda.gov.sg/public/vaccinations/" target="_blank" rel="noopener">CDA vaccinations </a><a class="ext" href="https://www.moh.gov.sg/managing-expenses/schemes-and-subsidies/healthier-sg-vaccinations" target="_blank" rel="noopener">MOH Healthier SG vaccinations </a><a class="ext" href="https://www.cdc.gov/flu/school-business/travelersfacts.htm" target="_blank" rel="noopener">CDC flu and travel </a></div></div>
+        </li>
+        <li>
+          <div class="s-name"><b>Software and fonts</b><span>Open source</span></div>
+          <div class="s-body"><p>Charts and the map are drawn with <a href="https://d3js.org/" target="_blank" rel="noopener">D3.js</a> (ISC licence), loaded from cdnjs. Text is set in Bricolage Grotesque and Public Sans (SIL Open Font Licence), loaded from Google Fonts.</p></div>
+        </li>
+      </ul>
+      <p class="hint">Want the numbers themselves? The weekly figures this site uses are in <a href="https://github.com/silkiee/kampunghealthradar/blob/main/data/weekly.csv" target="_blank" rel="noopener">data/weekly.csv</a> on GitHub, with the bulletin each one came from.</p>
+    </section>
+
+    <section class="g-sec" id="l-names" aria-labelledby="l-names-h">
+      <h3 id="l-names-h" tabindex="-1">5. Names, logos and copyright</h3>
+      <ul class="l-list">
+        <li>Agency names such as CDA, MOH, NEA, URA, HealthHub and CDC appear only to say where information comes from. Their use does not mean any agency has approved this site.</li>
+        <li>This site does not use any government logo, crest or official design, and it does not copy CDA's pages, charts or images. It re-draws the published numbers and links to the originals.</li>
+        <li>The bulletin figures belong to their publishers. This site does not claim them as its own.</li>
+        <li>The site's own code, design and text are © 2026 Andy. You are welcome to link to the site and to quote short parts with credit.</li>
+        <li>If an agency would like anything on this site changed, credited differently or removed, please get in touch (section 7). I will act on it promptly.</li>
+      </ul>
+    </section>
+
+    <section class="g-sec" id="l-privacy" aria-labelledby="l-privacy-h">
+      <h3 id="l-privacy-h" tabindex="-1">6. Privacy</h3>
+      <p class="g-p">This site is built to collect nothing about you.</p>
+      <ul class="l-list">
+        <li><b>No accounts, ads, analytics or tracking.</b> The site sets no cookies of its own.</li>
+        <li><b>Your answers stay with you.</b> The area search, the "Am I due?" check and "Travelling soon?" run in your browser. Nothing you choose is saved or sent.</li>
+        <li><b>Files you add stay in your tab.</b> A CSV added through "Add data" is read in your browser and is gone when you close the tab.</li>
+        <li><b>Services the page relies on.</b> The site is hosted on GitHub Pages, which logs visitors' IP addresses for security. Fonts come from Google Fonts and the chart library from cdnjs (Cloudflare). Like any website, these services can see your IP address when your browser loads from them. See the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.</li>
+        <li><b>Calendar reminders.</b> The Google Calendar button opens Google's own site with the reminder filled in. The Apple or Outlook option downloads a small file to your device.</li>
+      </ul>
+    </section>
+
+    <section class="g-sec" id="l-fix" aria-labelledby="l-fix-h">
+      <h3 id="l-fix-h" tabindex="-1">7. Corrections and takedown requests</h3>
+      <p class="g-p">If a number is wrong, a source is credited wrongly, or you would like something removed, please tell me. Include the part of the page you mean and what should change.</p>
+      <div class="acts"><a class="btn primary ext" href="https://github.com/silkiee/kampunghealthradar/issues" target="_blank" rel="noopener">Report an issue on GitHub </a></div>
+      <p class="hint">GitHub issues are public, so please do not include personal or health details. I aim to respond within 7 days. Where a request from an agency or rights holder is unclear, I will remove the content first and discuss afterwards.</p>
+    </section>
+
+    <section class="g-sec" id="l-liab" aria-labelledby="l-liab-h">
+      <h3 id="l-liab-h" tabindex="-1">8. Use at your own discretion</h3>
+      <ul class="l-list">
+        <li>Everything on this site is provided "as is", for general information only, without any promise that it is accurate, complete or up to date.</li>
+        <li>To the extent allowed by Singapore law, the operator is not responsible for any loss or harm from using, or relying on, this site. Please check anything important with CDA, MOH or a doctor.</li>
+        <li>Links to other websites are provided for convenience. Those sites are responsible for their own content.</li>
+        <li>Nothing here limits any responsibility that cannot be limited under Singapore law.</li>
+      </ul>
+    </section>
+
+    <section class="g-sec" id="l-changes" aria-labelledby="l-changes-h">
+      <h3 id="l-changes-h" tabindex="-1">9. Changes to this page, and governing law</h3>
+      <ul class="l-list">
+        <li>This page is updated when something important changes, such as a new data source or a new feature. The "last reviewed" date at the top shows the latest change, and the full history is on GitHub.</li>
+        <li>This page is governed by the laws of Singapore.</li>
+      </ul>
+    </section>
+
+    <footer class="g-foot">
+      <p>This page explains, in plain language, how the site works and where its data comes from. It is not legal advice.</p>
+      <p>Independent prototype. Not affiliated with or endorsed by CDA, MOH, NEA or any Singapore government agency.</p>
     </footer>
   </div>
  </div>
@@ -690,7 +911,7 @@ details.more table.kv td:last-child{white-space:nowrap}
     <p>The flu jab guide puts CDA's public advice on flu vaccination next to the bulletin data. <b>Flu right now</b> uses weekly flu positivity, with our own bands: Low is under 10%, Moderate is 10 to 24% and High is 25% or more. <b>When flu season usually comes</b> uses polyclinic visits for coughs, colds and flu in 2012 to 2019 and 2023 to 2025. We leave out 2020 to 2022 because COVID-19 measures changed the usual pattern. <b>Am I due?</b> and <b>Travelling soon?</b> follow CDA's September 2026 advice, the national adult and childhood immunisation schedules, and CDC advice for travellers. They run in your browser: nothing you choose is saved or sent. Vaccine dates, prices and CDA updates come from <b>data/flu-updates.csv</b>.</p>
     <h3>Limits</h3>
     <ul>
-      <li>Independent prototype. Not affiliated with or endorsed by CDA, MOH or NEA.</li>
+      <li>Independent prototype. Not affiliated with or endorsed by CDA, MOH or NEA. See <a href="#legal" data-close>Legal &amp; data sources</a>.</li>
       <li>Bulletin figures are provisional and may be revised.</li>
       <li>Population figures per planning area are rounded approximations.</li>
       <li>Advice follows standard public health guidance. It is not medical advice for any individual.</li>
@@ -3683,6 +3904,7 @@ $('#reset-data').onclick=()=>{ extraRecords=[]; recompute(); update(); renderCov
 /* ---------------- update loop ---------------- */
 function update(){
   $('#stamp').textContent=`Latest bulletin: week ${M.dengue.t} · ${weekRange(M.dengue.t)} ${CUR}`;
+  $('#l-latest').textContent=`Latest bulletin used on this site: week ${M.dengue.t} of ${CUR} (${weekRange(M.dengue.t)} ${CUR})`;
   renderPanel(); renderMap(); renderTimeline();
   if(GUIDE_ON) renderGuide();
 }
@@ -3703,7 +3925,7 @@ let rz; window.addEventListener('resize',()=>{ clearTimeout(rz); rz=setTimeout((
 
 /* ---------------- flu jab guide ---------------- */
 let FLU=parseFluUpdates(document.getElementById('data-flu').textContent.trim());
-let GUIDE_ON=false, guideInit=false, mapStale=false, grz;
+let GUIDE_ON=false, LEGAL_ON=false, guideInit=false, mapStale=false, grz;
 const BASE_TITLE=document.title;
 const MONFULL=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const SYRINGE='<svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M10.6 1.6l3.8 3.8M12.5 3.5l-7.4 7.4-2.4.3.3-2.4 7.4-7.4M8.6 5.4l2 2M6.8 7.2l1.1 1.1M2.7 13.3l1.5-1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -3956,49 +4178,58 @@ function updateTrip(){
     ${remindHTML(a.remind)}</div>`;
 }
 
-/* switching between the map and the guide (#flu-jab) */
+/* switching between the map, the flu jab guide (#flu-jab) and the legal page (#legal) */
 function route(){
-  const on=location.hash==='#flu-jab';
-  if(on===GUIDE_ON) return;
-  GUIDE_ON=on; $('.app').hidden=on; $('#guide').hidden=!on;
-  $('#btn-jab').setAttribute('aria-current',on?'page':'false');
-  if(on){ stopPlay(); renderGuide(); $('#guide').scrollTop=0; window.scrollTo(0,0); $('#g-title').focus({preventScroll:true}); document.title='Flu jab guide · '+BASE_TITLE; spyLock=0; navOn=null; spy(); }
+  const g=location.hash==='#flu-jab', l=location.hash==='#legal';
+  if(g===GUIDE_ON&&l===LEGAL_ON) return;
+  const wasMap=!GUIDE_ON&&!LEGAL_ON;
+  GUIDE_ON=g; LEGAL_ON=l; $('.app').hidden=g||l; $('#guide').hidden=!g; $('#legal').hidden=!l;
+  $('#btn-jab').setAttribute('aria-current',g?'page':'false');
+  $('#btn-legal').setAttribute('aria-current',l?'page':'false');
+  if(g||l){ if(wasMap) stopPlay(); }
+  if(g){ renderGuide(); $('#guide').scrollTop=0; window.scrollTo(0,0); $('#g-title').focus({preventScroll:true}); document.title='Flu jab guide · '+BASE_TITLE; }
+  else if(l){ $('#legal').scrollTop=0; window.scrollTo(0,0); $('#l-title').focus({preventScroll:true}); document.title='Legal & data sources · '+BASE_TITLE; }
   else { document.title=BASE_TITLE; if(mapStale){ mapStale=false; window.dispatchEvent(new Event('resize')); } renderPanel(); }
+  if(g||l){ spyLock=0; navOn=null; spy(); }
 }
 window.addEventListener('hashchange',route);
 $('#btn-jab').addEventListener('click',()=>{ if(GUIDE_ON){ $('#guide').scrollTo({top:0}); window.scrollTo(0,0); } });
+$('#btn-legal').addEventListener('click',()=>{ if(LEGAL_ON){ $('#legal').scrollTo({top:0}); window.scrollTo(0,0); } });
 document.addEventListener('click',ev=>{
   const j=ev.target.closest('[data-jump]'); if(!j) return;
   const id=j.dataset.jump, el=document.getElementById(id); if(!el) return;
   ev.preventDefault();
   const behavior=matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
   spyLock=Date.now()+1000; setNav(id);
-  if(id==='g-top'){ $('#guide').scrollTo({top:0,behavior}); window.scrollTo({top:0,behavior}); }
+  if(id==='g-top'||id==='l-top'){ $(id==='g-top'?'#guide':'#legal').scrollTo({top:0,behavior}); window.scrollTo({top:0,behavior}); }
   else el.scrollIntoView({behavior,block:'start'});
   const h=el.querySelector('h2[tabindex],h3[tabindex]'); if(h) h.focus({preventScroll:true});
 });
 /* section navigation: highlight the section being read */
-const NAV_IDS=[...document.querySelectorAll('#g-nav [data-jump]')].map(b=>b.dataset.jump);
+const NAVS={guide:{box:'#guide',nav:'#g-nav'},legal:{box:'#legal',nav:'#l-nav'}};
+const NAV_IDS={guide:[...document.querySelectorAll('#g-nav [data-jump]')].map(b=>b.dataset.jump),legal:[...document.querySelectorAll('#l-nav [data-jump]')].map(b=>b.dataset.jump)};
+const curView=()=>GUIDE_ON?'guide':LEGAL_ON?'legal':null;
 let navOn=null, spyRaf=0, spyLock=0;
 function setNav(id){
-  if(id===navOn) return; navOn=id;
-  document.querySelectorAll('#g-nav [data-jump]').forEach(b=>{ const on=b.dataset.jump===id; b.classList.toggle('on',on); on? b.setAttribute('aria-current','location') : b.removeAttribute('aria-current'); });
-  const ul=$('#g-nav ul'), b=ul.querySelector(`[data-jump="${id}"]`);
+  const v=curView(); if(!v||id===navOn) return; navOn=id; const N=NAVS[v].nav;
+  document.querySelectorAll(N+' [data-jump]').forEach(b=>{ const on=b.dataset.jump===id; b.classList.toggle('on',on); on? b.setAttribute('aria-current','location') : b.removeAttribute('aria-current'); });
+  const ul=$(N+' ul'), b=ul.querySelector(`[data-jump="${id}"]`);
   if(b&&ul.scrollWidth>ul.clientWidth) ul.scrollTo({left:Math.max(0,b.parentElement.offsetLeft-24),behavior:'smooth'});
 }
 function spy(){
-  spyRaf=0; if(!GUIDE_ON||Date.now()<spyLock) return;
-  const g=$('#guide'), wide=innerWidth>=1100, line=Math.max(wide?120:$('#g-nav').offsetHeight+60,innerHeight*0.3);
-  let cur=NAV_IDS[0];
-  for(const id of NAV_IDS){ const el=document.getElementById(id); if(el&&el.getBoundingClientRect().top<=line) cur=id; }
+  spyRaf=0; const v=curView(); if(!v||Date.now()<spyLock) return;
+  const ids=NAV_IDS[v], g=$(NAVS[v].box), wide=innerWidth>=1100, line=Math.max(wide?120:$(NAVS[v].nav).offsetHeight+60,innerHeight*0.3);
+  let cur=ids[0];
+  for(const id of ids){ const el=document.getElementById(id); if(el&&el.getBoundingClientRect().top<=line) cur=id; }
   const bottom=g.scrollHeight>g.clientHeight+4? g.scrollTop+g.clientHeight>=g.scrollHeight-4 : innerHeight+scrollY>=document.documentElement.scrollHeight-4;
-  if(bottom&&(g.scrollTop>0||scrollY>0)) cur=NAV_IDS[NAV_IDS.length-1];
+  if(bottom&&(g.scrollTop>0||scrollY>0)) cur=ids[ids.length-1];
   setNav(cur);
 }
 const onGuideScroll=()=>{ if(!spyRaf) spyRaf=requestAnimationFrame(spy); };
 $('#guide').addEventListener('scroll',onGuideScroll,{passive:true});
+$('#legal').addEventListener('scroll',onGuideScroll,{passive:true});
 window.addEventListener('scroll',onGuideScroll,{passive:true});
-window.addEventListener('resize',()=>{ if(!GUIDE_ON) return; mapStale=true; clearTimeout(grz); grz=setTimeout(()=>{ const L=gLevel(); renderNow(L); renderSeason(L); spy(); },150); });
+window.addEventListener('resize',()=>{ if(LEGAL_ON){ mapStale=true; spy(); return; } if(!GUIDE_ON) return; mapStale=true; clearTimeout(grz); grz=setTimeout(()=>{ const L=gLevel(); renderNow(L); renderSeason(L); spy(); },150); });
 
 recompute(); update();
 // On GitHub Pages, prefer the editable data/weekly.csv next to this page if it exists
