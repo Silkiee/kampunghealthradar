@@ -2,7 +2,7 @@
 
 Singapore's Weekly Infectious Disease Bulletin, turned into a map, a 3-month outlook and plain-language advice for the public.
 
-> Personal experimental project, not an official source. Built and run by one person in their own time and at their own cost; no organisation funds or sponsors it. Not affiliated with or endorsed by CDA, MOH or NEA. Area-level figures are illustrative estimates, not local reports. See the [Legal & data sources](https://silkiee.github.io/kampunghealthradar/#legal) page.
+> Personal experimental project, not an official source. Built and run by one person in their own time and at their own cost; no organisation funds or sponsors it. Not affiliated with or endorsed by CDA, MOH or NEA. Area-level figures are illustrative estimates, not local reports; accurate area-level figures would need local data from agencies such as NEA and URA, which this project does not have. See the [Legal & data sources](https://silkiee.github.io/kampunghealthradar/#legal) page.
 
 ## What's in this folder
 
@@ -63,7 +63,7 @@ The "Am I due?" rules follow CDA's September 2026 advice (get the Northern Hemis
 ## How the numbers are made (short version)
 - **Outlook:** the average of the last three weeks, shaped by the same months in past years, plus the recent direction fading out over time. The bands come from testing the method on every earlier week of the current year.
 - **"What if we act now?":** each round of infection shrinks in proportion to the cut in spread, after a short delay; 15% of cases (e.g. picked up overseas) are left untouched.
-- **Map:** national figures spread across the 55 URA planning areas by approximate population and age profile (plus a mild east/north-east and landed-housing weighting for dengue). Colours compare each area with a typical week for Singapore.
+- **Map:** national figures spread across the 55 URA planning areas by approximate population and age profile (plus a mild east/north-east and landed-housing weighting for dengue). Colours compare each area with a typical week for Singapore. The area shapes come from URA's open planning-area boundaries, but the numbers inside them are not real local data. Accurate area-level figures would need local data from agencies such as NEA and URA, which this project does not have.
 - **Flu jab guide:** "Flu right now" uses weekly flu positivity (Low under 10%, Moderate 10–24%, High 25%+, our own bands). "When flu season usually comes" averages respiratory polyclinic visits by month for 2012–2019 and 2023–2025, leaving out the COVID-19 years 2020–2022. The answers in "Am I due?" and "Travelling soon?" are worked out in the browser; nothing is saved or sent.
 - **2025 weeks 38–53** were read off the bars in the charts of the EW37 2026 bulletin; that method matches the printed weeks to within 1 case.
 - **2012–2024** come from the yearly Weekly Infectious Disease Bulletin spreadsheets: `dengue_cases` (Dengue + DHF columns) and `ari_daily` (Acute Upper Respiratory Tract infections) for every week, and `hfmd_daily` for 2023–2024 only. Before 2023 the spreadsheets give HFMD as weekly notified cases, a different measure, so those years are left out. 2019 uses the complete, revised sheet in the 2020 spreadsheet. Blank DHF cells in 2014 are counted as 0.
