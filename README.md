@@ -2,7 +2,7 @@
 
 Singapore's Weekly Infectious Disease Bulletin, turned into a map, a 3-month outlook and plain-language advice for the public.
 
-> Independent prototype. Not affiliated with or endorsed by CDA, MOH or NEA. Area-level figures are illustrative estimates, not local reports.
+> Personal experimental project, not an official source. Built and run by one person in their own time and at their own cost; no organisation funds or sponsors it. Not affiliated with or endorsed by CDA, MOH or NEA. Area-level figures are illustrative estimates, not local reports. See the [Legal & data sources](https://silkiee.github.io/kampunghealthradar/#legal) page.
 
 ## What's in this folder
 
