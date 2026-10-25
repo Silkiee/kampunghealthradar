@@ -12,10 +12,11 @@ A concept showing how Singapore's weekly infectious disease figures could be tur
 |---|---|
 | `index.html` | The whole dashboard. Open it in a browser and it works. |
 | `data/weekly.csv` | The illustrative numbers behind the dashboard, one row per week and indicator. |
+| `data/area-factors.csv` | Made-up local factors that make some planning areas run hotter or cooler each week (illustrative hot spots on the map). |
 | `data/flu-updates.csv` | Vaccine dates, prices and official flu news for the flu jab guide (real, in our own words), plus one illustrative past flu peak. Edit this file when CDA announces something new. |
 | `README.md` | This guide. |
 
-When the site is hosted on GitHub Pages, the dashboard reads `data/weekly.csv` and `data/flu-updates.csv` automatically. If you open `index.html` straight from your computer, it uses a built-in copy of the same data.
+When the site is hosted on GitHub Pages, the dashboard reads `data/weekly.csv`, `data/area-factors.csv` and `data/flu-updates.csv` automatically. If you open `index.html` straight from your computer, it uses a built-in copy of the same data.
 
 The **flu jab guide** opens from the "Flu jab guide" button, or directly at `…/kampunghealthradar/#flu-jab`. Share that link on its own if you only want the guide.
 
@@ -45,6 +46,12 @@ Every value in this file is made up. It covers 2012 to week 43 of 2026 and has t
 | `median5y_dengue_cases` | Median of the same week in 2021–2025 of this file | 2026 |
 | `median5y_ari_daily`, `median5y_hfmd_daily` | Median of the same week in 2021–2025 (HFMD: 2023–2025) of this file | 2026 |
 
+## Map hot spots (`data/area-factors.csv`)
+
+Every value in this file is made up. One row per disease (`dengue`, `hfmd`, `flu`, `covid`) and planning area (URA code, such as `TM` for Tampines), with one column per week of 2026 (`w1` to `w52`).
+
+Each area's share of the national figure is its population-and-age weight multiplied by that week's factor. Shares are rescaled every week so the areas always add up to the national figure. A factor above 1 means the area runs hotter than its population alone would suggest that week; below 1 means cooler. The factors are set so the latest week (week 43) shows mostly Very low and Low areas, with one Very high area for each disease, and then drift so local clusters rise and fade over the year.
+
 ## Flu jab guide (`data/flu-updates.csv`)
 
 | Column | Meaning |
@@ -68,7 +75,7 @@ The "Am I due?" rules follow CDA's September 2026 advice (get the Northern Hemis
 - **Illustrative data:** every weekly value comes from a simple model with realistic seasons (dengue peaks in mid-year; coughs, colds and flu peak from December to February with a smaller mid-year rise; HFMD rises during school terms) and an invented history of bigger and smaller years. Flu activity drives the respiratory visits, so the flu and respiratory figures move together. Dengue hospital admissions are about 1 in 5 cases. The "usual" week is the median of the same week in the past 5 years of the file. The dengue alert and epidemic lines (mean + 1 and 2 SD of 2016–2025) and the respiratory "busy" lines (70th and 90th percentile of 2021–2025) are worked out from the same data.
 - **Outlook:** the average of the last three weeks, shaped by the same months in past years, plus the recent direction fading out over time. The bands come from testing the method on every earlier week of the current year.
 - **"What if we act now?":** each round of infection shrinks in proportion to the cut in spread, after a short delay; 15% of cases (e.g. picked up overseas) are left untouched.
-- **Map:** national figures spread across the 55 URA planning areas by approximate population and age profile (plus a mild east/north-east and landed-housing weighting for dengue). Colours compare each area with a typical week for Singapore. The area shapes come from URA's open planning-area boundaries, but the numbers inside them are not real local data. Accurate area-level figures would need local data from agencies such as NEA and URA, which this project does not have.
+- **Map:** national figures spread across the URA planning areas by approximate population and age profile (plus a mild east/north-east and landed-housing weighting for dengue), then shifted by made-up local hot spots from `data/area-factors.csv`. The 21 areas where few or no people live (such as Downtown Core, Tuas and the water catchments) have small made-up resident numbers; only the Western Islands and North-Eastern Islands are left out. Colours compare each area with a typical week for Singapore. The area shapes come from URA's open planning-area boundaries, but the numbers inside them are not real local data. Accurate area-level figures would need local data from agencies such as NEA and URA, which this project does not have.
 - **Flu jab guide:** "Flu right now" uses weekly flu positivity (Low under 10%, Moderate 10–24%, High 25%+, our own bands). "When flu season usually comes" averages the illustrative respiratory polyclinic visits by month for 2012–2025. The answers in "Am I due?" and "Travelling soon?" are worked out in the browser; nothing is saved or sent.
 
 Sources: disease figures are illustrative and made up for this project. Flu jab guide: CDA flu vaccination and flu situation updates (Sep 2026, advice only); National Adult and Childhood Immunisation Schedules; MOH vaccination subsidies; CDC flu advice for travellers; URA Master Plan 2019 planning area boundaries (data.gov.sg).
