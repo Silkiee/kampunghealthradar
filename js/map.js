@@ -3,8 +3,22 @@
 const svg=d3.select('#map');
 let VW=1000,VH=640;
 const proj=d3.geoIdentity().reflectY(true);
+let fitKey='';
+const legendKey=()=>{ const r=$('.mapwrap').getBoundingClientRect(), l=$('#legend').getBoundingClientRect();
+  return [r.width,r.height,l.left-r.left,l.top-r.top,l.width,l.height].map(Math.round).join(','); };
 function fitProj(){ const r=$('.mapwrap').getBoundingClientRect(); VW=Math.max(320,r.width); VH=Math.max(320,r.height); const narrow=VW<700;
-  proj.fitExtent(narrow?[[12,110],[VW-12,VH-118]]:[[40,130],[VW-40,VH-120]],AREAS); svg.attr('viewBox',`0 0 ${VW} ${VH}`); }
+  const base=narrow?[[12,110],[VW-12,VH-118]]:[[40,130],[VW-40,VH-120]];
+  proj.fitExtent(base,AREAS);
+  // on wider maps, shrink the map away from the legend's side until no estimated area sits under the legend
+  const lg=$('#legend').getBoundingClientRect();
+  if(!narrow&&lg.height>60){
+    const L=[lg.left-r.left-8,lg.top-r.top-8,lg.right-r.left+8,lg.bottom-r.top+8], right=(L[0]+L[2])/2>VW/2;
+    const under=c=>{ if(typeof c[0]==='number'){ const p=proj(c); return p[0]>L[0]&&p[0]<L[2]&&p[1]>L[1]&&p[1]<L[3]; } return c.some(under); };
+    const ext=[[...base[0]],[...base[1]]], step=Math.max(16,VW*.02);
+    for(let cut=0; cut<VW*.35&&AREAS.features.some(f=>est(f.properties)&&under(f.geometry.coordinates)); cut+=step){
+      if(right) ext[1][0]-=step; else ext[0][0]+=step; proj.fitExtent(ext,AREAS); }
+  }
+  fitKey=legendKey(); svg.attr('viewBox',`0 0 ${VW} ${VH}`); }
 const path=d3.geoPath(proj);
 fitProj();
 const defs=svg.append('defs');
@@ -47,26 +61,30 @@ function fillFor(f){
   return HEAT[levelOf(id,r)]||'var(--land-none)';
 }
 function renderMap(){
+  renderLegend();
+  const t=d3.zoomTransform(svg.node());
+  if(t.k===1&&t.x===0&&t.y===0&&legendKey()!==fitKey){ fitProj(); areaSel.attr('d',path); drawRegions(); }
   areaSel.style('fill',fillFor);
   const d=DI[state.disease], w=state.week, fc=isFc(w);
   $('#map-t').textContent=`${d.name} · ${state.showAreas?'estimated level by planning area':'national level'}`;
   $('#map-s').textContent=`${fc?'Outlook':'Illustrative data'} · week of ${weekRange(w)} ${CUR}${fc&&state.plan[d.id]?` · with your ${state.plan[d.id]}% plan`:''}`;
   gSel.selectAll('path').data(state.area?AREAS.features.filter(f=>f.properties.id===state.area):[]).join('path').attr('class','sel').attr('d',path);
-  drawLabels(); renderLegend();
+  drawLabels();
 }
 function drawLabels(){
   const k=zk, d=DI[state.disease], w=state.week;
   gReg.style('display',k<1.8?null:'none');
-  // pills for the 3 busiest areas, skipping any that would overlap another pill
-  const pills=[], boxes=[];
+  // pills for the 3 busiest areas: if one would overlap another pill, try it just above or below its area, else skip it
+  const pills=[], boxes=[], off={};
   for(const id of state.showAreas? top3() : []){ const a=RES.find(r=>r.id===id); const [px,py]=proj([a.lx,a.ly]); const sx=px*k, sy=py*k;
-    const bw=(a.name.length+4)*7.2+18, b=[sx-bw/2,sy-14,sx+bw/2,sy+14];
-    if(boxes.some(o=>!(b[2]<o[0]||b[0]>o[2]||b[3]<o[1]||b[1]>o[3]))) continue; boxes.push(b); pills.push(id); }
+    const bw=(a.name.length+4)*7.2+18;
+    for(const dy of [0,-30,30]){ const b=[sx-bw/2,sy+dy-14,sx+bw/2,sy+dy+14];
+      if(boxes.some(o=>!(b[2]<o[0]||b[0]>o[2]||b[3]<o[1]||b[1]>o[3]))) continue; boxes.push(b); pills.push(id); off[id]=dy; break; } }
   const labs=(k>=1.8? AREAS.features.filter(f=>est(f.properties)) : AREAS.features.filter(f=>f.properties.id===state.area)).filter(f=>!pills.includes(f.properties.id));
   gLab.selectAll('text').data(labs,f=>f.properties.id).join('text').attr('class','alab')
     .attr('transform',f=>{const [x,y]=proj([f.properties.lx,f.properties.ly]);return `translate(${x},${y}) scale(${1/k})`;}).text(f=>f.properties.name);
   const sel=gPill.selectAll('g.mpill').data(pills,x=>x).join(en=>{const g=en.append('g').attr('class','mpill');g.append('rect');g.append('text');return g;});
-  sel.classed('on',x=>x===state.area).attr('transform',x=>{const a=RES.find(r=>r.id===x);const [px,py]=proj([a.lx,a.ly]);return `translate(${px},${py}) scale(${1/k})`;})
+  sel.classed('on',x=>x===state.area).attr('transform',x=>{const a=RES.find(r=>r.id===x);const [px,py]=proj([a.lx,a.ly]);return `translate(${px},${py}) scale(${1/k}) translate(0,${off[x]||0})`;})
     .on('click',(ev,x)=>selectArea(x,true));
   sel.each(function(x){ const a=RES.find(r=>r.id===x); const g=d3.select(this);
     const av=areaCount(d.id,a,w); const txt=`${a.name} ${av<1?'<1':'~'+fmt(av)}`; const t=g.select('text').text(txt);

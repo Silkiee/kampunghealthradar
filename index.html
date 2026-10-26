@@ -60,11 +60,13 @@
       <button type="button" id="z-out" aria-label="Zoom out">−</button>
       <button type="button" id="z-reset" aria-label="Reset map view" style="font-size:13px">⤢</button>
     </div>
-    <div class="map-card legend" id="legend"></div>
-    <div class="map-card timeline">
-      <button class="play" id="play" type="button" aria-label="Play the year"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" id="play-ico"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg></button>
-      <div class="tl-head"><span><b id="tl-week"></b> <span id="tl-kind"></span></span><span class="muted" id="tl-hint">Drag to travel through 2026 and into the next 3 months</span></div>
-      <div class="tl-track"><svg id="tl-svg" aria-hidden="true"></svg><label for="tl" class="sr">Week</label><input type="range" id="tl" min="1" max="50" step="1"></div>
+    <div class="map-dock">
+      <div class="map-card legend" id="legend"></div>
+      <div class="map-card timeline">
+        <button class="play" id="play" type="button" aria-label="Play the year"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" id="play-ico"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg></button>
+        <div class="tl-head"><span><b id="tl-week"></b> <span id="tl-kind"></span></span><span class="muted" id="tl-hint">Drag to travel through 2026 and into the next 3 months</span></div>
+        <div class="tl-track"><svg id="tl-svg" aria-hidden="true"></svg><label for="tl" class="sr">Week</label><input type="range" id="tl" min="1" max="50" step="1"></div>
+      </div>
     </div>
     <div class="maptip" id="maptip" hidden></div>
   </main>
@@ -90,8 +92,8 @@
     <a class="back" href="#">← Back to the map</a>
 
     <header class="g-hero" id="g-top">
-      <div class="eyebrow" id="g-eyebrow">Flu jab guide · Singapore</div>
       <h2 id="g-title" tabindex="-1"></h2>
+      <div class="eyebrow" id="g-eyebrow">Flu jab guide · Singapore</div>
       <p class="g-lede" id="g-lede"></p>
       <div class="g-tiles" id="g-tiles"></div>
       <div class="g-cta">
@@ -258,8 +260,8 @@
     <a class="back" href="#">← Back to the map</a>
 
     <header class="g-hero" id="l-top">
-      <div class="eyebrow">Legal &amp; data sources</div>
       <h2 id="l-title" tabindex="-1">A personal experimental project with illustrative data</h2>
+      <div class="eyebrow">Legal &amp; data sources</div>
       <p class="g-lede">Kampung Health Radar is a personal experimental project that shows how Singapore's weekly infectious disease figures could be turned into a map, charts and plain-language advice. <b>All the disease figures on this site are illustrative: made up to look realistic, not taken from any official source.</b> It is not run by, linked to or endorsed by the Communicable Diseases Agency (CDA), the Ministry of Health (MOH), the National Environment Agency (NEA) or any other government agency.</p>
       <p class="hint">Last reviewed 25 October 2026 · <span id="l-latest">Illustrative data up to: see the top of the map</span></p>
       <div class="l-callout" role="note">

@@ -28,6 +28,7 @@ A concept showing how Singapore's weekly infectious disease figures could be tur
 | `data/planning-areas.geojson` | URA planning area shapes, with approximate resident numbers and age shares (made up for areas with few or no residents). |
 | `data/context.json` | Illustrative background facts for the story text, such as the main dengue serotype. |
 | `README.md` | This guide. |
+| `PRODUCT.md` | Design brief: who the site is for, its principles and its look. |
 
 The page has no build step and no framework: GitHub Pages serves these files as they are. Charts and the map use D3.js from cdnjs, and the fonts come from Google Fonts.
 

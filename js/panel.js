@@ -75,8 +75,8 @@ function storyHTML(){
     if(!fc) facts.push(`This year's wave peaked at ${pk}% positivity in ${monthOf(pkw)}.`);
   }
   return `<section class="story" aria-live="polite">
-    <div class="eyebrow">${fc?'Outlook':'Singapore'} · week of ${weekRange(w)}</div>
     <h2>${title}</h2>
+    <div class="meta">${fc?'Outlook':'Singapore'} · week of ${weekRange(w)}</div>
     <p>${facts.join(' ')}</p>${watch}</section>`;
 }
 function outlookSummary(id,sc){
@@ -151,7 +151,7 @@ function chartBlockHTML(title){
 }
 function renderNational(){
   const d=DI[state.disease];
-  $('#panel-body').innerHTML=`<div style="display:flex;flex-direction:column;gap:18px">
+  $('#panel-body').innerHTML=`<div class="stack" data-lead="2">
     ${cardsHTML()}
     ${storyHTML()}
     ${state.disease==='flu'?jabCardHTML():''}
@@ -170,7 +170,7 @@ function renderArea(){
   const a=AREAS.features.find(f=>f.properties.id===state.area).properties;
   const d=DI[state.disease], w=state.week, fc=isFc(w);
   if(!est(a)){
-    $('#panel-body').innerHTML=`<div style="display:flex;flex-direction:column;gap:14px"><button class="back" type="button" data-back>← All of Singapore</button>
+    $('#panel-body').innerHTML=`<div class="stack" data-lead="5"><button class="back" type="button" data-back>← All of Singapore</button>
       <div class="area-head"><h2>${a.name}</h2><div class="meta">${a.region} region · ${a.pop? 'about '+fmt(a.pop)+' residents':'no resident population'}</div></div>
       <div class="note">Almost no one lives on the ${a.name}, so we do not estimate disease levels here.</div></div>`;
     return;
@@ -183,9 +183,9 @@ function renderArea(){
   let why=d.why(a);
   if(on&&(lf>=1.25||lf<=0.8)){ const same=(baseRatio>1)===(ratio>1); why=[lf>1?'an illustrative local cluster is showing here this week (made-up figures)':'fewer cases are showing here this week than its population would suggest (made-up local variation)',...(same?why:[])]; }
   const cmp=Math.abs(ratio-1)<0.06?'about the same as the Singapore average':`${ratio.toFixed(1)}× the Singapore average`;
-  $('#panel-body').innerHTML=`<div style="display:flex;flex-direction:column;gap:18px">
+  $('#panel-body').innerHTML=`<div class="stack" data-lead="5">
     <button class="back" type="button" data-back>← All of Singapore</button>
-    <div class="area-head"><div class="eyebrow">${a.region} region</div><h2>${a.name}</h2><div class="meta">About ${fmt(a.pop)} residents · ${a.kid}% under 10 · ${a.sen}% aged 65+ (${a.madeup?'made-up numbers':'approximate'})</div></div>
+    <div class="area-head"><h2>${a.name}</h2><div class="meta">${a.region} region · About ${fmt(a.pop)} residents · ${a.kid}% under 10 · ${a.sen}% aged 65+ (${a.madeup?'made-up numbers':'approximate'})</div></div>
     ${on?'<span class="illus">⚠ Illustrative estimate: national figures spread by population, age and made-up local hot spots, not local reports</span>':'<div class="note">Area estimates are switched off, so you are seeing national figures. Turn on “Show area estimates” on the map to see an illustrative local view.</div>'}
     ${tabsHTML()}
     <section class="section">
